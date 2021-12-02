@@ -111,10 +111,11 @@ const calculateTotalStakedAmountInAvaxFromPng = function(
   amountAvailable: JSBI,
   avaxPngPairReserveOfPng: JSBI,
   avaxPngPairReserveOfWavax: JSBI,
-  reserveInPng: JSBI
+  reserveInPng: JSBI,
+  chainId: ChainId | undefined
 ): TokenAmount {
   if (JSBI.EQ(amountAvailable, JSBI.BigInt(0))) {
-    return new TokenAmount(WAVAX[ChainId.AVALANCHE], JSBI.BigInt(0))
+    return new TokenAmount(WAVAX[chainId || ChainId.AVALANCHE], JSBI.BigInt(0))
   }
 
   const oneToken = JSBI.BigInt(1000000000000000000)
@@ -122,7 +123,7 @@ const calculateTotalStakedAmountInAvaxFromPng = function(
   const valueOfPngInAvax = JSBI.divide(JSBI.multiply(reserveInPng, avaxPngRatio), oneToken)
 
   return new TokenAmount(
-    WAVAX[ChainId.AVALANCHE],
+    WAVAX[chainId || ChainId.AVALANCHE],
     JSBI.divide(
       JSBI.multiply(
         JSBI.multiply(amountStaked, valueOfPngInAvax),
@@ -161,12 +162,13 @@ const calculateApr = function(rewardRatePerSecond: JSBI, totalSupply: JSBI): JSB
 const calculateTotalStakedAmountInAvax = function(
   amountStaked: JSBI,
   amountAvailable: JSBI,
-  reserveInWavax: JSBI
+  reserveInWavax: JSBI,
+  chainId: ChainId | undefined
 ): TokenAmount {
   if (JSBI.GT(amountAvailable, 0)) {
     // take the total amount of LP tokens staked, multiply by AVAX value of all LP tokens, divide by all LP tokens
     return new TokenAmount(
-      WAVAX[ChainId.AVALANCHE],
+      WAVAX[chainId || ChainId.AVALANCHE],
       JSBI.divide(
         JSBI.multiply(
           JSBI.multiply(amountStaked, reserveInWavax),
@@ -176,7 +178,7 @@ const calculateTotalStakedAmountInAvax = function(
       )
     )
   } else {
-    return new TokenAmount(WAVAX[ChainId.AVALANCHE], JSBI.BigInt(0))
+    return new TokenAmount(WAVAX[chainId || ChainId.AVALANCHE], JSBI.BigInt(0))
   }
 }
 
@@ -199,7 +201,7 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
     [chainId, pairToFilterBy, version]
   )
 
-  const png = PNG[ChainId.AVALANCHE]
+  const png = PNG[chainId || ChainId.AVALANCHE]
 
   const rewardsAddresses = useMemo(() => info.map(({ stakingRewardAddress }) => stakingRewardAddress), [info])
 
@@ -220,7 +222,7 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
 
   const pairTotalSupplies = useMultipleContractSingleData(pairAddresses, ERC20_INTERFACE, 'totalSupply')
 
-  const [avaxPngPairState, avaxPngPair] = usePair(WAVAX[ChainId.AVALANCHE], png)
+  const [avaxPngPairState, avaxPngPair] = usePair(WAVAX[chainId || ChainId.AVALANCHE], png)
 
   // tokens per second, constants
   const rewardRates = useMultipleContractSingleData(
@@ -305,13 +307,19 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
 
         const isAvaxPool = tokens[0].equals(WAVAX[tokens[0].chainId])
         const totalStakedInWavax = isAvaxPool
-          ? calculateTotalStakedAmountInAvax(totalSupplyStaked, totalSupplyAvailable, pair.reserveOf(wavax).raw)
+          ? calculateTotalStakedAmountInAvax(
+              totalSupplyStaked,
+              totalSupplyAvailable,
+              pair.reserveOf(wavax).raw,
+              chainId
+            )
           : calculateTotalStakedAmountInAvaxFromPng(
               totalSupplyStaked,
               totalSupplyAvailable,
               avaxPngPair.reserveOf(png).raw,
               avaxPngPair.reserveOf(WAVAX[tokens[1].chainId]).raw,
-              pair.reserveOf(png).raw
+              pair.reserveOf(png).raw,
+              chainId
             )
 
         const totalStakedInUsd = totalStakedInWavax && (usdPrice?.quote(totalStakedInWavax) as TokenAmount)
@@ -388,7 +396,7 @@ export function useSingleSideStakingInfo(
     [chainId, rewardTokenToFilterBy, version]
   )
 
-  const png = PNG[ChainId.AVALANCHE]
+  const png = PNG[chainId || ChainId.AVALANCHE]
 
   const rewardsAddresses = useMemo(() => info.map(({ stakingRewardAddress }) => stakingRewardAddress), [info])
   const routes = useMemo(
@@ -742,7 +750,7 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
   const { chainId, account } = useActiveWeb3React()
   const minichefContract = useStakingContract(MINICHEF_ADDRESS)
   const poolMap = useMinichefPools()
-  const png = chainId ? PNG[chainId] : PNG[ChainId.AVALANCHE]
+  const png = chainId ? PNG[chainId] : PNG[chainId || ChainId.AVALANCHE]
 
   let info = useMemo(
     () =>
@@ -768,7 +776,7 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
   const pairTotalSupplies = useMultipleContractSingleData(pairAddresses, ERC20_INTERFACE, 'totalSupply')
   const balances = useMultipleContractSingleData(pairAddresses, ERC20_INTERFACE, 'balanceOf', [MINICHEF_ADDRESS])
 
-  const [avaxPngPairState, avaxPngPair] = usePair(WAVAX[ChainId.AVALANCHE], png)
+  const [avaxPngPairState, avaxPngPair] = usePair(WAVAX[chainId || ChainId.AVALANCHE], png)
 
   const poolIdArray = useMemo(() => {
     if (!pairAddresses || !poolMap) return []
@@ -802,7 +810,7 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
   )
 
   const arr = useMemo(() => {
-    if (!chainId || !png) return []
+    if (!chainId || !png || !avaxPrice) return []
 
     return pairAddresses.reduce<any[]>((memo, pairAddress, index) => {
       const pairTotalSupplyState = pairTotalSupplies[index]
@@ -887,7 +895,8 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
           const totalStakedInWavax = calculateTotalStakedAmountInAvax(
             totalSupplyStaked,
             totalSupplyAvailable,
-            pair.reserveOf(WAVAX[chainId]).raw
+            pair.reserveOf(WAVAX[chainId]).raw,
+            chainId
           )
           totalStakedInUsd = totalStakedInWavax && (usdPrice?.quote(totalStakedInWavax) as TokenAmount)
         } else if (isPngPool) {
@@ -896,7 +905,8 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
             totalSupplyAvailable,
             avaxPngPair.reserveOf(png).raw,
             avaxPngPair.reserveOf(WAVAX[chainId]).raw,
-            pair.reserveOf(png).raw
+            pair.reserveOf(png).raw,
+            chainId
           )
           totalStakedInUsd = totalStakedInWavax && (usdPrice?.quote(totalStakedInWavax) as TokenAmount)
         } else {

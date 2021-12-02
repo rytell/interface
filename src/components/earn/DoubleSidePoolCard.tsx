@@ -11,7 +11,7 @@ import { useColor } from '../../hooks/useColor'
 import { currencyId } from '../../utils/currencyId'
 import { Break, CardNoise, CardBGImage } from './styled'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
-import { PNG } from '../../constants'
+import { RADI } from '../../constants'
 import { useTranslation } from 'react-i18next'
 
 const StatContainer = styled.div`
@@ -107,7 +107,7 @@ export default function DoubleSidePoolCard({
       ? currency0 === CAVAX
         ? token1
         : token0
-      : token0.equals(PNG[token0.chainId])
+      : token0.equals(RADI[token0.chainId])
       ? token1
       : token0
 
@@ -181,7 +181,7 @@ export default function DoubleSidePoolCard({
           <TYPE.white>{swapFeeApr && !stakingInfo.isPeriodFinished ? `${swapFeeApr}%` : '-'}</TYPE.white>
         </RowBetween>
         <RowBetween>
-          <TYPE.white>PNG Rewards APR</TYPE.white>
+          <TYPE.white>RADI Rewards APR</TYPE.white>
           <TYPE.white>{stakingApr && !stakingInfo.isPeriodFinished ? `${stakingApr}%` : '-'}</TYPE.white>
         </RowBetween>
         <RowBetween>
@@ -210,7 +210,7 @@ export default function DoubleSidePoolCard({
               </span>
               {`${stakingInfo.rewardRate
                 ?.multiply(`${60 * 60 * 24 * 7}`)
-                ?.toSignificant(4, { groupSeparator: ',' })} PNG / week`}
+                ?.toSignificant(4, { groupSeparator: ',' })} RADI / week`}
             </TYPE.black>
           </BottomSection>
         </>

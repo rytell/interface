@@ -13,7 +13,7 @@ import { isAddress } from 'ethers/lib/utils'
 import useENS from '../../hooks/useENS'
 import { useDelegateCallback } from '../../state/governance/hooks'
 import { useTokenBalance } from '../../state/wallet/hooks'
-import { PNG } from '../../constants'
+import { RADI } from '../../constants'
 import { LoadingView, SubmittedView } from '../ModalViews'
 import { useTranslation } from 'react-i18next'
 
@@ -57,7 +57,7 @@ export default function DelegateModal({ isOpen, onDismiss, title }: VoteModalPro
   const { address: parsedAddress } = useENS(activeDelegate)
 
   // get the number of votes available to delegate
-  const pngBalance = useTokenBalance(account ?? undefined, chainId ? PNG[chainId] : undefined)
+  const pngBalance = useTokenBalance(account ?? undefined, chainId ? RADI[chainId] : undefined)
 
   const delegateCallback = useDelegateCallback()
 
@@ -102,7 +102,9 @@ export default function DelegateModal({ isOpen, onDismiss, title }: VoteModalPro
             <TYPE.body>{t('vote.canEitherVote')}</TYPE.body>
             {usingDelegate && <AddressInputPanel value={typed} onChange={handleRecipientType} />}
             <ButtonPrimary disabled={!isAddress(parsedAddress ?? '')} onClick={onDelegate}>
-              <TYPE.mediumHeader color="white">{usingDelegate ? t('vote.delegateVotes') : t('vote.selfDelegate')}</TYPE.mediumHeader>
+              <TYPE.mediumHeader color="white">
+                {usingDelegate ? t('vote.delegateVotes') : t('vote.selfDelegate')}
+              </TYPE.mediumHeader>
             </ButtonPrimary>
             <TextButton onClick={() => setUsingDelegate(!usingDelegate)}>
               <TYPE.blue>

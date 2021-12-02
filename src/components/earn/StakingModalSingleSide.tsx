@@ -42,7 +42,12 @@ interface StakingModalProps {
   userLiquidityUnstaked: TokenAmount | undefined
 }
 
-export default function StakingModalSingleSide({ isOpen, onDismiss, stakingInfo, userLiquidityUnstaked }: StakingModalProps) {
+export default function StakingModalSingleSide({
+  isOpen,
+  onDismiss,
+  stakingInfo,
+  userLiquidityUnstaked
+}: StakingModalProps) {
   const { account, chainId, library } = useActiveWeb3React()
 
   // track and parse user input
@@ -84,17 +89,17 @@ export default function StakingModalSingleSide({ isOpen, onDismiss, stakingInfo,
     if (stakingContract && parsedAmount && deadline) {
       if (approval === ApprovalState.APPROVED) {
         stakingContract
-	        .stake(`0x${parsedAmount.raw.toString(16)}`)
-	        .then((response: TransactionResponse) => {
-		        addTransaction(response, {
-			        summary: t('earnPage.stakeStakingTokens', { symbol: 'PNG' })
-		        })
-		        setHash(response.hash)
-	        })
-	        .catch((error: any) => {
-		        setAttempting(false)
-		        console.error(error)
-	        })
+          .stake(`0x${parsedAmount.raw.toString(16)}`)
+          .then((response: TransactionResponse) => {
+            addTransaction(response, {
+              summary: t('earnPage.stakeStakingTokens', { symbol: 'RADI' })
+            })
+            setHash(response.hash)
+          })
+          .catch((error: any) => {
+            setAttempting(false)
+            console.error(error)
+          })
       } else if (signatureData) {
         stakingContract
           .stakeWithPermit(
@@ -102,11 +107,11 @@ export default function StakingModalSingleSide({ isOpen, onDismiss, stakingInfo,
             signatureData.deadline,
             signatureData.v,
             signatureData.r,
-            signatureData.s,
+            signatureData.s
           )
           .then((response: TransactionResponse) => {
             addTransaction(response, {
-	            summary: t('earnPage.stakeStakingTokens', { symbol: 'PNG' })
+              summary: t('earnPage.stakeStakingTokens', { symbol: 'RADI' })
             })
             setHash(response.hash)
           })
@@ -142,16 +147,16 @@ export default function StakingModalSingleSide({ isOpen, onDismiss, stakingInfo,
     // try to gather a signature for permission
     const nonce = await stakingTokenContract.nonces(account)
 
-	  const EIP712Domain = [
-		  { name: 'name', type: 'string' },
-		  { name: 'chainId', type: 'uint256' },
-		  { name: 'verifyingContract', type: 'address' }
-	  ]
-	  const domain = {
-		  name: 'Pangolin',
-		  chainId: chainId,
-		  verifyingContract: stakingTokenContract.address
-	  }
+    const EIP712Domain = [
+      { name: 'name', type: 'string' },
+      { name: 'chainId', type: 'uint256' },
+      { name: 'verifyingContract', type: 'address' }
+    ]
+    const domain = {
+      name: 'Pangolin',
+      chainId: chainId,
+      verifyingContract: stakingTokenContract.address
+    }
     const Permit = [
       { name: 'owner', type: 'address' },
       { name: 'spender', type: 'address' },
@@ -250,8 +255,8 @@ export default function StakingModalSingleSide({ isOpen, onDismiss, stakingInfo,
       {attempting && !hash && (
         <LoadingView onDismiss={wrappedOnDismiss}>
           <AutoColumn gap="12px" justify={'center'}>
-            <TYPE.largeHeader>{t('earn.depositingToken', { symbol: 'PNG' })}</TYPE.largeHeader>
-            <TYPE.body fontSize={20}>{parsedAmount?.toSignificant(4)} PNG</TYPE.body>
+            <TYPE.largeHeader>{t('earn.depositingToken', { symbol: 'RADI' })}</TYPE.largeHeader>
+            <TYPE.body fontSize={20}>{parsedAmount?.toSignificant(4)} RADI</TYPE.body>
           </AutoColumn>
         </LoadingView>
       )}
@@ -259,7 +264,9 @@ export default function StakingModalSingleSide({ isOpen, onDismiss, stakingInfo,
         <SubmittedView onDismiss={wrappedOnDismiss} hash={hash}>
           <AutoColumn gap="12px" justify={'center'}>
             <TYPE.largeHeader>{t('earn.transactionSubmitted')}</TYPE.largeHeader>
-            <TYPE.body fontSize={20}>{t('earn.deposited')} {parsedAmount?.toSignificant(4)} PNG</TYPE.body>
+            <TYPE.body fontSize={20}>
+              {t('earn.deposited')} {parsedAmount?.toSignificant(4)} RADI
+            </TYPE.body>
           </AutoColumn>
         </SubmittedView>
       )}

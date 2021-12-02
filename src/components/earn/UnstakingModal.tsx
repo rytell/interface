@@ -48,13 +48,17 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo, version
     if (stakingContract && poolMap && stakingInfo?.stakedAmount) {
       setAttempting(true)
       const method = version < 2 ? 'exit' : 'withdrawAndHarvest'
-      const args = version < 2
-        ? []
-        : [poolMap[stakingInfo.stakedAmount.token.address], `0x${stakingInfo.stakedAmount?.raw.toString(16)}`, account]
+      const args =
+        version < 2
+          ? []
+          : [
+              poolMap[stakingInfo.stakedAmount.token.address],
+              `0x${stakingInfo.stakedAmount?.raw.toString(16)}`,
+              account
+            ]
 
       // TODO: Support withdrawing partial amounts for v2+
-      await stakingContract
-        [method](...args)
+      await stakingContract[method](...args)
         .then((response: TransactionResponse) => {
           addTransaction(response, {
             summary: t('earn.withdrawDepositedLiquidity')
@@ -97,12 +101,10 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo, version
               <TYPE.body fontWeight={600} fontSize={36}>
                 {<FormattedCurrencyAmount currencyAmount={stakingInfo?.earnedAmount} />}
               </TYPE.body>
-              <TYPE.body>{t('earn.unclaimedReward', { symbol: 'PNG' })}</TYPE.body>
+              <TYPE.body>{t('earn.unclaimedReward', { symbol: 'RADI' })}</TYPE.body>
             </AutoColumn>
           )}
-          <TYPE.subHeader style={{ textAlign: 'center' }}>
-            {t('earn.whenYouWithdrawWarning')}
-          </TYPE.subHeader>
+          <TYPE.subHeader style={{ textAlign: 'center' }}>{t('earn.whenYouWithdrawWarning')}</TYPE.subHeader>
           <ButtonError disabled={!!error} error={!!error && !!stakingInfo?.stakedAmount} onClick={onWithdraw}>
             {error ?? t('earn.withdrawAndClaim')}
           </ButtonError>
@@ -120,7 +122,7 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo, version
             <TYPE.body fontSize={20}>
               {t('earn.claimingReward', {
                 amount: stakingInfo?.earnedAmount?.toSignificant(4),
-                symbol: 'PNG'
+                symbol: 'RADI'
               })}
             </TYPE.body>
           </AutoColumn>
@@ -131,7 +133,7 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo, version
           <AutoColumn gap="12px" justify={'center'}>
             <TYPE.largeHeader>{t('earn.transactionSubmitted')}</TYPE.largeHeader>
             <TYPE.body fontSize={20}>{t('earn.withdrewStakingToken', { symbol: 'PGL' })}</TYPE.body>
-            <TYPE.body fontSize={20}>{t('earn.claimedReward', { symbol: 'PNG' })}</TYPE.body>
+            <TYPE.body fontSize={20}>{t('earn.claimedReward', { symbol: 'RADI' })}</TYPE.body>
           </AutoColumn>
         </SubmittedView>
       )}

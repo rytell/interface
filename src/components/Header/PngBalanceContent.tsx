@@ -4,7 +4,7 @@ import { X } from 'react-feather'
 import styled from 'styled-components'
 import tokenLogo from '../../assets/images/token-logo.png'
 import { injected } from '../../connectors'
-import { PNG } from '../../constants'
+import { RADI } from '../../constants'
 import { useTotalSupply } from '../../data/TotalSupply'
 import { useActiveWeb3React } from '../../hooks'
 import { useTotalPngEarned } from '../../state/stake/hooks'
@@ -60,7 +60,7 @@ const AddPNG = styled.span`
  */
 export default function PngBalanceContent({ setShowPngBalanceModal }: { setShowPngBalanceModal: any }) {
   const { account, chainId } = useActiveWeb3React()
-  const png = chainId ? PNG[chainId] : undefined
+  const png = chainId ? RADI[chainId] : undefined
 
   const total = useAggregatePngBalance()
   const pngBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, png)
@@ -68,7 +68,7 @@ export default function PngBalanceContent({ setShowPngBalanceModal }: { setShowP
 
   const totalSupply: TokenAmount | undefined = useTotalSupply(png)
 
-  // Determine PNG price in AVAX
+  // Determine RADI price in AVAX
   const wavax = WAVAX[chainId ? chainId : 43114]
   const [, avaxPngTokenPair] = usePair(wavax, png)
   const oneToken = JSBI.BigInt(1000000000000000000)
@@ -124,7 +124,8 @@ export default function PngBalanceContent({ setShowPngBalanceModal }: { setShowP
                     {pngToClaim && pngToClaim.greaterThan('0') && (
                       <StyledInternalLink
                         onClick={() => setShowPngBalanceModal(false)}
-                        to={`/png/${DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION}`}>
+                        to={`/png/${DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION}`}
+                      >
                         ({t('earn.claim')})
                       </StyledInternalLink>
                     )}
@@ -153,36 +154,39 @@ export default function PngBalanceContent({ setShowPngBalanceModal }: { setShowP
         </CardSection>
         {account && (
           <>
-          <CardSection gap="sm">
-            <AutoColumn gap="md">
-              <AddPNG onClick={() => {
-                injected.getProvider().then(provider => {
-                  if (provider) {
-                    provider.request({
-                      method: 'wallet_watchAsset',
-                      params: {
-                        type: 'ERC20',
-                        options: {
-                          address: png?.address,
-                          symbol: png?.symbol,
-                          decimals: png?.decimals,
-                          image: 'https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png',
-                        },
-                      },
-                    }).catch((error: any) => {
-                      console.error(error)
+            <CardSection gap="sm">
+              <AutoColumn gap="md">
+                <AddPNG
+                  onClick={() => {
+                    injected.getProvider().then(provider => {
+                      if (provider) {
+                        provider
+                          .request({
+                            method: 'wallet_watchAsset',
+                            params: {
+                              type: 'ERC20',
+                              options: {
+                                address: png?.address,
+                                symbol: png?.symbol,
+                                decimals: png?.decimals,
+                                image:
+                                  'https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png'
+                              }
+                            }
+                          })
+                          .catch((error: any) => {
+                            console.error(error)
+                          })
+                      }
                     })
-                  }
-                });
-              }
-            }>
-                <TYPE.white color="white">{t('header.addMetamask')}</TYPE.white>
-              </AddPNG>
-            </AutoColumn>
-          </CardSection>
+                  }}
+                >
+                  <TYPE.white color="white">{t('header.addMetamask')}</TYPE.white>
+                </AddPNG>
+              </AutoColumn>
+            </CardSection>
           </>
-          )
-        }
+        )}
       </ModalUpper>
     </ContentWrapper>
   )
