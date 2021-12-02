@@ -7,8 +7,7 @@ import { useActiveWeb3React } from '../../hooks'
 import { useMulticallContract } from '../../hooks/useContract'
 import { isAddress } from '../../utils'
 import { useSingleContractMultipleData, useMultipleContractSingleData } from '../multicall/hooks'
-import { useTotalPngEarned } from '../stake/hooks'
-
+import { useTotalRadiEarned } from '../stake/hooks'
 
 /**
  * Returns a map of the given addresses to their eventually consistent ETH balances.
@@ -22,9 +21,9 @@ export function useETHBalances(
     () =>
       uncheckedAddresses
         ? uncheckedAddresses
-          .map(isAddress)
-          .filter((a): a is string => a !== false)
-          .sort()
+            .map(isAddress)
+            .filter((a): a is string => a !== false)
+            .sort()
         : [],
     [uncheckedAddresses]
   )
@@ -69,13 +68,13 @@ export function useTokenBalancesWithLoadingIndicator(
       () =>
         address && validatedTokens.length > 0
           ? validatedTokens.reduce<{ [tokenAddress: string]: TokenAmount | undefined }>((memo, token, i) => {
-            const value = balances?.[i]?.result?.[0]
-            const amount = value ? JSBI.BigInt(value.toString()) : undefined
-            if (amount) {
-              memo[token.address] = new TokenAmount(token, amount)
-            }
-            return memo
-          }, {})
+              const value = balances?.[i]?.result?.[0]
+              const amount = value ? JSBI.BigInt(value.toString()) : undefined
+              if (amount) {
+                memo[token.address] = new TokenAmount(token, amount)
+              }
+              return memo
+            }, {})
           : {},
       [address, validatedTokens, balances]
     ),
@@ -135,21 +134,15 @@ export function useAllTokenBalances(): { [tokenAddress: string]: TokenAmount | u
 }
 
 // get the total owned and unharvested PNG for account
-export function useAggregatePngBalance(): TokenAmount | undefined {
+export function useAggregateRadiBalance(): TokenAmount | undefined {
   const { account, chainId } = useActiveWeb3React()
 
-  const png = chainId ? PNG[chainId] : undefined
+  const radi = chainId ? PNG[chainId] : undefined
 
-  const pngBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, png)
-  const pngUnHarvested: TokenAmount | undefined = useTotalPngEarned()
+  const radiBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, radi)
+  const radiUnHarvested: TokenAmount | undefined = useTotalRadiEarned()
 
-  if (!png) return undefined
+  if (!radi) return undefined
 
-  return new TokenAmount(
-    png,
-    JSBI.add(
-      pngBalance?.raw ?? JSBI.BigInt(0),
-      pngUnHarvested?.raw ?? JSBI.BigInt(0)
-    )
-  )
+  return new TokenAmount(radi, JSBI.add(radiBalance?.raw ?? JSBI.BigInt(0), radiUnHarvested?.raw ?? JSBI.BigInt(0)))
 }

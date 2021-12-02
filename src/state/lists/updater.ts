@@ -57,7 +57,7 @@ export default function Updater(): null {
             // automatically update minor/patch as long as bump matches the min update
             if (bump >= min) {
               if (isDefaultList) {
-                // if its pangolin hosted token list then we will autoupdate it
+                // if its rytell hosted token list then we will autoupdate it
                 ReactGA.event({
                   category: 'Lists',
                   action: 'Update List from Popup',
@@ -89,7 +89,7 @@ export default function Updater(): null {
 
           case VersionUpgrade.MAJOR:
             if (isDefaultList) {
-              // if its pangolin hosted token list then we will autoupdate it
+              // if its rytell hosted token list then we will autoupdate it
               ReactGA.event({
                 category: 'Lists',
                 action: 'Update List from Popup',

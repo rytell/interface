@@ -109,7 +109,7 @@ export default function SingleSidePoolCard({
         <RowBetween>
           <TYPE.white> {t('earn.totalStaked')}</TYPE.white>
           <TYPE.white>
-            {`${stakingInfo.totalStakedInPng.toSignificant(4, { groupSeparator: ',' }) ?? '-'} RADI`}
+            {`${stakingInfo.totalStakedInRadi.toSignificant(4, { groupSeparator: ',' }) ?? '-'} RADI`}
           </TYPE.white>
         </RowBetween>
       </StatContainer>

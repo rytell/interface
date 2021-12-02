@@ -1,13 +1,13 @@
 import { ChainId, TokenAmount } from '@pangolindex/sdk'
 import React, { useState, useRef } from 'react'
 import { useActiveWeb3React } from '../../hooks'
-import { useETHBalances, useAggregatePngBalance } from '../../state/wallet/hooks'
+import { useETHBalances, useAggregateRadiBalance } from '../../state/wallet/hooks'
 import { CardNoise } from '../../components/earn/styled'
 import { CountUp } from 'use-count-up'
 import { TYPE } from '../../theme'
 import Web3Status from '../../components/Web3Status'
 import Modal from '../../components/Modal'
-import PngBalanceContent from './PngBalanceContent'
+import RadiBalanceContent from './RadiBalanceContent'
 import usePrevious from '../../hooks/usePrevious'
 import LanguageSelection from '../../components/LanguageSelection'
 import { ApplicationModal } from '../../state/application/actions'
@@ -48,9 +48,9 @@ export default function Header({ onCollapsed }: HeaderProps) {
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
-  const aggregateBalance: TokenAmount | undefined = useAggregatePngBalance()
+  const aggregateBalance: TokenAmount | undefined = useAggregateRadiBalance()
 
-  const [showPngBalanceModal, setShowPngBalanceModal] = useState(false)
+  const [showRadiBalanceModal, setShowRadiBalanceModal] = useState(false)
 
   const countUpValue = aggregateBalance?.toFixed(0) ?? '0'
   const countUpValuePrevious = usePrevious(countUpValue) ?? '0'
@@ -63,12 +63,11 @@ export default function Header({ onCollapsed }: HeaderProps) {
 
   return (
     <HeaderFrame>
-      <Modal isOpen={showPngBalanceModal} onDismiss={() => setShowPngBalanceModal(false)}>
-        <PngBalanceContent setShowPngBalanceModal={setShowPngBalanceModal} />
+      <Modal isOpen={showRadiBalanceModal} onDismiss={() => setShowRadiBalanceModal(false)}>
+        <RadiBalanceContent setShowRadiBalanceModal={setShowRadiBalanceModal} />
       </Modal>
 
       <MobileHeader>
-    
         <StyledMenuIcon onClick={() => onCollapsed()} />
         <MobileLogoWrapper>
           <Logo collapsed={false} />
@@ -83,7 +82,7 @@ export default function Header({ onCollapsed }: HeaderProps) {
             )}
           </HideSmall>
           {aggregateBalance && (
-            <PNGWrapper onClick={() => setShowPngBalanceModal(true)}>
+            <PNGWrapper onClick={() => setShowRadiBalanceModal(true)}>
               <PNGAmount active={!!account} style={{ pointerEvents: 'auto' }}>
                 {account && (
                   <HideSmall>

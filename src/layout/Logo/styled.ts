@@ -13,7 +13,7 @@ export const Title = styled.a`
   }
 `
 
-export const PngIcon = styled.div`
+export const RadiIcon = styled.div`
   transition: transform 0.3s ease;
   :hover {
     transform: rotate(-5deg);

@@ -89,8 +89,8 @@ export default function App() {
               <Route exact strict path="/send" component={RedirectPathToSwapOnly} />
               <Route exact strict path="/find" component={PoolFinder} />
               <Route exact strict path="/pool" component={Pool} />
-              <Route exact strict path="/png/2" component={EarnV2} />
-              <Route exact strict path="/png/:version" component={EarnV1} />
+              <Route exact strict path="/radi/2" component={EarnV2} />
+              <Route exact strict path="/radi/:version" component={EarnV1} />
               <Route exact strict path="/stake/:version" component={Stake} />
               <Route exact strict path="/create" component={RedirectToAddLiquidity} />
               <Route exact path="/add" component={AddLiquidity} />
@@ -102,8 +102,8 @@ export default function App() {
               <Route exact strict path="/remove/:tokens" component={RedirectOldRemoveLiquidityPathStructure} />
               <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
 
-              <Route exact strict path="/png/:currencyIdA/:currencyIdB/2" component={ManageV2} />
-              <Route exact strict path="/png/:currencyIdA/:currencyIdB/:version" component={ManageV1} />
+              <Route exact strict path="/radi/:currencyIdA/:currencyIdB/2" component={ManageV2} />
+              <Route exact strict path="/radi/:currencyIdA/:currencyIdB/:version" component={ManageV1} />
 
               <Route exact strict path="/stake/:version/:rewardCurrencyId" component={ManageStake} />
 

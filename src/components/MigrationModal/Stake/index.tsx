@@ -99,10 +99,11 @@ const Stake = ({
     let stakingToken = stakingInfo?.stakedAmount?.token
     const parsedInput = tryParseAmount(stakingAmount, stakingToken) as TokenAmount
 
-    if (parsedInput
-      && stakingInfo?.stakedAmount
-      && JSBI.lessThanOrEqual(parsedInput.raw, userLiquidityUnstaked.raw)
-      && JSBI.greaterThan(parsedInput.raw, JSBI.BigInt(0))
+    if (
+      parsedInput &&
+      stakingInfo?.stakedAmount &&
+      JSBI.lessThanOrEqual(parsedInput.raw, userLiquidityUnstaked.raw) &&
+      JSBI.greaterThan(parsedInput.raw, JSBI.BigInt(0))
     ) {
       setIsValidAmount(true)
     } else {
@@ -179,7 +180,7 @@ const Stake = ({
       { name: 'verifyingContract', type: 'address' }
     ]
     const domain = {
-      name: 'Pangolin Liquidity',
+      name: 'Rytell Liquidity',
       version: '1',
       chainId: chainId,
       verifyingContract: pairContract.address

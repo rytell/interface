@@ -117,12 +117,12 @@ export default function Vote() {
 
   // user data
   const availableVotes: TokenAmount | undefined = useUserVotes()
-  const pngBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, chainId ? PNG[chainId] : undefined)
+  const radiBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, chainId ? PNG[chainId] : undefined)
   const userDelegatee: string | undefined = useUserDelegatee()
 
   // show delegation option if they have have a balance, but have not delegated
   const showUnlockVoting = Boolean(
-    pngBalance && JSBI.notEqual(pngBalance.raw, JSBI.BigInt(0)) && userDelegatee === ZERO_ADDRESS
+    radiBalance && JSBI.notEqual(radiBalance.raw, JSBI.BigInt(0)) && userDelegatee === ZERO_ADDRESS
   )
 
   return (
@@ -142,7 +142,7 @@ export default function Vote() {
                 <TYPE.white fontWeight={600}>{t('votePage.pangolinGovernance')}</TYPE.white>
               </RowBetween>
               <RowBetween>
-                <TYPE.white fontSize={14}>{t('votePage.earnedPngTokens')}</TYPE.white>
+                <TYPE.white fontSize={14}>{t('votePage.earnedRadiTokens')}</TYPE.white>
               </RowBetween>
               <RowBetween>
                 <TYPE.white fontSize={14}>{t('votePage.eligibleToVote')}</TYPE.white>
@@ -175,12 +175,12 @@ export default function Vote() {
             <TYPE.body fontWeight={500} mr="6px">
               <FormattedCurrencyAmount currencyAmount={availableVotes} /> {t('votePage.votes')}
             </TYPE.body>
-          ) : pngBalance &&
+          ) : radiBalance &&
             userDelegatee &&
             userDelegatee !== ZERO_ADDRESS &&
-            JSBI.notEqual(JSBI.BigInt(0), pngBalance?.raw) ? (
+            JSBI.notEqual(JSBI.BigInt(0), radiBalance?.raw) ? (
             <TYPE.body fontWeight={500} mr="6px">
-              <FormattedCurrencyAmount currencyAmount={pngBalance} /> {t('votePage.votes')}
+              <FormattedCurrencyAmount currencyAmount={radiBalance} /> {t('votePage.votes')}
             </TYPE.body>
           ) : (
             ''

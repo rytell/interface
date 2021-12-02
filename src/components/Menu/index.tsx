@@ -54,7 +54,7 @@ export default function Menu() {
             <Book size={14} />
             {t('menu.tutorials')}
           </MenuItem>
-          <MenuItem id="link" href="https://t.me/pangolindex">
+          <MenuItem id="link" href="https://t.me/rytelldex">
             <Send size={14} />
             {t('menu.telegram')}
           </MenuItem>
@@ -62,11 +62,11 @@ export default function Menu() {
             <MessageCircle size={14} />
             {t('menu.discord')}
           </MenuItem>
-          <MenuItem id="link" href="https://twitter.com/pangolindex">
+          <MenuItem id="link" href="https://twitter.com/rytelldex">
             <Twitter size={14} />
             {t('menu.twitter')}
           </MenuItem>
-          <MenuItem id="link" href="https://github.com/pangolindex">
+          <MenuItem id="link" href="https://github.com/rytelldex">
             <GitHub size={14} />
             {t('menu.code')}
           </MenuItem>

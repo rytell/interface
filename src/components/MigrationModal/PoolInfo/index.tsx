@@ -65,7 +65,7 @@ const PoolInfo = ({
 
   const userLiquidityUnstaked = useTokenBalance(account ?? undefined, stakingInfo?.stakedAmount?.token) as TokenAmount
 
-  const unClaimedPng = stakingInfo?.earnedAmount?.toFixed(6) ?? '0'
+  const unClaimedRadi = stakingInfo?.earnedAmount?.toFixed(6) ?? '0'
 
   const parsedAmount = tryParseAmount(amount, stakingInfo?.stakedAmount?.token)
   const parsedAmountWrapped = wrappedCurrencyAmount(parsedAmount, chainId)
@@ -75,7 +75,7 @@ const PoolInfo = ({
     parsedAmountWrapped ? totalPoolTokens?.add(parsedAmountWrapped).raw : totalPoolTokens?.raw
   )
 
-  const pngRate = stakingInfo?.rewardRate
+  const radiRate = stakingInfo?.rewardRate
     ?.multiply((60 * 60 * 24 * 7).toString())
     ?.toSignificant(4, { groupSeparator: ',' })
 
@@ -105,14 +105,14 @@ const PoolInfo = ({
     ).format('$0.00a')}`
   }
 
-  const yourPngRate = {
+  const yourRadiRate = {
     label: `${t('migratePage.yourRate')}`,
-    value: `${pngRate}    ${t('earnPage.rewardPerWeek', { symbol: 'RADI' })}`
+    value: `${radiRate}    ${t('earnPage.rewardPerWeek', { symbol: 'RADI' })}`
   }
 
   const unClaimedRow = {
-    label: `${t('migratePage.unclaimedPng')}`,
-    value: userLiquidityUnstaked ? `${unClaimedPng}` : '-'
+    label: `${t('migratePage.unclaimedRadi')}`,
+    value: userLiquidityUnstaked ? `${unClaimedRadi}` : '-'
   }
   const poolShareRow = {
     label: `${t('migratePage.shareOfPool')}`,
@@ -120,7 +120,7 @@ const PoolInfo = ({
   }
 
   let info = [] as Array<{ label: string; value: string }>
-  if (type === 'unstake') info = [yourPngRate, unClaimedRow]
+  if (type === 'unstake') info = [yourRadiRate, unClaimedRow]
   if (type === 'stake') info = [currency0Row, currency1Row, dollarWorthRow, poolShareRow]
 
   const addonLabel = () => {
@@ -164,7 +164,7 @@ const PoolInfo = ({
                   <StyledBalanceMax onClick={onMax}>{t('currencyInputPanel.max')}</StyledBalanceMax>
 
                   <Text color="text4" fontSize={24}>
-                    PGL
+                    RYTL
                   </Text>
                 </Box>
               }

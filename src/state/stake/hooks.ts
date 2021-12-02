@@ -86,7 +86,7 @@ export interface SingleSideStakingInfo extends StakingInfoBase {
   // the token being earned
   rewardToken: Token
   // total staked PNG in the pool
-  totalStakedInPng: TokenAmount
+  totalStakedInRadi: TokenAmount
   apr: JSBI
 }
 
@@ -106,12 +106,12 @@ export interface StakingInfo extends DoubleSideStakingInfo {
   combinedApr?: Number
 }
 
-const calculateTotalStakedAmountInAvaxFromPng = function(
+const calculateTotalStakedAmountInAvaxFromRadi = function(
   amountStaked: JSBI,
   amountAvailable: JSBI,
-  avaxPngPairReserveOfPng: JSBI,
-  avaxPngPairReserveOfWavax: JSBI,
-  reserveInPng: JSBI,
+  avaxRadiPairReserveOfRadi: JSBI,
+  avaxRadiPairReserveOfWavax: JSBI,
+  reserveInRadi: JSBI,
   chainId: ChainId | undefined
 ): TokenAmount {
   if (JSBI.EQ(amountAvailable, JSBI.BigInt(0))) {
@@ -119,14 +119,14 @@ const calculateTotalStakedAmountInAvaxFromPng = function(
   }
 
   const oneToken = JSBI.BigInt(1000000000000000000)
-  const avaxPngRatio = JSBI.divide(JSBI.multiply(oneToken, avaxPngPairReserveOfWavax), avaxPngPairReserveOfPng)
-  const valueOfPngInAvax = JSBI.divide(JSBI.multiply(reserveInPng, avaxPngRatio), oneToken)
+  const avaxRadiRatio = JSBI.divide(JSBI.multiply(oneToken, avaxRadiPairReserveOfWavax), avaxRadiPairReserveOfRadi)
+  const valueOfRadiInAvax = JSBI.divide(JSBI.multiply(reserveInRadi, avaxRadiRatio), oneToken)
 
   return new TokenAmount(
     WAVAX[chainId || ChainId.AVALANCHE],
     JSBI.divide(
       JSBI.multiply(
-        JSBI.multiply(amountStaked, valueOfPngInAvax),
+        JSBI.multiply(amountStaked, valueOfRadiInAvax),
         JSBI.BigInt(2) // this is b/c the value of LP shares are ~double the value of the wavax they entitle owner to
       ),
       amountAvailable
@@ -134,15 +134,15 @@ const calculateTotalStakedAmountInAvaxFromPng = function(
   )
 }
 
-const calculateRewardRateInPng = function(rewardRate: JSBI, valueOfPng: JSBI | null): JSBI {
-  if (!valueOfPng || JSBI.EQ(valueOfPng, 0)) return JSBI.BigInt(0)
+const calculateRewardRateInRadi = function(rewardRate: JSBI, valueOfRadi: JSBI | null): JSBI {
+  if (!valueOfRadi || JSBI.EQ(valueOfRadi, 0)) return JSBI.BigInt(0)
 
   // TODO: Handle situation where stakingToken and rewardToken have different decimals
   const oneToken = JSBI.BigInt(1000000000000000000)
 
   return JSBI.divide(
     JSBI.multiply(rewardRate, oneToken), // Multiply first for precision
-    valueOfPng
+    valueOfRadi
   )
 }
 
@@ -201,7 +201,7 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
     [chainId, pairToFilterBy, version]
   )
 
-  const png = PNG[chainId || ChainId.AVALANCHE]
+  const radi = PNG[chainId || ChainId.AVALANCHE]
 
   const rewardsAddresses = useMemo(() => info.map(({ stakingRewardAddress }) => stakingRewardAddress), [info])
 
@@ -222,7 +222,7 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
 
   const pairTotalSupplies = useMultipleContractSingleData(pairAddresses, ERC20_INTERFACE, 'totalSupply')
 
-  const [avaxPngPairState, avaxPngPair] = usePair(WAVAX[chainId || ChainId.AVALANCHE], png)
+  const [avaxRadiPairState, avaxRadiPair] = usePair(WAVAX[chainId || ChainId.AVALANCHE], radi)
 
   // tokens per second, constants
   const rewardRates = useMultipleContractSingleData(
@@ -243,7 +243,7 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
   const usdPrice = useUSDCPrice(WAVAX[chainId ? chainId : ChainId.AVALANCHE])
 
   return useMemo(() => {
-    if (!chainId || !png) return []
+    if (!chainId || !radi) return []
 
     return rewardsAddresses.reduce<DoubleSideStakingInfo[]>((memo, rewardsAddress, index) => {
       // these two are dependent on account
@@ -267,9 +267,9 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
         periodFinishState?.loading === false &&
         pairTotalSupplyState?.loading === false &&
         pair &&
-        avaxPngPair &&
+        avaxRadiPair &&
         pairState !== PairState.LOADING &&
-        avaxPngPairState !== PairState.LOADING
+        avaxRadiPairState !== PairState.LOADING
       ) {
         if (
           balanceState?.error ||
@@ -280,8 +280,8 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
           pairTotalSupplyState.error ||
           pairState === PairState.INVALID ||
           pairState === PairState.NOT_EXISTS ||
-          avaxPngPairState === PairState.INVALID ||
-          avaxPngPairState === PairState.NOT_EXISTS
+          avaxRadiPairState === PairState.INVALID ||
+          avaxRadiPairState === PairState.NOT_EXISTS
         ) {
           console.error('Failed to load staking rewards info')
           return memo
@@ -303,7 +303,7 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
 
         const stakedAmount = new TokenAmount(dummyPair.liquidityToken, JSBI.BigInt(balanceState?.result?.[0] ?? 0))
         const totalStakedAmount = new TokenAmount(dummyPair.liquidityToken, JSBI.BigInt(totalSupplyStaked))
-        const totalRewardRate = new TokenAmount(png, JSBI.BigInt(isPeriodFinished ? 0 : rewardRateState.result?.[0]))
+        const totalRewardRate = new TokenAmount(radi, JSBI.BigInt(isPeriodFinished ? 0 : rewardRateState.result?.[0]))
 
         const isAvaxPool = tokens[0].equals(WAVAX[tokens[0].chainId])
         const totalStakedInWavax = isAvaxPool
@@ -313,12 +313,12 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
               pair.reserveOf(wavax).raw,
               chainId
             )
-          : calculateTotalStakedAmountInAvaxFromPng(
+          : calculateTotalStakedAmountInAvaxFromRadi(
               totalSupplyStaked,
               totalSupplyAvailable,
-              avaxPngPair.reserveOf(png).raw,
-              avaxPngPair.reserveOf(WAVAX[tokens[1].chainId]).raw,
-              pair.reserveOf(png).raw,
+              avaxRadiPair.reserveOf(radi).raw,
+              avaxRadiPair.reserveOf(WAVAX[tokens[1].chainId]).raw,
+              pair.reserveOf(radi).raw,
               chainId
             )
 
@@ -329,7 +329,7 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
           totalRewardRate: TokenAmount
         ): TokenAmount => {
           return new TokenAmount(
-            png,
+            radi,
             JSBI.greaterThan(totalStakedAmount.raw, JSBI.BigInt(0))
               ? JSBI.divide(JSBI.multiply(totalRewardRate.raw, stakedAmount.raw), totalStakedAmount.raw)
               : JSBI.BigInt(0)
@@ -345,7 +345,7 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
           tokens: tokens,
           periodFinish: periodFinishMs > 0 ? new Date(periodFinishMs) : undefined,
           isPeriodFinished: isPeriodFinished,
-          earnedAmount: new TokenAmount(png, JSBI.BigInt(earnedAmountState?.result?.[0] ?? 0)),
+          earnedAmount: new TokenAmount(radi, JSBI.BigInt(earnedAmountState?.result?.[0] ?? 0)),
           rewardRate: individualRewardRate,
           totalRewardRate: totalRewardRate,
           stakedAmount: stakedAmount,
@@ -361,7 +361,7 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     chainId,
-    png,
+    radi,
     rewardsAddresses,
     balances,
     earnedAmounts,
@@ -370,8 +370,8 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
     periodFinishes,
     pairs,
     pairTotalSupplies,
-    avaxPngPair,
-    avaxPngPairState,
+    avaxRadiPair,
+    avaxRadiPairState,
     info
   ])
 }
@@ -396,16 +396,16 @@ export function useSingleSideStakingInfo(
     [chainId, rewardTokenToFilterBy, version]
   )
 
-  const png = PNG[chainId || ChainId.AVALANCHE]
+  const radi = PNG[chainId || ChainId.AVALANCHE]
 
   const rewardsAddresses = useMemo(() => info.map(({ stakingRewardAddress }) => stakingRewardAddress), [info])
   const routes = useMemo(
     (): string[][] =>
       info.map(({ conversionRouteHops, rewardToken }) => {
-        return [png.address, ...conversionRouteHops.map(token => token.address), rewardToken.address]
+        return [radi.address, ...conversionRouteHops.map(token => token.address), rewardToken.address]
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }),
-    [info, png]
+    [info, radi]
   )
 
   const accountArg = useMemo(() => [account ?? undefined], [account])
@@ -443,7 +443,7 @@ export function useSingleSideStakingInfo(
   const amountsOuts = useSingleContractMultipleData(routerContract, 'getAmountsOut', getAmountsOutArgs, NEVER_RELOAD)
 
   return useMemo(() => {
-    if (!chainId || !png) return []
+    if (!chainId || !radi) return []
 
     return rewardsAddresses.reduce<SingleSideStakingInfo[]>((memo, rewardsAddress, index) => {
       // these two are dependent on account
@@ -479,7 +479,7 @@ export function useSingleSideStakingInfo(
         }
 
         const rewardToken = info[index].rewardToken
-        const valueOfPng = JSBI.BigInt(amountsOutsState.result?.[0]?.slice(-1)?.[0] ?? 0)
+        const valueOfRadi = JSBI.BigInt(amountsOutsState.result?.[0]?.slice(-1)?.[0] ?? 0)
         const periodFinishMs = periodFinishState.result?.[0]?.mul(1000)?.toNumber()
 
         // periodFinish will be 0 immediately after a reward contract is initialized
@@ -487,17 +487,17 @@ export function useSingleSideStakingInfo(
 
         const totalSupplyStaked = JSBI.BigInt(stakingTotalSupplyState.result?.[0])
 
-        const stakedAmount = new TokenAmount(png, JSBI.BigInt(balanceState?.result?.[0] ?? 0))
-        const totalStakedAmount = new TokenAmount(png, JSBI.BigInt(totalSupplyStaked))
+        const stakedAmount = new TokenAmount(radi, JSBI.BigInt(balanceState?.result?.[0] ?? 0))
+        const totalStakedAmount = new TokenAmount(radi, JSBI.BigInt(totalSupplyStaked))
         const totalRewardRate = new TokenAmount(
           rewardToken,
           JSBI.BigInt(isPeriodFinished ? 0 : rewardRateState.result?.[0])
         )
-        const earnedAmount = new TokenAmount(png, JSBI.BigInt(earnedAmountState?.result?.[0] ?? 0))
+        const earnedAmount = new TokenAmount(radi, JSBI.BigInt(earnedAmountState?.result?.[0] ?? 0))
 
-        const rewardRateInPng = calculateRewardRateInPng(totalRewardRate.raw, valueOfPng)
+        const rewardRateInRadi = calculateRewardRateInRadi(totalRewardRate.raw, valueOfRadi)
 
-        const apr = isPeriodFinished ? JSBI.BigInt(0) : calculateApr(rewardRateInPng, totalSupplyStaked)
+        const apr = isPeriodFinished ? JSBI.BigInt(0) : calculateApr(rewardRateInRadi, totalSupplyStaked)
 
         const getHypotheticalRewardRate = (
           stakedAmount: TokenAmount,
@@ -524,7 +524,7 @@ export function useSingleSideStakingInfo(
           totalRewardRate: totalRewardRate,
           stakedAmount: stakedAmount,
           totalStakedAmount: totalStakedAmount,
-          totalStakedInPng: totalStakedAmount,
+          totalStakedInRadi: totalStakedAmount,
           getHypotheticalRewardRate,
           apr: apr
         })
@@ -533,7 +533,7 @@ export function useSingleSideStakingInfo(
     }, [])
   }, [
     chainId,
-    png,
+    radi,
     rewardsAddresses,
     balances,
     earnedAmounts,
@@ -545,42 +545,42 @@ export function useSingleSideStakingInfo(
   ])
 }
 
-export function useTotalPngEarned(): TokenAmount | undefined {
+export function useTotalRadiEarned(): TokenAmount | undefined {
   const { chainId } = useActiveWeb3React()
-  const png = PNG[chainId || ChainId.AVALANCHE]
+  const radi = PNG[chainId || ChainId.AVALANCHE]
   const stakingInfo0 = useStakingInfo(0)
   const stakingInfo1 = useStakingInfo(1)
   const stakingInfo2 = useMinichefStakingInfos(2)
 
   const earned0 = useMemo(() => {
-    if (!png) new TokenAmount(png, '0')
+    if (!radi) new TokenAmount(radi, '0')
     return (
       stakingInfo0?.reduce(
         (accumulator, stakingInfo) => accumulator.add(stakingInfo.earnedAmount),
-        new TokenAmount(png, '0')
-      ) ?? new TokenAmount(png, '0')
+        new TokenAmount(radi, '0')
+      ) ?? new TokenAmount(radi, '0')
     )
-  }, [stakingInfo0, png])
+  }, [stakingInfo0, radi])
 
   const earned1 = useMemo(() => {
-    if (!png) new TokenAmount(png, '0')
+    if (!radi) new TokenAmount(radi, '0')
     return (
       stakingInfo1?.reduce(
         (accumulator, stakingInfo) => accumulator.add(stakingInfo.earnedAmount),
-        new TokenAmount(png, '0')
-      ) ?? new TokenAmount(png, '0')
+        new TokenAmount(radi, '0')
+      ) ?? new TokenAmount(radi, '0')
     )
-  }, [stakingInfo1, png])
+  }, [stakingInfo1, radi])
 
   const earned2 = useMemo(() => {
-    if (!png) new TokenAmount(png, '0')
+    if (!radi) new TokenAmount(radi, '0')
     return (
       stakingInfo2?.reduce(
         (accumulator, stakingInfo) => accumulator.add(stakingInfo.earnedAmount),
-        new TokenAmount(png, '0')
-      ) ?? new TokenAmount(png, '0')
+        new TokenAmount(radi, '0')
+      ) ?? new TokenAmount(radi, '0')
     )
-  }, [stakingInfo2, png])
+  }, [stakingInfo2, radi])
 
   return earned0.add(earned1).add(earned2)
   // return earned0 ? (earned1 ? earned0.add(earned1) : earned0) : earned1 ? earned1 : undefined
@@ -657,7 +657,7 @@ export function useGetStakingDataWithAPR(version: number) {
     if (stakingInfos?.length > 0) {
       Promise.all(
         stakingInfos.map(stakingInfo => {
-          return fetch(`https://api.pangolin.exchange/pangolin/apr/${stakingInfo.stakingRewardAddress}`)
+          return fetch(`https://api.rytell.exchange/rytell/apr/${stakingInfo.stakingRewardAddress}`)
             .then(res => res.json())
             .then(res => ({
               swapFeeApr: Number(res.swapFeeApr),
@@ -750,7 +750,7 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
   const { chainId, account } = useActiveWeb3React()
   const minichefContract = useStakingContract(MINICHEF_ADDRESS)
   const poolMap = useMinichefPools()
-  const png = chainId ? PNG[chainId] : PNG[chainId || ChainId.AVALANCHE]
+  const radi = chainId ? PNG[chainId] : PNG[chainId || ChainId.AVALANCHE]
 
   let info = useMemo(
     () =>
@@ -776,7 +776,7 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
   const pairTotalSupplies = useMultipleContractSingleData(pairAddresses, ERC20_INTERFACE, 'totalSupply')
   const balances = useMultipleContractSingleData(pairAddresses, ERC20_INTERFACE, 'balanceOf', [MINICHEF_ADDRESS])
 
-  const [avaxPngPairState, avaxPngPair] = usePair(WAVAX[chainId || ChainId.AVALANCHE], png)
+  const [avaxRadiPairState, avaxRadiPair] = usePair(WAVAX[chainId || ChainId.AVALANCHE], radi)
 
   const poolIdArray = useMemo(() => {
     if (!pairAddresses || !poolMap) return []
@@ -810,7 +810,7 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
   )
 
   const arr = useMemo(() => {
-    if (!chainId || !png || !avaxPrice) return []
+    if (!chainId || !radi || !avaxPrice) return []
 
     return pairAddresses.reduce<any[]>((memo, pairAddress, index) => {
       const pairTotalSupplyState = pairTotalSupplies[index]
@@ -825,9 +825,9 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
         poolInfo?.loading === false &&
         balanceState?.loading === false &&
         pair &&
-        avaxPngPair &&
+        avaxRadiPair &&
         pairState !== PairState.LOADING &&
-        avaxPngPairState !== PairState.LOADING &&
+        avaxRadiPairState !== PairState.LOADING &&
         rewardPerSecond &&
         totalAllocPoint &&
         rewardsExpiration?.[0]
@@ -837,8 +837,8 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
           pairTotalSupplyState.error ||
           pairState === PairState.INVALID ||
           pairState === PairState.NOT_EXISTS ||
-          avaxPngPairState === PairState.INVALID ||
-          avaxPngPairState === PairState.NOT_EXISTS
+          avaxRadiPairState === PairState.INVALID ||
+          avaxRadiPairState === PairState.NOT_EXISTS
         ) {
           console.error('Failed to load staking rewards info')
           return memo
@@ -853,9 +853,9 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
 
         const poolAllocPointAmount = new TokenAmount(lpToken, JSBI.BigInt(poolInfo?.result?.['allocPoint']))
         const totalAllocPointAmount = new TokenAmount(lpToken, JSBI.BigInt(totalAllocPoint?.[0]))
-        const rewardRatePerSecAmount = new TokenAmount(png, JSBI.BigInt(rewardPerSecond?.[0]))
+        const rewardRatePerSecAmount = new TokenAmount(radi, JSBI.BigInt(rewardPerSecond?.[0]))
         const poolRewardRate = new TokenAmount(
-          png,
+          radi,
           JSBI.divide(JSBI.multiply(poolAllocPointAmount.raw, rewardRatePerSecAmount.raw), totalAllocPointAmount.raw)
         )
 
@@ -868,11 +868,11 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
         const totalSupplyAvailable = JSBI.BigInt(pairTotalSupplyState?.result?.[0])
         const totalStakedAmount = new TokenAmount(lpToken, JSBI.BigInt(balanceState?.result?.[0]))
         const stakedAmount = new TokenAmount(lpToken, JSBI.BigInt(userPoolInfo?.result?.['amount'] ?? 0))
-        const earnedAmount = new TokenAmount(png, JSBI.BigInt(pendingRewardInfo?.result?.['pending'] ?? 0))
+        const earnedAmount = new TokenAmount(radi, JSBI.BigInt(pendingRewardInfo?.result?.['pending'] ?? 0))
         const multiplier = JSBI.BigInt(poolInfo?.result?.['allocPoint'])
 
         const isAvaxPool = pair.involvesToken(WAVAX[chainId])
-        const isPngPool = pair.involvesToken(PNG[chainId])
+        const isRadiPool = pair.involvesToken(PNG[chainId])
 
         let totalStakedInUsd = new TokenAmount(DAIe[chainId], BIG_INT_ZERO)
         const totalStakedInWavax = new TokenAmount(WAVAX[chainId], BIG_INT_ZERO)
@@ -899,13 +899,13 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
             chainId
           )
           totalStakedInUsd = totalStakedInWavax && (usdPrice?.quote(totalStakedInWavax) as TokenAmount)
-        } else if (isPngPool) {
-          const totalStakedInWavax = calculateTotalStakedAmountInAvaxFromPng(
+        } else if (isRadiPool) {
+          const totalStakedInWavax = calculateTotalStakedAmountInAvaxFromRadi(
             totalSupplyStaked,
             totalSupplyAvailable,
-            avaxPngPair.reserveOf(png).raw,
-            avaxPngPair.reserveOf(WAVAX[chainId]).raw,
-            pair.reserveOf(png).raw,
+            avaxRadiPair.reserveOf(radi).raw,
+            avaxRadiPair.reserveOf(WAVAX[chainId]).raw,
+            pair.reserveOf(radi).raw,
             chainId
           )
           totalStakedInUsd = totalStakedInWavax && (usdPrice?.quote(totalStakedInWavax) as TokenAmount)
@@ -920,7 +920,7 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
           totalRewardRate: TokenAmount
         ): TokenAmount => {
           return new TokenAmount(
-            png,
+            radi,
             JSBI.greaterThan(totalStakedAmount.raw, JSBI.BigInt(0))
               ? JSBI.divide(JSBI.multiply(totalRewardRate.raw, stakedAmount.raw), totalStakedAmount.raw)
               : JSBI.BigInt(0)
@@ -950,13 +950,13 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
     }, [])
   }, [
     chainId,
-    png,
+    radi,
     pairTotalSupplies,
     poolInfos,
     userInfos,
     pairs,
-    avaxPngPair,
-    avaxPngPairState,
+    avaxRadiPair,
+    avaxRadiPairState,
     rewardPerSecond,
     totalAllocPoint,
     pendingRewards,

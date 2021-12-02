@@ -113,7 +113,7 @@ export default function Vote() {
       <TopSection gap="2px">
         <Confetti start={Boolean(claimConfirmed)} />
         <TYPE.mediumHeader style={{ margin: '0.5rem 0' }} textAlign="center">
-          {t('airdrop.claimPngAirdrop')}
+          {t('airdrop.claimRadiAirdrop')}
         </TYPE.mediumHeader>
         {!claimingAllowed ? (
           <Card padding="40px">
@@ -139,7 +139,9 @@ export default function Vote() {
               {t('airdrop.noUniNoSushi')}
             </TYPE.body>
             <TYPE.body mt="1rem" color={theme.text1} textAlign="center">
-              {t('airdrop.youHave') + claimAmount?.toFixed(0, { groupSeparator: ',' }) + t('airdrop.pngAvailableClaim')}
+              {t('airdrop.youHave') +
+                claimAmount?.toFixed(0, { groupSeparator: ',' }) +
+                t('airdrop.radiAvailableClaim')}
             </TYPE.body>
           </Card>
         ) : attempting ? (
@@ -153,7 +155,7 @@ export default function Vote() {
             <span role="img" aria-label="party-hat">
               🎉{' '}
             </span>
-            {t('airdrop.welcomeToTeamPangolin')}
+            {t('airdrop.welcomeToTeamRytell')}
             <span role="img" aria-label="party-hat">
               {' '}
               🎉

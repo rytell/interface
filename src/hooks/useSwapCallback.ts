@@ -151,8 +151,8 @@ export function useSwapCallback(
                     console.debug('Call threw error', call, callError)
                     let errorMessage: string
                     switch (callError.reason) {
-                      case 'PangolinRouter: INSUFFICIENT_OUTPUT_AMOUNT':
-                      case 'PangolinRouter: EXCESSIVE_INPUT_AMOUNT':
+                      case 'RytellRouter: INSUFFICIENT_OUTPUT_AMOUNT':
+                      case 'RytellRouter: EXCESSIVE_INPUT_AMOUNT':
                         errorMessage =
                           'This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance.'
                         break
@@ -199,10 +199,11 @@ export function useSwapCallback(
             const withRecipient =
               recipient === account
                 ? base
-                : `${base} to ${recipientAddressOrName && isAddress(recipientAddressOrName)
-                  ? shortenAddress(recipientAddressOrName)
-                  : recipientAddressOrName
-                }`
+                : `${base} to ${
+                    recipientAddressOrName && isAddress(recipientAddressOrName)
+                      ? shortenAddress(recipientAddressOrName)
+                      : recipientAddressOrName
+                  }`
 
             const withVersion =
               tradeVersion === Version.v2 ? withRecipient : `${withRecipient} on ${(tradeVersion as any).toUpperCase()}`

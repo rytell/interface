@@ -1,6 +1,6 @@
 {
   "name": "@pangolindex/interface",
-  "description": "Pangolin Interface",
+  "description": "Rytell Interface",
   "homepage": ".",
   "engines": {
     "node": ">=14.17.0"

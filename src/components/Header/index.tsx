@@ -11,7 +11,7 @@ import Logo from '../../assets/svg/icon.svg'
 import LogoDark from '../../assets/svg/icon.svg'
 import { useActiveWeb3React } from '../../hooks'
 import { useDarkModeManager } from '../../state/user/hooks'
-import { useETHBalances, useAggregatePngBalance } from '../../state/wallet/hooks'
+import { useETHBalances, useAggregateRadiBalance } from '../../state/wallet/hooks'
 import { CardNoise } from '../earn/styled'
 import { CountUp } from 'use-count-up'
 import {
@@ -24,7 +24,7 @@ import Menu from '../Menu'
 import Row, { RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
 import Modal from '../Modal'
-import PngBalanceContent from './PngBalanceContent'
+import RadiBalanceContent from './RadiBalanceContent'
 import usePrevious from '../../hooks/usePrevious'
 // import { ANALYTICS_PAGE } from '../../constants'
 import LanguageSelection from '../LanguageSelection'
@@ -190,7 +190,7 @@ const Title = styled.a`
   }
 `
 
-const PngIcon = styled.div`
+const RadiIcon = styled.div`
   transition: transform 0.3s ease;
   :hover {
     transform: rotate(-5deg);
@@ -299,9 +299,9 @@ export default function Header() {
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [isDark] = useDarkModeManager()
 
-  const aggregateBalance: TokenAmount | undefined = useAggregatePngBalance()
+  const aggregateBalance: TokenAmount | undefined = useAggregateRadiBalance()
 
-  const [showPngBalanceModal, setShowPngBalanceModal] = useState(false)
+  const [showRadiBalanceModal, setShowRadiBalanceModal] = useState(false)
 
   const countUpValue = aggregateBalance?.toFixed(0) ?? '0'
   const countUpValuePrevious = usePrevious(countUpValue) ?? '0'
@@ -312,14 +312,14 @@ export default function Header() {
 
   return (
     <HeaderFrame>
-      <Modal isOpen={showPngBalanceModal} onDismiss={() => setShowPngBalanceModal(false)}>
-        <PngBalanceContent setShowPngBalanceModal={setShowPngBalanceModal} />
+      <Modal isOpen={showRadiBalanceModal} onDismiss={() => setShowRadiBalanceModal(false)}>
+        <RadiBalanceContent setShowRadiBalanceModal={setShowRadiBalanceModal} />
       </Modal>
       <HeaderRow>
         <Title href=".">
-          <PngIcon>
+          <RadiIcon>
             <img width={'24px'} src={isDark ? LogoDark : Logo} alt="logo" />
-          </PngIcon>
+          </RadiIcon>
         </Title>
         <HeaderLinks>
           <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
@@ -340,18 +340,18 @@ export default function Header() {
           </StyledNavLink>
 
           <StyledLink
-            id={`png-nav-link`}
+            id={`radi-nav-link`}
             onClick={toggle}
-            isActive={location?.pathname?.startsWith('/png')}
+            isActive={location?.pathname?.startsWith('/radi')}
             ref={node as any}
           >
             {t('header.farm')} <ChevronDown size={24} />
             {open && (
               <NarrowMenuFlyout>
-                <MenuNavItem id="link" to={'/png/1'}>
+                <MenuNavItem id="link" to={'/radi/1'}>
                   {t('header.version1')}
                 </MenuNavItem>
-                <MenuNavItem id="link" to={'/png/2'}>
+                <MenuNavItem id="link" to={'/radi/2'}>
                   {t('header.version2')}
                 </MenuNavItem>
               </NarrowMenuFlyout>
@@ -379,7 +379,7 @@ export default function Header() {
             )}
           </HideSmall>
           {aggregateBalance && (
-            <PNGWrapper onClick={() => setShowPngBalanceModal(true)}>
+            <PNGWrapper onClick={() => setShowRadiBalanceModal(true)}>
               <PNGAmount active={!!account} style={{ pointerEvents: 'auto' }}>
                 {account && (
                   <HideSmall>

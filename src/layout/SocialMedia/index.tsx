@@ -49,7 +49,7 @@ export default function SocialMedia({ collapsed }: SocialMediaProps) {
       title: 'Discord'
     },
     {
-      link: 'https://pangolin.substack.com/',
+      link: 'https://rytell.substack.com/',
       icon: Substack,
       title: 'Substack'
     }

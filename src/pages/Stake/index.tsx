@@ -46,8 +46,8 @@ export default function Earn({
     Promise.all(
       stakingInfos
         ?.sort(function(info_a, info_b) {
-          // greater stake in png comes first
-          return info_a.totalStakedInPng?.greaterThan(info_b.totalStakedInPng ?? BIG_INT_ZERO) ? -1 : 1
+          // greater stake in radi comes first
+          return info_a.totalStakedInRadi?.greaterThan(info_b.totalStakedInRadi ?? BIG_INT_ZERO) ? -1 : 1
         })
         .sort(function(info_a, info_b) {
           if (info_a.stakedAmount.greaterThan(BIG_INT_ZERO)) {
@@ -67,7 +67,7 @@ export default function Earn({
     ).then(results => {
       setStakingInfoResults(results)
     })
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stakingInfos?.length])
 
   const DataRow = styled(RowBetween)`
@@ -76,7 +76,9 @@ export default function Earn({
    `};
   `
 
-  const stakingRewardsExist = Boolean(typeof chainId === 'number' && (SINGLE_SIDE_STAKING_REWARDS_INFO[chainId]?.length ?? 0) > 0)
+  const stakingRewardsExist = Boolean(
+    typeof chainId === 'number' && (SINGLE_SIDE_STAKING_REWARDS_INFO[chainId]?.length ?? 0) > 0
+  )
 
   return (
     <PageWrapper gap="lg" justify="center">
@@ -88,7 +90,7 @@ export default function Earn({
                 <TYPE.white fontWeight={600}>{t('earnPage.pangolinLiquidityStaking')}</TYPE.white>
               </RowBetween>
               <RowBetween>
-                <TYPE.white fontSize={14}>{t('earnPage.depositPangolinStaking')}</TYPE.white>
+                <TYPE.white fontSize={14}>{t('earnPage.depositRytellStaking')}</TYPE.white>
               </RowBetween>
             </AutoColumn>
           </CardSection>
@@ -97,9 +99,7 @@ export default function Earn({
 
       <AutoColumn gap="lg" style={{ width: '100%', maxWidth: '720px' }}>
         <DataRow style={{ alignItems: 'baseline' }}>
-          <TYPE.mediumHeader style={{ marginTop: '0.5rem' }}>
-            {t('earnPage.currentOpportunities')}
-          </TYPE.mediumHeader>
+          <TYPE.mediumHeader style={{ marginTop: '0.5rem' }}>{t('earnPage.currentOpportunities')}</TYPE.mediumHeader>
         </DataRow>
 
         <PoolSection>
@@ -109,11 +109,7 @@ export default function Earn({
             t('earnPage.noActiveRewards')
           ) : (
             stakingInfoResults?.map(stakingInfo => (
-              <SingleSidePoolCard
-                key={stakingInfo.stakingRewardAddress}
-                stakingInfo={stakingInfo}
-                version={version}
-              />
+              <SingleSidePoolCard key={stakingInfo.stakingRewardAddress} stakingInfo={stakingInfo} version={version} />
             ))
           )}
         </PoolSection>

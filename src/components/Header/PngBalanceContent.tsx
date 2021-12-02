@@ -7,10 +7,10 @@ import { injected } from '../../connectors'
 import { RADI } from '../../constants'
 import { useTotalSupply } from '../../data/TotalSupply'
 import { useActiveWeb3React } from '../../hooks'
-import { useTotalPngEarned } from '../../state/stake/hooks'
+import { useTotalRadiEarned } from '../../state/stake/hooks'
 import { DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION } from '../../state/stake/doubleSideConfig'
-import { useAggregatePngBalance, useTokenBalance } from '../../state/wallet/hooks'
-import { StyledInternalLink, TYPE, PngTokenAnimated } from '../../theme'
+import { useAggregateRadiBalance, useTokenBalance } from '../../state/wallet/hooks'
+import { StyledInternalLink, TYPE, RadiTokenAnimated } from '../../theme'
 import { AutoColumn } from '../Column'
 import { RowBetween } from '../Row'
 import { Break, CardBGImage, CardNoise, CardSection, DataCard } from '../earn/styled'
@@ -58,38 +58,38 @@ const AddPNG = styled.span`
 /**
  * Content for balance stats modal
  */
-export default function PngBalanceContent({ setShowPngBalanceModal }: { setShowPngBalanceModal: any }) {
+export default function RadiBalanceContent({ setShowRadiBalanceModal }: { setShowRadiBalanceModal: any }) {
   const { account, chainId } = useActiveWeb3React()
-  const png = chainId ? RADI[chainId] : undefined
+  const radi = chainId ? RADI[chainId] : undefined
 
-  const total = useAggregatePngBalance()
-  const pngBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, png)
-  const pngToClaim: TokenAmount | undefined = useTotalPngEarned()
+  const total = useAggregateRadiBalance()
+  const radiBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, radi)
+  const radiToClaim: TokenAmount | undefined = useTotalRadiEarned()
 
-  const totalSupply: TokenAmount | undefined = useTotalSupply(png)
+  const totalSupply: TokenAmount | undefined = useTotalSupply(radi)
 
   // Determine RADI price in AVAX
   const wavax = WAVAX[chainId ? chainId : 43114]
-  const [, avaxPngTokenPair] = usePair(wavax, png)
+  const [, avaxRadiTokenPair] = usePair(wavax, radi)
   const oneToken = JSBI.BigInt(1000000000000000000)
   const { t } = useTranslation()
-  let pngPrice: number | undefined
-  if (avaxPngTokenPair && png) {
-    const avaxPngRatio = JSBI.divide(
-      JSBI.multiply(oneToken, avaxPngTokenPair.reserveOf(wavax).raw),
-      avaxPngTokenPair.reserveOf(png).raw
+  let radiPrice: number | undefined
+  if (avaxRadiTokenPair && radi) {
+    const avaxRadiRatio = JSBI.divide(
+      JSBI.multiply(oneToken, avaxRadiTokenPair.reserveOf(wavax).raw),
+      avaxRadiTokenPair.reserveOf(radi).raw
     )
-    pngPrice = JSBI.toNumber(avaxPngRatio) / 1000000000000000000
+    radiPrice = JSBI.toNumber(avaxRadiRatio) / 1000000000000000000
   }
 
   const [circulation, setCirculation] = useState(totalSupply)
 
   useMemo(() => {
-    if (png === undefined) return
-    fetch(`https://api.pangolin.exchange/png/circulating-supply`)
+    if (radi === undefined) return
+    fetch(`https://api.rytell.exchange/radi/circulating-supply`)
       .then(res => res.text())
-      .then(val => setCirculation(new TokenAmount(png, val)))
-  }, [png])
+      .then(val => setCirculation(new TokenAmount(radi, val)))
+  }, [radi])
 
   return (
     <ContentWrapper gap="lg">
@@ -98,8 +98,8 @@ export default function PngBalanceContent({ setShowPngBalanceModal }: { setShowP
         <CardNoise />
         <CardSection gap="md">
           <RowBetween>
-            <TYPE.white color="white">{t('header.pngBreakDown')}</TYPE.white>
-            <StyledClose stroke="white" onClick={() => setShowPngBalanceModal(false)} />
+            <TYPE.white color="white">{t('header.radiBreakDown')}</TYPE.white>
+            <StyledClose stroke="white" onClick={() => setShowRadiBalanceModal(false)} />
           </RowBetween>
         </CardSection>
         <Break />
@@ -107,7 +107,7 @@ export default function PngBalanceContent({ setShowPngBalanceModal }: { setShowP
           <>
             <CardSection gap="sm">
               <AutoColumn gap="md" justify="center">
-                <PngTokenAnimated width="48px" src={tokenLogo} />{' '}
+                <RadiTokenAnimated width="48px" src={tokenLogo} />{' '}
                 <TYPE.white fontSize={48} fontWeight={600} color="white">
                   {total?.toFixed(2, { groupSeparator: ',' })}
                 </TYPE.white>
@@ -115,16 +115,16 @@ export default function PngBalanceContent({ setShowPngBalanceModal }: { setShowP
               <AutoColumn gap="md">
                 <RowBetween>
                   <TYPE.white color="white">{t('header.balance')}</TYPE.white>
-                  <TYPE.white color="white">{pngBalance?.toFixed(2, { groupSeparator: ',' })}</TYPE.white>
+                  <TYPE.white color="white">{radiBalance?.toFixed(2, { groupSeparator: ',' })}</TYPE.white>
                 </RowBetween>
                 <RowBetween>
                   <TYPE.white color="white">{t('header.unclaimed')}</TYPE.white>
                   <TYPE.white color="white">
-                    {pngToClaim?.toFixed(4, { groupSeparator: ',' })}{' '}
-                    {pngToClaim && pngToClaim.greaterThan('0') && (
+                    {radiToClaim?.toFixed(4, { groupSeparator: ',' })}{' '}
+                    {radiToClaim && radiToClaim.greaterThan('0') && (
                       <StyledInternalLink
-                        onClick={() => setShowPngBalanceModal(false)}
-                        to={`/png/${DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION}`}
+                        onClick={() => setShowRadiBalanceModal(false)}
+                        to={`/radi/${DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION}`}
                       >
                         ({t('earn.claim')})
                       </StyledInternalLink>
@@ -139,11 +139,11 @@ export default function PngBalanceContent({ setShowPngBalanceModal }: { setShowP
         <CardSection gap="sm">
           <AutoColumn gap="md">
             <RowBetween>
-              <TYPE.white color="white">{t('header.pngPrice')}</TYPE.white>
-              <TYPE.white color="white">{pngPrice?.toFixed(5) ?? '-'} AVAX</TYPE.white>
+              <TYPE.white color="white">{t('header.radiPrice')}</TYPE.white>
+              <TYPE.white color="white">{radiPrice?.toFixed(5) ?? '-'} AVAX</TYPE.white>
             </RowBetween>
             <RowBetween>
-              <TYPE.white color="white">{t('header.pngCirculation')}</TYPE.white>
+              <TYPE.white color="white">{t('header.radiCirculation')}</TYPE.white>
               <TYPE.white color="white">{circulation?.toFixed(0, { groupSeparator: ',' })}</TYPE.white>
             </RowBetween>
             <RowBetween>
@@ -166,9 +166,9 @@ export default function PngBalanceContent({ setShowPngBalanceModal }: { setShowP
                             params: {
                               type: 'ERC20',
                               options: {
-                                address: png?.address,
-                                symbol: png?.symbol,
-                                decimals: png?.decimals,
+                                address: radi?.address,
+                                symbol: radi?.symbol,
+                                decimals: radi?.decimals,
                                 image:
                                   'https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png'
                               }

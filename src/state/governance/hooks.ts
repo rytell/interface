@@ -1,7 +1,7 @@
 import { UNI } from './../../constants/index'
 import { TokenAmount } from '@pangolindex/sdk'
 import { isAddress } from 'ethers/lib/utils'
-import { useGovernanceContract, usePngContract } from '../../hooks/useContract'
+import { useGovernanceContract, useRadiContract } from '../../hooks/useContract'
 import { useSingleCallResult, useSingleContractMultipleData } from '../multicall/hooks'
 import { useActiveWeb3React } from '../../hooks'
 import { ethers, utils } from 'ethers'
@@ -58,9 +58,9 @@ export async function getBlockFromTimestamp(timestamp: number) {
     query: GET_BLOCK,
     variables: {
       timestampFrom: timestamp,
-      timestampTo: timestamp + 60 * 60 * 24 * 7,
+      timestampTo: timestamp + 60 * 60 * 24 * 7
     },
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'cache-first'
   })
   return result?.data?.blocks?.[0]?.number
 }
@@ -166,7 +166,6 @@ export function useAllProposalData() {
     allProposals.reverse()
     allProposalStates.reverse()
 
-
     return allProposals
       .filter((p, i) => {
         return Boolean(p.result) && Boolean(allProposalStates[i]?.result) && Boolean(formattedEvents[i])
@@ -201,14 +200,14 @@ export function useProposalData(id: string): ProposalData | undefined {
 // get the users delegatee if it exists
 export function useUserDelegatee(): string {
   const { account } = useActiveWeb3React()
-  const uniContract = usePngContract()
+  const uniContract = useRadiContract()
   const { result } = useSingleCallResult(uniContract, 'delegates', [account ?? undefined])
   return result?.[0] ?? undefined
 }
 
 export function useUserVotes(): TokenAmount | undefined {
   const { account, chainId } = useActiveWeb3React()
-  const uniContract = usePngContract()
+  const uniContract = useRadiContract()
 
   // check for available votes
   const uni = chainId ? UNI[chainId] : undefined
@@ -220,7 +219,7 @@ export function useDelegateCallback(): (delegatee: string | undefined) => undefi
   const { account, chainId, library } = useActiveWeb3React()
   const addTransaction = useTransactionAdder()
 
-  const uniContract = usePngContract()
+  const uniContract = useRadiContract()
 
   return useCallback(
     (delegatee: string | undefined) => {

@@ -57,7 +57,7 @@ export default function DelegateModal({ isOpen, onDismiss, title }: VoteModalPro
   const { address: parsedAddress } = useENS(activeDelegate)
 
   // get the number of votes available to delegate
-  const pngBalance = useTokenBalance(account ?? undefined, chainId ? RADI[chainId] : undefined)
+  const radiBalance = useTokenBalance(account ?? undefined, chainId ? RADI[chainId] : undefined)
 
   const delegateCallback = useDelegateCallback()
 
@@ -98,7 +98,7 @@ export default function DelegateModal({ isOpen, onDismiss, title }: VoteModalPro
               <TYPE.mediumHeader fontWeight={500}>{title}</TYPE.mediumHeader>
               <StyledClosed stroke="black" onClick={wrappedOndismiss} />
             </RowBetween>
-            <TYPE.body>{t('vote.earnedPng')}</TYPE.body>
+            <TYPE.body>{t('vote.earnedRadi')}</TYPE.body>
             <TYPE.body>{t('vote.canEitherVote')}</TYPE.body>
             {usingDelegate && <AddressInputPanel value={typed} onChange={handleRecipientType} />}
             <ButtonPrimary disabled={!isAddress(parsedAddress ?? '')} onClick={onDelegate}>
@@ -118,7 +118,7 @@ export default function DelegateModal({ isOpen, onDismiss, title }: VoteModalPro
         <LoadingView onDismiss={wrappedOndismiss}>
           <AutoColumn gap="12px" justify={'center'}>
             <TYPE.largeHeader>{usingDelegate ? t('vote.delegatingVotes') : t('vote.unlockingVotes')}</TYPE.largeHeader>
-            <TYPE.main fontSize={36}>{pngBalance?.toSignificant(4)}</TYPE.main>
+            <TYPE.main fontSize={36}>{radiBalance?.toSignificant(4)}</TYPE.main>
           </AutoColumn>
         </LoadingView>
       )}
@@ -126,7 +126,7 @@ export default function DelegateModal({ isOpen, onDismiss, title }: VoteModalPro
         <SubmittedView onDismiss={wrappedOndismiss} hash={hash}>
           <AutoColumn gap="12px" justify={'center'}>
             <TYPE.largeHeader>{t('vote.transactionSubmitted')}</TYPE.largeHeader>
-            <TYPE.main fontSize={36}>{pngBalance?.toSignificant(4)}</TYPE.main>
+            <TYPE.main fontSize={36}>{radiBalance?.toSignificant(4)}</TYPE.main>
           </AutoColumn>
         </SubmittedView>
       )}

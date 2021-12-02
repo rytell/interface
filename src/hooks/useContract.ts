@@ -4,7 +4,7 @@ import { abi as IPangolinPairABI } from '@pangolindex/exchange-contracts/artifac
 import { abi as STAKING_REWARDS_ABI } from '@pangolindex/governance/artifacts/contracts/StakingRewards.sol/StakingRewards.json'
 import { abi as AIRDROP_ABI } from '@pangolindex/governance/artifacts/contracts/Airdrop.sol/Airdrop.json'
 import { abi as GOVERNANCE_ABI } from '@pangolindex/governance/artifacts/contracts/GovernorAlpha.sol/GovernorAlpha.json'
-import { abi as PNG_ABI } from '@pangolindex/governance/artifacts/contracts/PNG.sol/Png.json'
+import { abi as PNG_ABI } from '@pangolindex/governance/artifacts/contracts/PNG.sol/Radi.json'
 import { abi as BRIDGE_MIGRATOR_ABI } from '@pangolindex/exchange-contracts/artifacts/contracts/pangolin-periphery/PangolinBridgeMigrationRouter.sol/PangolinBridgeMigrationRouter.json'
 import { abi as MINICHEF_ABI } from '@pangolindex/governance/artifacts/contracts/MiniChefV2.sol/MiniChefV2.json'
 import { useMemo } from 'react'
@@ -91,13 +91,17 @@ export function useGovernanceContract(): Contract | null {
   return useContract(GOVERNANCE_ADDRESS, GOVERNANCE_ABI, true)
 }
 
-export function usePngContract(): Contract | null {
+export function useRadiContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId ? PNG[chainId].address : undefined, PNG_ABI, true)
 }
 
 export function useStakingContract(stakingAddress?: string, withSignerIfPossible?: boolean): Contract | null {
-  return useContract(stakingAddress, stakingAddress === MINICHEF_ADDRESS ? MINICHEF_ABI : STAKING_REWARDS_ABI, withSignerIfPossible)
+  return useContract(
+    stakingAddress,
+    stakingAddress === MINICHEF_ADDRESS ? MINICHEF_ABI : STAKING_REWARDS_ABI,
+    withSignerIfPossible
+  )
 }
 
 export function useAirdropContract(): Contract | null {

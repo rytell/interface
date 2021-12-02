@@ -32,7 +32,7 @@ const WrapSmall = styled(RowBetween)`
 `
 
 /* the idea is to format the partner logos with this one */
-const PngIcon = styled.div`
+const RadiIcon = styled.div`
   transition: transform 0.3s ease;
   :hover {
     transform: rotate(-5deg);
@@ -148,9 +148,9 @@ export default function IDO() {
         {IDO_LIST?.filter(ido => ido.status === IDO_STATUS_UPCOMING).map(filteredIDO => {
           return (
             <IDOs key={filteredIDO.id}>
-              <PngIcon>
+              <RadiIcon>
                 <img width={'50px'} src={filteredIDO.projectIconLocation} alt="logo" />
-              </PngIcon>
+              </RadiIcon>
               <StyledExternalLink id={`gov-nav-link`} href={filteredIDO.announcementUrl}>
                 {filteredIDO.title} by {filteredIDO.launchpad} <span style={{ fontSize: '11px' }}>↗</span>
               </StyledExternalLink>
@@ -168,9 +168,9 @@ export default function IDO() {
         {IDO_LIST.filter(ido => ido.status === IDO_STATUS_ENDED).map(filteredIDO => {
           return (
             <IDOs key={filteredIDO.id}>
-              <PngIcon>
+              <RadiIcon>
                 <img width={'50px'} src={filteredIDO.projectIconLocation} alt="logo" />
-              </PngIcon>
+              </RadiIcon>
               <StyledExternalLink id={`gov-nav-link`} href={filteredIDO.announcementUrl}>
                 {filteredIDO.title} by {filteredIDO.launchpad} <span style={{ fontSize: '11px' }}>↗</span>
               </StyledExternalLink>

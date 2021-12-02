@@ -34,7 +34,13 @@ interface BridgeMigratorModalProps {
   userLiquidityUnstaked: TokenAmount | undefined
 }
 
-export default function BridgeMigratorModal({ isOpen, onDismiss, pairFrom, pairTo, userLiquidityUnstaked }: BridgeMigratorModalProps) {
+export default function BridgeMigratorModal({
+  isOpen,
+  onDismiss,
+  pairFrom,
+  pairTo,
+  userLiquidityUnstaked
+}: BridgeMigratorModalProps) {
   const { account, chainId, library } = useActiveWeb3React()
 
   // track and parse user input
@@ -66,13 +72,14 @@ export default function BridgeMigratorModal({ isOpen, onDismiss, pairFrom, pairT
     setAttempting(true)
     if (bridgeMigratorContract && parsedAmount && deadline && account) {
       if (approval === ApprovalState.APPROVED) {
-        await bridgeMigratorContract.migrateLiquidity(
-          pairFrom.liquidityToken.address,
-          pairTo.liquidityToken.address,
-          account,
-          `0x${parsedAmount.raw.toString(16)}`,
-          deadline.toNumber(),
-        )
+        await bridgeMigratorContract
+          .migrateLiquidity(
+            pairFrom.liquidityToken.address,
+            pairTo.liquidityToken.address,
+            account,
+            `0x${parsedAmount.raw.toString(16)}`,
+            deadline.toNumber()
+          )
           .then((response: TransactionResponse) => {
             addTransaction(response, {
               summary: 'Migrate liquidity'
@@ -93,7 +100,7 @@ export default function BridgeMigratorModal({ isOpen, onDismiss, pairFrom, pairT
             signatureData.deadline,
             signatureData.v,
             signatureData.r,
-            signatureData.s,
+            signatureData.s
           )
           .then((response: TransactionResponse) => {
             addTransaction(response, {
@@ -140,7 +147,7 @@ export default function BridgeMigratorModal({ isOpen, onDismiss, pairFrom, pairT
       { name: 'verifyingContract', type: 'address' }
     ]
     const domain = {
-      name: 'Pangolin Liquidity',
+      name: 'Rytell Liquidity',
       version: '1',
       chainId: chainId,
       verifyingContract: pairContract.address
@@ -236,7 +243,7 @@ export default function BridgeMigratorModal({ isOpen, onDismiss, pairFrom, pairT
           <AutoColumn gap="12px" justify={'center'}>
             {/* TODO: Translate with i18n */}
             <TYPE.largeHeader>Migrating Liquidity</TYPE.largeHeader>
-            <TYPE.body fontSize={20}>{parsedAmount?.toSignificant(4)} PGL</TYPE.body>
+            <TYPE.body fontSize={20}>{parsedAmount?.toSignificant(4)} RYTL</TYPE.body>
           </AutoColumn>
         </LoadingView>
       )}
@@ -245,7 +252,7 @@ export default function BridgeMigratorModal({ isOpen, onDismiss, pairFrom, pairT
           <AutoColumn gap="12px" justify={'center'}>
             <TYPE.largeHeader>{t('earn.transactionSubmitted')}</TYPE.largeHeader>
             {/* TODO: Translate with i18n */}
-            <TYPE.body fontSize={20}>Migrated {parsedAmount?.toSignificant(4)} PGL</TYPE.body>
+            <TYPE.body fontSize={20}>Migrated {parsedAmount?.toSignificant(4)} RYTL</TYPE.body>
           </AutoColumn>
         </SubmittedView>
       )}

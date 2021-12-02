@@ -66,11 +66,11 @@ export default function Sidebar({ collapsed, onCollapsed }: SidebarProps) {
     },
 
     {
-      link: '/png/2',
+      link: '/radi/2',
       icon: Farm,
       title: t('header.farm'),
       id: 'farm',
-      isActive: location?.pathname?.startsWith('/png')
+      isActive: location?.pathname?.startsWith('/radi')
     },
 
     {
@@ -98,7 +98,7 @@ export default function Sidebar({ collapsed, onCollapsed }: SidebarProps) {
     }
   ]
 
-  const pangolinLinks = [
+  const rytellLinks = [
     {
       link: ANALYTICS_PAGE,
       icon: Charts,
@@ -106,7 +106,7 @@ export default function Sidebar({ collapsed, onCollapsed }: SidebarProps) {
       id: 'charts'
     },
     {
-      link: 'https://gov.pangolin.exchange',
+      link: 'https://gov.rytell.exchange',
       icon: Governance,
       title: t('header.forum'),
       id: 'forum'
@@ -121,7 +121,7 @@ export default function Sidebar({ collapsed, onCollapsed }: SidebarProps) {
       id: 'bridge'
     },
     {
-      link: 'https://pangolin.exchange',
+      link: 'https://rytell.exchange',
       icon: Partners,
       title: t('header.ourPartners'),
       id: 'our-partners'
@@ -173,7 +173,7 @@ export default function Sidebar({ collapsed, onCollapsed }: SidebarProps) {
               </Box>
             )}
 
-            {pangolinLinks.map((x, index) => {
+            {rytellLinks.map((x, index) => {
               return (
                 <MenuItem key={index}>
                   <MenuExternalLink id={x.id} href={x.link}>

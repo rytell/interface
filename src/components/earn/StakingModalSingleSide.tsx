@@ -11,7 +11,7 @@ import CurrencyInputPanel from '../CurrencyInputPanel'
 import { TokenAmount } from '@pangolindex/sdk'
 import { useActiveWeb3React } from '../../hooks'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
-import { usePngContract, useStakingContract } from '../../hooks/useContract'
+import { useRadiContract, useStakingContract } from '../../hooks/useContract'
 import { useApproveCallback, ApprovalState } from '../../hooks/useApproveCallback'
 import { SingleSideStakingInfo, useDerivedStakeInfo } from '../../state/stake/hooks'
 import { wrappedCurrencyAmount } from '../../utils/wrappedCurrency'
@@ -74,7 +74,7 @@ export default function StakingModalSingleSide({
     onDismiss()
   }, [onDismiss])
 
-  const stakingTokenContract = usePngContract()
+  const stakingTokenContract = useRadiContract()
 
   // approval data for stake
   const deadline = useTransactionDeadline()
@@ -153,7 +153,7 @@ export default function StakingModalSingleSide({
       { name: 'verifyingContract', type: 'address' }
     ]
     const domain = {
-      name: 'Pangolin',
+      name: 'Rytell',
       chainId: chainId,
       verifyingContract: stakingTokenContract.address
     }

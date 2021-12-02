@@ -116,7 +116,7 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo, version
             <TYPE.body fontSize={20}>
               {t('earn.withdrawingLiquidity', {
                 amount: stakingInfo?.stakedAmount?.toSignificant(4),
-                symbol: 'PGL'
+                symbol: 'RYTL'
               })}
             </TYPE.body>
             <TYPE.body fontSize={20}>
@@ -132,7 +132,7 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo, version
         <SubmittedView onDismiss={wrappedOnDismiss} hash={hash}>
           <AutoColumn gap="12px" justify={'center'}>
             <TYPE.largeHeader>{t('earn.transactionSubmitted')}</TYPE.largeHeader>
-            <TYPE.body fontSize={20}>{t('earn.withdrewStakingToken', { symbol: 'PGL' })}</TYPE.body>
+            <TYPE.body fontSize={20}>{t('earn.withdrewStakingToken', { symbol: 'RYTL' })}</TYPE.body>
             <TYPE.body fontSize={20}>{t('earn.claimedReward', { symbol: 'RADI' })}</TYPE.body>
           </AutoColumn>
         </SubmittedView>

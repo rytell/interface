@@ -28,7 +28,7 @@ export const injected = new InjectedConnector({
 
 export const walletlink = new WalletLinkConnector({
   url: NETWORK_URL,
-  appName: 'Pangolin',
+  appName: 'Rytell',
   appLogoUrl: 'https://raw.githubusercontent.com/pangolindex/interface/master/public/images/384x384_App_Icon.png'
 })
 
