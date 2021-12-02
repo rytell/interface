@@ -2,19 +2,19 @@ import { TokenAmount, WAVAX, JSBI } from '@pangolindex/sdk'
 import React, { useMemo, useState } from 'react'
 import { X } from 'react-feather'
 import styled from 'styled-components'
-import tokenLogo from '../../assets/images/token-logo.png'
-import { injected } from '../../connectors'
-import { RADI } from '../../constants'
-import { useTotalSupply } from '../../data/TotalSupply'
-import { useActiveWeb3React } from '../../hooks'
-import { useTotalRadiEarned } from '../../state/stake/hooks'
-import { DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION } from '../../state/stake/doubleSideConfig'
-import { useAggregateRadiBalance, useTokenBalance } from '../../state/wallet/hooks'
-import { StyledInternalLink, TYPE, RadiTokenAnimated } from '../../theme'
-import { AutoColumn } from '../Column'
-import { RowBetween } from '../Row'
-import { Break, CardBGImage, CardNoise, CardSection, DataCard } from '../earn/styled'
-import { usePair } from '../../data/Reserves'
+import tokenLogo from '../../../assets/images/token-logo.png'
+import { injected } from '../../../connectors'
+import { RADI } from '../../../constants'
+import { useTotalSupply } from '../../../data/TotalSupply'
+import { useActiveWeb3React } from '../../../hooks'
+import { useTotalRadiEarned } from '../../../state/stake/hooks'
+import { DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION } from '../../../state/stake/doubleSideConfig'
+import { useAggregateRadiBalance, useTokenBalance } from '../../../state/wallet/hooks'
+import { StyledInternalLink, TYPE, RadiTokenAnimated } from '../../../theme'
+import { AutoColumn } from '../../Column'
+import { RowBetween } from '../../Row'
+import { Break, CardBGImage, CardNoise, CardSection, DataCard } from '../../earn/styled'
+import { usePair } from '../../../data/Reserves'
 import { useTranslation } from 'react-i18next'
 
 const ContentWrapper = styled(AutoColumn)`
@@ -58,7 +58,7 @@ const AddPNG = styled.span`
 /**
  * Content for balance stats modal
  */
-export default function RadiBalanceContent({ setShowRadiBalanceModal }: { setShowRadiBalanceModal: any }) {
+export const RadiBalanceContent = ({ setShowRadiBalanceModal }: { setShowRadiBalanceModal: any }) => {
   const { account, chainId } = useActiveWeb3React()
   const radi = chainId ? RADI[chainId] : undefined
 

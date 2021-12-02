@@ -132,6 +132,7 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "@rytell/exchange-contracts": "^1.0.1",
     "@types/crypto-js": "^4.0.2",
     "crypto-js": "^4.0.0"
   },

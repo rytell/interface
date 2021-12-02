@@ -2656,6 +2656,14 @@
     debug "^3.1.0"
     hosted-git-info "^2.6.0"
 
+"@rytell/exchange-contracts@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@rytell/exchange-contracts/-/exchange-contracts-1.0.1.tgz#34f98bb9879a16f61bb8f14373625ca4f4aa059f"
+  integrity sha512-hzrZwjvP7Otf9GB7OXEqVWoVXQBWC4mkdFrbhpGSlkWm6x6uQeHPh70Lf3FO3jmRv81Ykp2RWyoTthfggVDf9g==
+  dependencies:
+    dotenv "^10.0.0"
+    hardhat-tracer "^1.0.0-alpha.5"
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.1.tgz#a21117b19ee9be70c379ec1877537ef2e1c63301"
@@ -7655,6 +7663,11 @@ dotenv@8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+
+dotenv@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
+  integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
 dotignore@~0.1.2:
   version "0.1.2"

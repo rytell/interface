@@ -1,6 +1,6 @@
 import { Interface } from '@ethersproject/abi'
-import { abi as IPangolinPairABI } from '@pangolindex/exchange-contracts/artifacts/contracts/pangolin-core/interfaces/IPangolinPair.sol/IPangolinPair.json'
+import { abi as IRytellPairABI } from '@rytell/exchange-contracts/artifacts/contracts/core/interfaces/IRytellPair.sol/IRytellPair.json'
 
-const PANGOLIN_PAIR_INTERFACE = new Interface(IPangolinPairABI)
+const RYTELL_PAIR_INTERFACE = new Interface(IRytellPairABI)
 
-export { PANGOLIN_PAIR_INTERFACE }
+export { RYTELL_PAIR_INTERFACE }

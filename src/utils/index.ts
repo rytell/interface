@@ -3,7 +3,7 @@ import { getAddress } from '@ethersproject/address'
 import { AddressZero } from '@ethersproject/constants'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
-import { abi as IPangolinRouterABI } from '@pangolindex/exchange-contracts/artifacts/contracts/rytell-periphery/interfaces/IPangolinRouter.sol/IPangolinRouter.json'
+import { abi as IRytellRouterABI } from '@rytell/exchange-contracts/artifacts/contracts/periphery/interfaces/IRytellRouter.sol/IRytellRouter.json'
 import { ROUTER_ADDRESS } from '../constants'
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, CAVAX } from '@pangolindex/sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
@@ -98,7 +98,7 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 export function getRouterContract(chainId: ChainId, library: Web3Provider, account?: string): Contract {
   return getContract(
     chainId ? ROUTER_ADDRESS[chainId] : ROUTER_ADDRESS[ChainId.AVALANCHE],
-    IPangolinRouterABI,
+    IRytellRouterABI,
     library,
     account
   )

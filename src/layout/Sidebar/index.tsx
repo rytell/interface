@@ -168,7 +168,7 @@ export default function Sidebar({ collapsed, onCollapsed }: SidebarProps) {
             {!collapsed && (
               <Box height={35} overflowY="hidden">
                 <Text color="color2" fontSize={12}>
-                  PANGOLIN LINKS{' '}
+                  RYTELL LINKS{' '}
                 </Text>
               </Box>
             )}

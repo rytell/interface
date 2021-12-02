@@ -24,7 +24,7 @@ import Menu from '../Menu'
 import Row, { RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
 import Modal from '../Modal'
-import RadiBalanceContent from './RadiBalanceContent'
+import { RadiBalanceContent } from './RadiBalanceContent/index'
 import usePrevious from '../../hooks/usePrevious'
 // import { ANALYTICS_PAGE } from '../../constants'
 import LanguageSelection from '../LanguageSelection'
@@ -340,18 +340,18 @@ export default function Header() {
           </StyledNavLink>
 
           <StyledLink
-            id={`radi-nav-link`}
+            id={`png-nav-link`}
             onClick={toggle}
-            isActive={location?.pathname?.startsWith('/radi')}
+            isActive={location?.pathname?.startsWith('/png')}
             ref={node as any}
           >
             {t('header.farm')} <ChevronDown size={24} />
             {open && (
               <NarrowMenuFlyout>
-                <MenuNavItem id="link" to={'/radi/1'}>
+                <MenuNavItem id="link" to={'/png/1'}>
                   {t('header.version1')}
                 </MenuNavItem>
-                <MenuNavItem id="link" to={'/radi/2'}>
+                <MenuNavItem id="link" to={'/png/2'}>
                   {t('header.version2')}
                 </MenuNavItem>
               </NarrowMenuFlyout>
