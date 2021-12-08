@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, CAVAX, Token } from '@pangolindex/sdk'
+import { Currency, CurrencyAmount, currencyEquals, CAVAX, Token } from '@rytell/sdk'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'

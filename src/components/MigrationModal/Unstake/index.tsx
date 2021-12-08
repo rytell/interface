@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Wrapper } from './styleds'
 import { Box, Button } from '@pangolindex/components'
-import { Pair, JSBI, TokenAmount } from '@pangolindex/sdk'
+import { Pair, JSBI, TokenAmount } from '@rytell/sdk'
 import PoolInfo from '../PoolInfo'
 import { StakingInfo } from '../../../state/stake/hooks'
 import { tryParseAmount } from '../../../state/swap/hooks'
@@ -42,10 +42,11 @@ const Unstake = ({ allChoosePool, goNext, goBack, choosePoolIndex }: UnstakeProp
     let stakingToken = stakingInfo?.stakedAmount?.token
     const parsedInput = tryParseAmount(unStakingAmount, stakingToken) as TokenAmount
 
-    if (parsedInput
-      && stakingInfo?.stakedAmount
-      && JSBI.lessThanOrEqual(parsedInput.raw, stakingInfo?.stakedAmount.raw)
-      && JSBI.greaterThan(parsedInput.raw, JSBI.BigInt(0))
+    if (
+      parsedInput &&
+      stakingInfo?.stakedAmount &&
+      JSBI.lessThanOrEqual(parsedInput.raw, stakingInfo?.stakedAmount.raw) &&
+      JSBI.greaterThan(parsedInput.raw, JSBI.BigInt(0))
     ) {
       setIsValidAmount(true)
     } else {
@@ -86,10 +87,7 @@ const Unstake = ({ allChoosePool, goNext, goBack, choosePoolIndex }: UnstakeProp
   const stakingContract = useStakingContract(stakingInfo.stakingRewardAddress)
 
   async function onWithdraw() {
-    if (
-      stakingContract &&
-      stakingInfo?.stakedAmount?.greaterThan('0')
-    ) {
+    if (stakingContract && stakingInfo?.stakedAmount?.greaterThan('0')) {
       setAttempting(true)
       await stakingContract
         .exit()

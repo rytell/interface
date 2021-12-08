@@ -1,4 +1,4 @@
-import { CurrencyAmount, CAVAX, JSBI } from '@pangolindex/sdk'
+import { CurrencyAmount, CAVAX, JSBI } from '@rytell/sdk'
 import { MIN_ETH } from '../constants'
 
 /**

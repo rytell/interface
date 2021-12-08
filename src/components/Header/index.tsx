@@ -1,4 +1,4 @@
-import { ChainId, TokenAmount } from '@pangolindex/sdk'
+import { ChainId, TokenAmount } from '@rytell/sdk'
 import React, { useState, useRef } from 'react'
 import { Text } from 'rebass'
 import { NavLink } from 'react-router-dom'
@@ -358,13 +358,13 @@ export default function Header() {
             )}
           </StyledLink>
 
-          <StyledNavLink
+          {/* <StyledNavLink
             id={`stake-nav-link`}
             to={'/stake/0'}
             isActive={(match, { pathname }) => Boolean(match) || pathname.startsWith('/stake')}
           >
             {t('header.stake')}
-          </StyledNavLink>
+          </StyledNavLink> */}
 
           {/* <StyledExternalLink id={`info-nav-link`} href={ANALYTICS_PAGE}>
             {t('header.charts')} <span style={{ fontSize: '11px' }}>↗</span>

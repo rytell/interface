@@ -1,4 +1,4 @@
-import { currencyEquals, Trade } from '@pangolindex/sdk'
+import { currencyEquals, Trade } from '@rytell/sdk'
 import React, { useCallback, useMemo } from 'react'
 import TransactionConfirmationModal, {
   ConfirmationModalContent,

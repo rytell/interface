@@ -1,4 +1,4 @@
-import { Currency, CAVAX, Token } from '@pangolindex/sdk'
+import { Currency, CAVAX, Token } from '@rytell/sdk'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 

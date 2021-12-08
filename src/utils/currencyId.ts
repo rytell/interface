@@ -1,4 +1,4 @@
-import { Currency, CAVAX, Token } from '@pangolindex/sdk'
+import { Currency, CAVAX, Token } from '@rytell/sdk'
 
 export function currencyId(currency: Currency): string {
   if (currency === CAVAX) return 'AVAX'

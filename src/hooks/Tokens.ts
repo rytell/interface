@@ -1,5 +1,5 @@
 import { parseBytes32String } from '@ethersproject/strings'
-import { Currency, CAVAX, Token, currencyEquals } from '@pangolindex/sdk'
+import { Currency, CAVAX, Token, currencyEquals } from '@rytell/sdk'
 import { useMemo } from 'react'
 import { useSelectedTokenList } from '../state/lists/hooks'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'

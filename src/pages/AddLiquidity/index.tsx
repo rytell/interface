@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, CAVAX, TokenAmount, WAVAX } from '@pangolindex/sdk'
+import { Currency, currencyEquals, CAVAX, TokenAmount, WAVAX } from '@rytell/sdk'
 import React, { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -38,7 +38,7 @@ import { Dots, Wrapper } from '../Pool/styleds'
 import { ConfirmAddModalBottom } from './ConfirmAddModalBottom'
 import { currencyId } from '../../utils/currencyId'
 import { PoolPriceBar } from './PoolPriceBar'
-import { ChainId } from '@pangolindex/sdk'
+import { ChainId } from '@rytell/sdk'
 import { useTranslation } from 'react-i18next'
 
 export default function AddLiquidity({
@@ -180,8 +180,8 @@ export default function AddLiquidity({
 
     setAttemptingTxn(true)
     await estimate(...args, value ? { value } : {})
-      .then(estimatedGasLimit =>
-        method(...args, {
+      .then(estimatedGasLimit => {
+        return method(...args, {
           ...(value ? { value } : {}),
           gasLimit: calculateGasMargin(estimatedGasLimit)
         }).then(response => {
@@ -207,12 +207,12 @@ export default function AddLiquidity({
             label: [currencies[Field.CURRENCY_A]?.symbol, currencies[Field.CURRENCY_B]?.symbol].join('/')
           })
         })
-      )
+      })
       .catch(error => {
         setAttemptingTxn(false)
         // we only care if the error is something _other_ than the user rejected the tx
         if (error?.code !== 4001) {
-          console.error(error)
+          console.error(error, ': ERROR')
         }
       })
   }
@@ -247,7 +247,10 @@ export default function AddLiquidity({
         </RowFlat>
         <Row>
           <Text fontSize="24px">
-            {currencies[Field.CURRENCY_A]?.symbol + '/' + currencies[Field.CURRENCY_B]?.symbol + t('addLiquidity.poolTokens')}
+            {currencies[Field.CURRENCY_A]?.symbol +
+              '/' +
+              currencies[Field.CURRENCY_B]?.symbol +
+              t('addLiquidity.poolTokens')}
           </Text>
         </Row>
         <TYPE.italic fontSize={12} textAlign="left" padding={'8px 0 0 0 '}>
@@ -383,7 +386,8 @@ export default function AddLiquidity({
                 <LightCard padding="0px" borderRadius={'20px'}>
                   <RowBetween padding="1rem">
                     <TYPE.subHeader fontWeight={500} fontSize={14}>
-                      {noLiquidity ? t('addLiquidity.initialPrices') : t('addLiquidity.prices')} {t('addLiquidity.poolShare')}
+                      {noLiquidity ? t('addLiquidity.initialPrices') : t('addLiquidity.prices')}{' '}
+                      {t('addLiquidity.poolShare')}
                     </TYPE.subHeader>
                   </RowBetween>{' '}
                   <LightCard padding="1rem" borderRadius={'20px'}>

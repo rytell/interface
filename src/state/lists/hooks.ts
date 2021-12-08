@@ -1,11 +1,11 @@
-import { ChainId, Token } from '@pangolindex/sdk'
+import { ChainId, Token } from '@rytell/sdk'
 import { Tags, TokenInfo, TokenList } from '@pangolindex/token-lists'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { AppState } from '../index'
 import { AEB_TOKENLIST } from '../../constants/lists'
-import { WAVAX } from '@pangolindex/sdk'
-import { PNG } from '../../constants'
+import { WAVAX } from '@rytell/sdk'
+import { RADI } from '../../constants'
 
 type TagDetails = Tags[keyof Tags]
 export interface TagInfo extends TagDetails {
@@ -155,7 +155,7 @@ export function useIsSelectedAEBToken(): Boolean {
   const aebToken = allAEBTokens.find(token => token?.address === selectedOutputToken?.currencyId)
 
   // ignore PNG and WAVAX token
-  if (aebToken?.address === PNG[ChainId.AVALANCHE].address || aebToken?.address === WAVAX[ChainId.AVALANCHE].address) {
+  if (aebToken?.address === RADI[ChainId.AVALANCHE].address || aebToken?.address === WAVAX[ChainId.AVALANCHE].address) {
     return false
   }
 

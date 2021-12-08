@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Pair, Token, Trade } from '@pangolindex/sdk'
+import { Currency, CurrencyAmount, Pair, Token, Trade } from '@rytell/sdk'
 import flatMap from 'lodash.flatmap'
 import { useMemo } from 'react'
 

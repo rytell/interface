@@ -1,4 +1,4 @@
-import { ChainId, JSBI, Percent, Token, WAVAX } from '@pangolindex/sdk'
+import { ChainId, JSBI, Percent, Token, WAVAX } from '@rytell/sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { injected, walletlink, walletconnect } from '../connectors'
@@ -6,12 +6,12 @@ import { injected, walletlink, walletconnect } from '../connectors'
 export const GAS_PRICE = 225
 
 export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.FUJI]: '0x3101f1C08A8CB21ABe094B6EDd902d4822FD36Da',
+  [ChainId.FUJI]: '0x1FDA88B59e905506cE7c7ff097aAA4615357A83f',
   [ChainId.AVALANCHE]: '0xE54Ca86531e17Ef3616d22Ca28b0D458b6C89106'
 }
 
 export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.FUJI]: '0x02583CcE83F94aAcc63872a0d60C37E2656047F3',
+  [ChainId.FUJI]: '0x8a4e0F94ac872975160Ff897EA0e9f680aE5168E',
   [ChainId.AVALANCHE]: '0xE54Ca86531e17Ef3616d22Ca28b0D458b6C89106'
 }
 
@@ -767,13 +767,13 @@ export const AIRDROP_ADDRESS: { [chainId in ChainId]?: string } = {
 }
 
 const WAVAX_AND_PNG_ONLY: ChainTokenList = {
-  [ChainId.FUJI]: [WAVAX[ChainId.FUJI], PNG[ChainId.FUJI]],
-  [ChainId.AVALANCHE]: [WAVAX[ChainId.AVALANCHE], PNG[ChainId.AVALANCHE]]
+  [ChainId.FUJI]: [WAVAX[ChainId.FUJI], PNG[ChainId.FUJI], RADI[ChainId.FUJI]],
+  [ChainId.AVALANCHE]: [WAVAX[ChainId.AVALANCHE], PNG[ChainId.AVALANCHE], RADI[ChainId.AVALANCHE]]
 }
 
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
-  [ChainId.FUJI]: [WAVAX[ChainId.FUJI], PNG[ChainId.FUJI]],
+  [ChainId.FUJI]: [WAVAX[ChainId.FUJI], PNG[ChainId.FUJI], RADI[ChainId.FUJI]],
   [ChainId.AVALANCHE]: [
     WAVAX[ChainId.AVALANCHE],
     PNG[ChainId.AVALANCHE],
@@ -802,13 +802,18 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
+  [ChainId.FUJI]: [],
   [ChainId.AVALANCHE]: []
 }
 
 // these tokens can be directly linked to (via url params) in the swap page without prompting a warning
 export const TRUSTED_TOKEN_ADDRESSES: { readonly [chainId in ChainId]: string[] } = {
-  [ChainId.FUJI]: [],
-  [ChainId.AVALANCHE]: [WAVAX[ChainId.AVALANCHE].address, PNG[ChainId.AVALANCHE].address]
+  [ChainId.FUJI]: [WAVAX[ChainId.FUJI].address, PNG[ChainId.FUJI].address, RADI[ChainId.FUJI].address],
+  [ChainId.AVALANCHE]: [
+    WAVAX[ChainId.AVALANCHE].address,
+    PNG[ChainId.AVALANCHE].address,
+    RADI[ChainId.AVALANCHE].address
+  ]
 }
 
 export interface WalletInfo {

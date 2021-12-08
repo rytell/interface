@@ -1,7 +1,6 @@
-import { ChainId, WAVAX } from '@pangolindex/sdk'
+import { ChainId, WAVAX } from '@rytell/sdk'
 import { OOE, APEIN } from '../../constants'
 import { SingleSideStaking } from './hooks'
-
 
 export const SINGLE_SIDE_STAKING: { [key: string]: SingleSideStaking } = {
   WAVAX_V0: {

@@ -1,7 +1,6 @@
-import { ChainId, CurrencyAmount, JSBI, Token, TokenAmount, WAVAX, Pair, Percent } from '@pangolindex/sdk'
+import { ChainId, CurrencyAmount, JSBI, Token, TokenAmount, WAVAX, Pair, Percent } from '@rytell/sdk'
 import { useMemo, useEffect, useState } from 'react'
 import {
-  PNG,
   USDTe,
   USDCe,
   DAIe,
@@ -10,7 +9,8 @@ import {
   BIG_INT_TWO,
   BIG_INT_ONE,
   BIG_INT_EIGHTEEN,
-  BIG_INT_TEN
+  BIG_INT_TEN,
+  RADI
 } from '../../constants'
 import { STAKING_REWARDS_INTERFACE } from '../../constants/abis/staking-rewards'
 import { PairState, usePair, usePairs } from '../../data/Reserves'
@@ -201,7 +201,7 @@ export function useStakingInfo(version: number, pairToFilterBy?: Pair | null): D
     [chainId, pairToFilterBy, version]
   )
 
-  const radi = PNG[chainId || ChainId.AVALANCHE]
+  const radi = RADI[chainId || ChainId.AVALANCHE]
 
   const rewardsAddresses = useMemo(() => info.map(({ stakingRewardAddress }) => stakingRewardAddress), [info])
 
@@ -396,7 +396,7 @@ export function useSingleSideStakingInfo(
     [chainId, rewardTokenToFilterBy, version]
   )
 
-  const radi = PNG[chainId || ChainId.AVALANCHE]
+  const radi = RADI[chainId || ChainId.AVALANCHE]
 
   const rewardsAddresses = useMemo(() => info.map(({ stakingRewardAddress }) => stakingRewardAddress), [info])
   const routes = useMemo(
@@ -547,7 +547,7 @@ export function useSingleSideStakingInfo(
 
 export function useTotalRadiEarned(): TokenAmount | undefined {
   const { chainId } = useActiveWeb3React()
-  const radi = PNG[chainId || ChainId.AVALANCHE]
+  const radi = RADI[chainId || ChainId.AVALANCHE]
   const stakingInfo0 = useStakingInfo(0)
   const stakingInfo1 = useStakingInfo(1)
   const stakingInfo2 = useMinichefStakingInfos(2)
@@ -750,7 +750,7 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
   const { chainId, account } = useActiveWeb3React()
   const minichefContract = useStakingContract(MINICHEF_ADDRESS)
   const poolMap = useMinichefPools()
-  const radi = chainId ? PNG[chainId] : PNG[chainId || ChainId.AVALANCHE]
+  const radi = chainId ? RADI[chainId] : RADI[chainId || ChainId.AVALANCHE]
 
   let info = useMemo(
     () =>
@@ -872,7 +872,7 @@ export const useMinichefStakingInfos = (version = 2, pairToFilterBy?: Pair | nul
         const multiplier = JSBI.BigInt(poolInfo?.result?.['allocPoint'])
 
         const isAvaxPool = pair.involvesToken(WAVAX[chainId])
-        const isRadiPool = pair.involvesToken(PNG[chainId])
+        const isRadiPool = pair.involvesToken(RADI[chainId])
 
         let totalStakedInUsd = new TokenAmount(DAIe[chainId], BIG_INT_ZERO)
         const totalStakedInWavax = new TokenAmount(WAVAX[chainId], BIG_INT_ZERO)

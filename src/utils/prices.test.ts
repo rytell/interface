@@ -1,4 +1,4 @@
-import { ChainId, JSBI, Pair, Route, Token, TokenAmount, Trade, TradeType } from '@pangolindex/sdk'
+import { ChainId, JSBI, Pair, Route, Token, TokenAmount, Trade, TradeType } from '@rytell/sdk'
 import { computeTradePriceBreakdown } from './prices'
 
 describe('prices', () => {

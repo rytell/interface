@@ -1,6 +1,6 @@
 import { Version } from '../../hooks/useToggledVersion'
 import { parseUnits } from '@ethersproject/units'
-import { Currency, CurrencyAmount, CAVAX, JSBI, Token, TokenAmount, Trade, ChainId } from '@pangolindex/sdk'
+import { Currency, CurrencyAmount, CAVAX, JSBI, Token, TokenAmount, Trade, ChainId } from '@rytell/sdk'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'

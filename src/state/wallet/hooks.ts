@@ -1,5 +1,5 @@
-import { PNG } from './../../constants/index'
-import { Currency, CurrencyAmount, CAVAX, JSBI, Token, TokenAmount } from '@pangolindex/sdk'
+import { RADI } from './../../constants/index'
+import { Currency, CurrencyAmount, CAVAX, JSBI, Token, TokenAmount } from '@rytell/sdk'
 import { useMemo } from 'react'
 import ERC20_INTERFACE from '../../constants/abis/erc20'
 import { useAllTokens } from '../../hooks/Tokens'
@@ -137,7 +137,7 @@ export function useAllTokenBalances(): { [tokenAddress: string]: TokenAmount | u
 export function useAggregateRadiBalance(): TokenAmount | undefined {
   const { account, chainId } = useActiveWeb3React()
 
-  const radi = chainId ? PNG[chainId] : undefined
+  const radi = chainId ? RADI[chainId] : undefined
 
   const radiBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, radi)
   const radiUnHarvested: TokenAmount | undefined = useTotalRadiEarned()

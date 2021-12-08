@@ -1,4 +1,4 @@
-import { TokenAmount, Pair, Currency, ChainId } from '@pangolindex/sdk'
+import { TokenAmount, Pair, Currency, ChainId } from '@rytell/sdk'
 import { useMemo } from 'react'
 import { abi as IRytellPairABI } from '@rytell/exchange-contracts/artifacts/contracts/core/interfaces/IRytellPair.sol/IRytellPair.json'
 import { Interface } from '@ethersproject/abi'

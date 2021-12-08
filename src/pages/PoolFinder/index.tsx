@@ -1,4 +1,4 @@
-import { Currency, CAVAX, JSBI, TokenAmount } from '@pangolindex/sdk'
+import { Currency, CAVAX, JSBI, TokenAmount } from '@rytell/sdk'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Plus } from 'react-feather'
 import { Text } from 'rebass'
@@ -72,9 +72,7 @@ export default function PoolFinder() {
 
   const prerequisiteMessage = (
     <LightCard padding="45px 10px">
-      <Text textAlign="center">
-        {!account ? t('poolFinder.connectToFind') : t('poolFinder.selectTokenToFind')}
-      </Text>
+      <Text textAlign="center">{!account ? t('poolFinder.connectToFind') : t('poolFinder.selectTokenToFind')}</Text>
     </LightCard>
   )
 

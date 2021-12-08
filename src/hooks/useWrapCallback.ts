@@ -1,4 +1,4 @@
-import { Currency, currencyEquals, CAVAX, WAVAX } from '@pangolindex/sdk'
+import { Currency, currencyEquals, CAVAX, WAVAX } from '@rytell/sdk'
 import { useMemo } from 'react'
 import { tryParseAmount } from '../state/swap/hooks'
 import { useTransactionAdder } from '../state/transactions/hooks'

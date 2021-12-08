@@ -1,4 +1,4 @@
-import { ChainId, Currency, CurrencyAmount, CAVAX, Token, TokenAmount, WAVAX } from '@pangolindex/sdk'
+import { ChainId, Currency, CurrencyAmount, CAVAX, Token, TokenAmount, WAVAX } from '@rytell/sdk'
 
 export function wrappedCurrency(currency: Currency | undefined, chainId: ChainId | undefined): Token | undefined {
   return chainId && currency === CAVAX ? WAVAX[chainId] : currency instanceof Token ? currency : undefined

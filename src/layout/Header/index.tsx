@@ -1,4 +1,4 @@
-import { ChainId, TokenAmount } from '@pangolindex/sdk'
+import { ChainId, TokenAmount } from '@rytell/sdk'
 import React, { useState, useRef } from 'react'
 import { useActiveWeb3React } from '../../hooks'
 import { useETHBalances, useAggregateRadiBalance } from '../../state/wallet/hooks'

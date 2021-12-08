@@ -1,10 +1,10 @@
 import { Contract } from '@ethersproject/contracts'
-import { WAVAX } from '@pangolindex/sdk'
+import { WAVAX } from '@rytell/sdk'
 import { abi as IRytellPairABI } from '@rytell/exchange-contracts/artifacts/contracts/core/interfaces/IRytellPair.sol/IRytellPair.json'
 import { abi as STAKING_REWARDS_ABI } from '@pangolindex/governance/artifacts/contracts/StakingRewards.sol/StakingRewards.json'
 import { abi as AIRDROP_ABI } from '@pangolindex/governance/artifacts/contracts/Airdrop.sol/Airdrop.json'
 import { abi as GOVERNANCE_ABI } from '@pangolindex/governance/artifacts/contracts/GovernorAlpha.sol/GovernorAlpha.json'
-import { abi as PNG_ABI } from '@pangolindex/governance/artifacts/contracts/PNG.sol/Png.json'
+import { abi as RADI_ABI } from '@rytell/tokens/artifacts/contracts/RadiToken.sol/RadiToken.json'
 import { abi as BRIDGE_MIGRATOR_ABI } from '@rytell/exchange-contracts/artifacts/contracts/periphery/RytellBridgeMigrationRouter.sol/RytellBridgeMigrationRouter.json'
 import { abi as MINICHEF_ABI } from '@pangolindex/governance/artifacts/contracts/MiniChefV2.sol/MiniChefV2.json'
 import { useMemo } from 'react'
@@ -15,11 +15,10 @@ import BRIDGE_TOKEN_ABI from '../constants/abis/bridge-token.json'
 import { MIGRATOR_ABI, MIGRATOR_ADDRESS } from '../constants/abis/migrator'
 import WETH_ABI from '../constants/abis/weth.json'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
-import { V1_EXCHANGE_ABI, V1_FACTORY_ABI, V1_FACTORY_ADDRESSES } from '../constants/v1'
+import { V1_EXCHANGE_ABI } from '../constants/v1'
 import { getContract } from '../utils'
 import { useActiveWeb3React } from './index'
-import { AIRDROP_ADDRESS, BRIDGE_MIGRATOR_ADDRESS, MINICHEF_ADDRESS } from '../constants'
-import { GOVERNANCE_ADDRESS, PNG } from '../constants'
+import { AIRDROP_ADDRESS, BRIDGE_MIGRATOR_ADDRESS, MINICHEF_ADDRESS, RADI, GOVERNANCE_ADDRESS } from '../constants'
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -34,11 +33,6 @@ function useContract(address: string | undefined, ABI: any, withSignerIfPossible
       return null
     }
   }, [address, ABI, library, withSignerIfPossible, account])
-}
-
-export function useV1FactoryContract(): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && V1_FACTORY_ADDRESSES[chainId], V1_FACTORY_ABI, false)
 }
 
 export function useV2MigratorContract(): Contract | null {
@@ -93,7 +87,7 @@ export function useGovernanceContract(): Contract | null {
 
 export function useRadiContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId ? PNG[chainId].address : undefined, PNG_ABI, true)
+  return useContract(chainId ? RADI[chainId].address : undefined, RADI_ABI, true)
 }
 
 export function useStakingContract(stakingAddress?: string, withSignerIfPossible?: boolean): Contract | null {

@@ -1,4 +1,4 @@
-import { JSBI, Pair, Percent } from '@pangolindex/sdk'
+import { JSBI, Pair, Percent } from '@rytell/sdk'
 import { darken } from 'polished'
 import React, { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
@@ -214,7 +214,13 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
               <ButtonEmpty
                 padding="8px"
                 as={Link}
-                to={`/migrate/${currencyId(currency0)}/${currencyId(currency1)}/${DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION}/${upgradeable0 ? upgradeable0.ab : currencyId(currency0)}/${upgradeable1 ? upgradeable1.ab : currencyId(currency1)}/${DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION}`}
+                to={`/migrate/${currencyId(currency0)}/${currencyId(
+                  currency1
+                )}/${DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION}/${
+                  upgradeable0 ? upgradeable0.ab : currencyId(currency0)
+                }/${
+                  upgradeable1 ? upgradeable1.ab : currencyId(currency1)
+                }/${DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION}`}
                 width="48%"
               >
                 Migrate

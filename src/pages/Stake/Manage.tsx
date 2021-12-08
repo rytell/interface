@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { AutoColumn } from '../../components/Column'
 import styled from 'styled-components'
 
-import { ChainId, JSBI } from '@pangolindex/sdk'
+import { ChainId, JSBI } from '@rytell/sdk'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { useCurrency } from '../../hooks/Tokens'
 import { useWalletModalToggle } from '../../state/application/hooks'
@@ -18,7 +18,7 @@ import { CountUp } from 'use-count-up'
 
 import { wrappedCurrency } from '../../utils/wrappedCurrency'
 import usePrevious from '../../hooks/usePrevious'
-import { BIG_INT_ZERO, PNG, ZERO_ADDRESS } from '../../constants'
+import { BIG_INT_ZERO, RADI, ZERO_ADDRESS } from '../../constants'
 import CurrencyLogo from '../../components/CurrencyLogo'
 import StakingModalSingleSide from '../../components/earn/StakingModalSingleSide'
 import UnstakingModalSingleSide from '../../components/earn/UnstakingModalSingleSide'
@@ -91,7 +91,7 @@ export default function Manage({
   const rewardToken = wrappedCurrency(rewardCurrency ?? undefined, chainId)
 
   const stakingInfo = useSingleSideStakingInfo(Number(version), rewardToken)?.[0]
-  const radi = PNG[chainId ? chainId : ChainId.AVALANCHE]
+  const radi = RADI[chainId ? chainId : ChainId.AVALANCHE]
 
   const backgroundColorStakingToken = useColor(radi)
 
