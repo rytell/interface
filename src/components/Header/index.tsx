@@ -7,8 +7,8 @@ import { darken } from 'polished'
 import { useTranslation } from 'react-i18next'
 import { ChevronDown } from 'react-feather'
 import styled from 'styled-components'
-import Logo from '../../assets/svg/icon.svg'
-import LogoDark from '../../assets/svg/icon.svg'
+import Logo from '../../assets/svg/logo.svg'
+import LogoDark from '../../assets/svg/logoDark.svg'
 import { useActiveWeb3React } from '../../hooks'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances, useAggregateRadiBalance } from '../../state/wallet/hooks'
@@ -318,7 +318,7 @@ export default function Header() {
       <HeaderRow>
         <Title href=".">
           <RadiIcon>
-            <img width={'24px'} src={isDark ? LogoDark : Logo} alt="logo" />
+            <img width={'60px'} src={isDark ? LogoDark : Logo} alt="logo" />
           </RadiIcon>
         </Title>
         <HeaderLinks>

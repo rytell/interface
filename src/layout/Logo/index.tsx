@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, Box } from '@pangolindex/components'
 import { useDarkModeManager } from '../../state/user/hooks'
-import Logo from '../../assets/svg/icon.svg'
-import LogoDark from '../../assets/svg/icon.svg'
+import Logo from '../../assets/svg/logo.svg'
+import LogoDark from '../../assets/svg/logoDark.svg'
 import { Title, RadiIcon, LogoWrapper } from './styled'
 
 interface LogoProps {
@@ -17,7 +17,7 @@ export default function LogoIcon({ collapsed }: LogoProps) {
       <Box>
         <Title href=".">
           <RadiIcon>
-            <img width={'28px'} src={isDark ? LogoDark : Logo} alt="logo" />
+            <img width={'60px'} src={isDark ? LogoDark : Logo} alt="logo" />
           </RadiIcon>
         </Title>
       </Box>
