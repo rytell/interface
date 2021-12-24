@@ -7,6 +7,7 @@ import { abi as GOVERNANCE_ABI } from '@pangolindex/governance/artifacts/contrac
 import { abi as RADI_ABI } from '@rytell/tokens/artifacts/contracts/RadiToken.sol/RadiToken.json'
 import { abi as BRIDGE_MIGRATOR_ABI } from '@rytell/exchange-contracts/artifacts/contracts/periphery/RytellBridgeMigrationRouter.sol/RytellBridgeMigrationRouter.json'
 import { abi as MINICHEF_ABI } from '@pangolindex/governance/artifacts/contracts/MiniChefV2.sol/MiniChefV2.json'
+import { abi as STAKING_RADI_ABI } from '@rytell/staking-radi/artifacts/contracts/StakingPool.sol/StakingPool.json'
 import { useMemo } from 'react'
 import ENS_PUBLIC_RESOLVER_ABI from '../constants/abis/ens-public-resolver.json'
 import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
@@ -18,7 +19,14 @@ import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import { V1_EXCHANGE_ABI } from '../constants/v1'
 import { getContract } from '../utils'
 import { useActiveWeb3React } from './index'
-import { AIRDROP_ADDRESS, BRIDGE_MIGRATOR_ADDRESS, MINICHEF_ADDRESS, RADI, GOVERNANCE_ADDRESS } from '../constants'
+import {
+  AIRDROP_ADDRESS,
+  BRIDGE_MIGRATOR_ADDRESS,
+  MINICHEF_ADDRESS,
+  RADI,
+  GOVERNANCE_ADDRESS,
+  RADI_STAKING_POOL
+} from '../constants'
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -88,6 +96,11 @@ export function useGovernanceContract(): Contract | null {
 export function useRadiContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId ? RADI[chainId].address : undefined, RADI_ABI, true)
+}
+
+export function useStakingPoolContract(): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId ? RADI_STAKING_POOL[chainId] : undefined, STAKING_RADI_ABI, true)
 }
 
 export function useStakingContract(stakingAddress?: string, withSignerIfPossible?: boolean): Contract | null {

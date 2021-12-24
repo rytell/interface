@@ -2,10 +2,10 @@ import { ChainId, TokenAmount } from '@rytell/sdk'
 import React, { useState, useRef } from 'react'
 import { Text } from 'rebass'
 import { NavLink } from 'react-router-dom'
-import { useLocation } from 'react-router'
+// import { useLocation } from 'react-router'
 import { darken } from 'polished'
 import { useTranslation } from 'react-i18next'
-import { ChevronDown } from 'react-feather'
+// import { ChevronDown } from 'react-feather'
 import styled from 'styled-components'
 import Logo from '../../assets/svg/logo.svg'
 import LogoDark from '../../assets/svg/logoDark.svg'
@@ -30,7 +30,7 @@ import usePrevious from '../../hooks/usePrevious'
 import LanguageSelection from '../LanguageSelection'
 import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen, useToggleModal } from '../../state/application/hooks'
-import { MenuFlyout, MenuNavItem } from '../StyledMenu'
+// import { MenuFlyout, MenuNavItem } from '../StyledMenu'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 
 const HeaderFrame = styled.div`
@@ -226,26 +226,26 @@ const StyledNavLink = styled(NavLink).attrs({
   }
 `
 
-const StyledLink = styled.div<{ isActive: boolean }>`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: left;
-  border-radius: 3rem;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${({ theme, isActive }) => (isActive ? theme.text1 : theme.text2)};
-  font-size: 1rem;
-  width: fit-content;
-  margin: 0 12px;
-  font-weight: ${({ isActive }) => (isActive ? 600 : 500)};
-  font-weight: 500;
-  line-height: 24px;
+// const StyledLink = styled.div<{ isActive: boolean }>`
+//   ${({ theme }) => theme.flexRowNoWrap}
+//   align-items: left;
+//   border-radius: 3rem;
+//   outline: none;
+//   cursor: pointer;
+//   text-decoration: none;
+//   color: ${({ theme, isActive }) => (isActive ? theme.text1 : theme.text2)};
+//   font-size: 1rem;
+//   width: fit-content;
+//   margin: 0 12px;
+//   font-weight: ${({ isActive }) => (isActive ? 600 : 500)};
+//   font-weight: 500;
+//   line-height: 24px;
 
-  :hover,
-  :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
-  }
-`
+//   :hover,
+//   :focus {
+//     color: ${({ theme }) => darken(0.1, theme.text1)};
+//   }
+// `
 
 // const StyledExternalLink = styled(ExternalLink).attrs({
 //   activeClassName
@@ -279,11 +279,11 @@ const StyledLink = styled.div<{ isActive: boolean }>`
 // `}
 // `
 
-const NarrowMenuFlyout = styled(MenuFlyout)`
-  min-width: 8.125rem;
-  left: 15rem;
-  right: auto !important;
-`
+// const NarrowMenuFlyout = styled(MenuFlyout)`
+//   min-width: 8.125rem;
+//   left: 15rem;
+//   right: auto !important;
+// `
 
 const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
   [ChainId.FUJI]: 'Fuji',
@@ -294,7 +294,7 @@ export default function Header() {
   const { account, chainId } = useActiveWeb3React()
   const { t } = useTranslation()
 
-  const location: any = useLocation()
+  // const location: any = useLocation()
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [isDark] = useDarkModeManager()
@@ -339,7 +339,11 @@ export default function Header() {
             {t('header.pool')}
           </StyledNavLink>
 
-          <StyledLink
+          <StyledNavLink id={`stake-nav-link`} to={'/stake-radi'}>
+            {t('header.stake')}
+          </StyledNavLink>
+
+          {/* <StyledLink
             id={`png-nav-link`}
             onClick={toggle}
             isActive={location?.pathname?.startsWith('/png')}
@@ -356,7 +360,7 @@ export default function Header() {
                 </MenuNavItem>
               </NarrowMenuFlyout>
             )}
-          </StyledLink>
+          </StyledLink> */}
 
           {/* <StyledNavLink
             id={`stake-nav-link`}
