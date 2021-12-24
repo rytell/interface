@@ -141,7 +141,7 @@ const ApproveOrInteract = ({
     case ApprovalState.PENDING:
       return <>Approving...</>
     default:
-      return <></>
+      return <>Checking Approval state...</>
   }
 }
 
