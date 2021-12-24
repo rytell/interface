@@ -26,14 +26,19 @@ export const BRIDGE_MIGRATOR_ADDRESS = '0x4b23Aa72A1214d0E4fd3f2c8Da7C6ba660F748
 
 export const MINICHEF_ADDRESS = '0x1f806f7C8dED893fd3caE279191ad7Aa3798E928'
 
+export const RADI_STAKING_POOL : { [chainId in ChainId]: string } = {
+  [ChainId.FUJI]: '0x9812Fb943aA12fEC07dDF496DEbaF1c4765403FA',
+  [ChainId.AVALANCHE]: ZERO_ADDRESS
+}
+
 // a list of tokens by chain
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
 }
 
 export const RADI: { [chainId in ChainId]: Token } = {
-  [ChainId.FUJI]: new Token(ChainId.FUJI, '0x8D0303Ef10c968B72EFf96fABE0f00e6392F105d', 18, 'RADI', 'Radi'),
-  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, ZERO_ADDRESS, 18, 'RADI', 'Radi')
+  [ChainId.FUJI]: new Token(ChainId.FUJI, '0xCcA36c23E977d6c2382dF43e930BC8dE9daC897E', 18, 'RADI', 'RADI'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, ZERO_ADDRESS, 18, 'RADI', 'RADI')
 }
 
 export const PNG: { [chainId in ChainId]: Token } = {
