@@ -79,8 +79,16 @@ const Button = styled.span`
   align-items: center;
 `
 
-const GetRadiOrInteract = ({ children, balance }: { children: ReactElement; balance: string }) => {
-  return +balance > 0 ? (
+const GetRadiOrInteract = ({
+  children,
+  balance,
+  xRadiBalance
+}: {
+  children: ReactElement
+  balance: string
+  xRadiBalance: string
+}) => {
+  return +balance > 0 || +xRadiBalance > 0 ? (
     children
   ) : (
     <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
@@ -227,7 +235,7 @@ export default function Earn({
         {/* <DataRow style={{ alignItems: 'baseline' }}>
           <TYPE.mediumHeader style={{ marginTop: '0.5rem' }}>{t('earnPage.currentOpportunities')}</TYPE.mediumHeader>
         </DataRow> */}
-        <GetRadiOrInteract balance={userRadiBalance}>
+        <GetRadiOrInteract balance={userRadiBalance} xRadiBalance={userStakingBalance}>
           <PoolSection>
             {account ? (
               <>
