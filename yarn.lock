@@ -2742,10 +2742,10 @@
     dotenv "^10.0.0"
     hardhat-tracer "^1.0.0-alpha.5"
 
-"@rytell/sdk@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@rytell/sdk/-/sdk-1.0.2.tgz#b4fa9ab49bf1d49ab5a4e08ef4ab77898fb6cbbc"
-  integrity sha512-sbw6h9pFC3YX1PJeW7AyMV94loM6wWIzfkXXkdEJsnCzLqOYY3OG+bbXaeXvWe19Xo15QJgEYqyRDpcERG6B3w==
+"@rytell/sdk@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@rytell/sdk/-/sdk-1.0.3.tgz#12208e03748ab3c5323d1ec0b560b63f4e379a79"
+  integrity sha512-M8E85yfX5m9COkUd+7RleXb3V2cahZ2gJhMg4yvz9A76YhcNjgH9qJC/wh17vzZoEenPZpq0EOw8V5RFruf4Eg==
   dependencies:
     "@openzeppelin/cli" "^2.8.2"
     "@pangolindex/exchange-contracts" "^1.0.1"

@@ -6,12 +6,12 @@ import { injected, walletlink, walletconnect } from '../connectors'
 export const GAS_PRICE = 225
 
 export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.FUJI]: '0x1FDA88B59e905506cE7c7ff097aAA4615357A83f',
+  [ChainId.FUJI]: '0xd0f172F6EeEeB2490fAC02dED056C6CBde07127C',
   [ChainId.AVALANCHE]: '0xE54Ca86531e17Ef3616d22Ca28b0D458b6C89106'
 }
 
 export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.FUJI]: '0x8a4e0F94ac872975160Ff897EA0e9f680aE5168E',
+  [ChainId.FUJI]: '0x12c643591dD4bcf68bc71Ff5d79DB505EaC792A2',
   [ChainId.AVALANCHE]: '0xE54Ca86531e17Ef3616d22Ca28b0D458b6C89106'
 }
 
@@ -26,7 +26,7 @@ export const BRIDGE_MIGRATOR_ADDRESS = '0x4b23Aa72A1214d0E4fd3f2c8Da7C6ba660F748
 
 export const MINICHEF_ADDRESS = '0x1f806f7C8dED893fd3caE279191ad7Aa3798E928'
 
-export const RADI_STAKING_POOL : { [chainId in ChainId]: string } = {
+export const RADI_STAKING_POOL: { [chainId in ChainId]: string } = {
   [ChainId.FUJI]: '0x9812Fb943aA12fEC07dDF496DEbaF1c4765403FA',
   [ChainId.AVALANCHE]: ZERO_ADDRESS
 }

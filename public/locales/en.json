@@ -136,7 +136,7 @@
     "manage": "Manage",
     "loading": "Loading",
     "yourPosition": "Your position",
-    "byAddingLiquidityInfo": "By adding liquidity you'll earn 0.25% of all trades on this pair proportional to your share of the pool.\n Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
+    "byAddingLiquidityInfo": "By adding liquidity you'll earn 0.05% of all trades on this pair proportional to your share of the pool.\n Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity."
   },
   "searchModal": {
     "commonBases": "Common bases",

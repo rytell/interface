@@ -67,25 +67,23 @@ function useSwapCallArguments(
 
     const swapMethods = []
 
+    // swapMethods.push(
+    //   Router.swapCallParameters(trade, {
+    //     feeOnTransfer: true,
+    //     allowedSlippage: new Percent(JSBI.BigInt(allowedSlippage), BIPS_BASE),
+    //     recipient,
+    //     deadline: deadline.toNumber()
+    //   })
+    // )
+
     swapMethods.push(
       Router.swapCallParameters(trade, {
-        feeOnTransfer: false,
+        feeOnTransfer: trade.tradeType === TradeType.EXACT_INPUT,
         allowedSlippage: new Percent(JSBI.BigInt(allowedSlippage), BIPS_BASE),
         recipient,
         deadline: deadline.toNumber()
       })
     )
-
-    if (trade.tradeType === TradeType.EXACT_INPUT) {
-      swapMethods.push(
-        Router.swapCallParameters(trade, {
-          feeOnTransfer: true,
-          allowedSlippage: new Percent(JSBI.BigInt(allowedSlippage), BIPS_BASE),
-          recipient,
-          deadline: deadline.toNumber()
-        })
-      )
-    }
 
     return swapMethods.map(parameters => ({ parameters, contract }))
   }, [account, allowedSlippage, chainId, deadline, library, recipient, trade])
@@ -130,6 +128,7 @@ export function useSwapCallback(
               parameters: { methodName, args, value },
               contract
             } = call
+            console.log(methodName, ': METHOD NAME')
             const options = !value || isZero(value) ? {} : { value }
 
             return contract.estimateGas[methodName](...args, options)
