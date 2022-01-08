@@ -17,6 +17,7 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
 
 export const LANDING_PAGE = 'https://rytell.exchange/'
 export const ANALYTICS_PAGE = 'https://info.rytell.exchange/'
+export const EXCHANGE_API = process.env.REACT_APP_EXCHANGE_API
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 

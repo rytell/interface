@@ -4,7 +4,7 @@ import { X } from 'react-feather'
 import styled from 'styled-components'
 import tokenLogo from '../../assets/images/token-logo.png'
 import { injected } from '../../connectors'
-import { PNG } from '../../constants'
+import { EXCHANGE_API, PNG } from '../../constants'
 import { useTotalSupply } from '../../data/TotalSupply'
 import { useActiveWeb3React } from '../../hooks'
 import { useTotalRadiEarned } from '../../state/stake/hooks'
@@ -86,7 +86,7 @@ export default function RadiBalanceContent({ setShowRadiBalanceModal }: { setSho
 
   useMemo(() => {
     if (radi === undefined) return
-    fetch(`https://api.rytell.exchange/radi/circulating-supply`)
+    fetch(`${EXCHANGE_API}/radi/circulating`)
       .then(res => res.text())
       .then(val => setCirculation(new TokenAmount(radi, val)))
   }, [radi])

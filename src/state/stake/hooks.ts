@@ -10,7 +10,8 @@ import {
   BIG_INT_ONE,
   BIG_INT_EIGHTEEN,
   BIG_INT_TEN,
-  RADI
+  RADI,
+  EXCHANGE_API
 } from '../../constants'
 import { STAKING_REWARDS_INTERFACE } from '../../constants/abis/staking-rewards'
 import { PairState, usePair, usePairs } from '../../data/Reserves'
@@ -657,7 +658,7 @@ export function useGetStakingDataWithAPR(version: number) {
     if (stakingInfos?.length > 0) {
       Promise.all(
         stakingInfos.map(stakingInfo => {
-          return fetch(`https://api.rytell.exchange/rytell/apr/${stakingInfo.stakingRewardAddress}`)
+          return fetch(`${EXCHANGE_API}/rytell/apr/${stakingInfo.stakingRewardAddress}`)
             .then(res => res.json())
             .then(res => ({
               swapFeeApr: Number(res.swapFeeApr),

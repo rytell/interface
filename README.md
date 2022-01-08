@@ -5,7 +5,7 @@ An open source interface for Rytell -- a community-driven decentralized exchange
 - Website: [rytell.exchange](https://rytell.exchange/)
 - Interface: [app.rytell.exchange](https://app.rytell.exchange)
 - Telegram: [Rytell](https://t.me/rytelldex)
-- Discord: [Rytell](https://discord.com/invite/PARrDYYbfw)
+- Discord: [Rytell](https://discord.gg/bZ9bBxbjR9)
 - Twitter: [@rytelldex](https://twitter.com/rytelldex)
 
 ## Accessing the Rytell Interface

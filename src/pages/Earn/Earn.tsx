@@ -15,7 +15,7 @@ import { JSBI } from '@rytell/sdk'
 import { useTranslation } from 'react-i18next'
 import { SearchInput } from '../../components/SearchModal/styleds'
 import useDebounce from '../../hooks/useDebounce'
-import { BIG_INT_ZERO } from '../../constants'
+import { BIG_INT_ZERO, EXCHANGE_API } from '../../constants'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -192,9 +192,7 @@ const Earn: React.FC<EarnProps> = ({ version, stakingInfos, poolMap }) => {
           // TODO: update here api call without staking reward address
           .map(stakingInfo => {
             if (poolMap) {
-              return fetch(
-                `https://api.rytell.exchange/rytell/apr2/${poolMap[stakingInfo.totalStakedAmount.token.address]}`
-              )
+              return fetch(`${EXCHANGE_API}/rytell/apr2/${poolMap[stakingInfo.totalStakedAmount.token.address]}`)
                 .then(res => res.json())
                 .then(res => ({
                   swapFeeApr: Number(res.swapFeeApr),
@@ -203,7 +201,7 @@ const Earn: React.FC<EarnProps> = ({ version, stakingInfos, poolMap }) => {
                   ...stakingInfo
                 }))
             } else {
-              return fetch(`https://api.rytell.exchange/rytell/apr/${stakingInfo.stakingRewardAddress}`)
+              return fetch(`${EXCHANGE_API}/rytell/apr/${stakingInfo.stakingRewardAddress}`)
                 .then(res => res.json())
                 .then(res => ({
                   swapFeeApr: Number(res.swapFeeApr),
