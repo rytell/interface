@@ -14,7 +14,7 @@ import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { usePairContract, useStakingContract } from '../../hooks/useContract'
 import { useApproveCallback, ApprovalState } from '../../hooks/useApproveCallback'
 import { splitSignature } from 'ethers/lib/utils'
-import { DoubleSideStakingInfo, useDerivedStakeInfo, useMinichefPools } from '../../state/stake/hooks'
+import { StakingInfo, useDerivedStakeInfo, useMinichefPools } from '../../state/stake/hooks'
 import { wrappedCurrencyAmount } from '../../utils/wrappedCurrency'
 import { TransactionResponse } from '@ethersproject/providers'
 import { useTransactionAdder } from '../../state/transactions/hooks'
@@ -38,18 +38,11 @@ const ContentWrapper = styled(AutoColumn)`
 interface StakingModalProps {
   isOpen: boolean
   onDismiss: () => void
-  stakingInfo: DoubleSideStakingInfo
+  stakingInfo: StakingInfo
   userLiquidityUnstaked: TokenAmount | undefined
-  version: number
 }
 
-export default function StakingModal({
-  isOpen,
-  onDismiss,
-  stakingInfo,
-  userLiquidityUnstaked,
-  version
-}: StakingModalProps) {
+export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiquidityUnstaked }: StakingModalProps) {
   const { account, chainId, library } = useActiveWeb3React()
 
   // track and parse user input
@@ -97,11 +90,8 @@ export default function StakingModal({
   async function onStake() {
     if (stakingContract && poolMap && parsedAmount && deadline) {
       setAttempting(true)
-      const method = version < 2 ? 'stake' : 'deposit'
-      const args =
-        version < 2
-          ? [`0x${parsedAmount.raw.toString(16)}`]
-          : [poolMap[stakingInfo.stakedAmount.token.address], `0x${parsedAmount.raw.toString(16)}`, account]
+      const method = 'stake'
+      const args = [`0x${parsedAmount.raw.toString(16)}`]
 
       if (approval === ApprovalState.APPROVED) {
         stakingContract[method](...args)
@@ -116,25 +106,14 @@ export default function StakingModal({
             console.error(error)
           })
       } else if (signatureData) {
-        const permitMethod = version < 2 ? 'stakeWithPermit' : 'depositWithPermit'
-        const permitArgs =
-          version < 2
-            ? [
-                `0x${parsedAmount.raw.toString(16)}`,
-                signatureData.deadline,
-                signatureData.v,
-                signatureData.r,
-                signatureData.s
-              ]
-            : [
-                poolMap[stakingInfo.stakedAmount.token.address],
-                `0x${parsedAmount.raw.toString(16)}`,
-                account,
-                signatureData.deadline,
-                signatureData.v,
-                signatureData.r,
-                signatureData.s
-              ]
+        const permitMethod = 'stakeWithPermit'
+        const permitArgs = [
+          `0x${parsedAmount.raw.toString(16)}`,
+          signatureData.deadline,
+          signatureData.v,
+          signatureData.r,
+          signatureData.s
+        ]
 
         stakingContract[permitMethod](...permitArgs)
           .then((response: TransactionResponse) => {

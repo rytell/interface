@@ -8,7 +8,6 @@ import { EXCHANGE_API, PNG } from '../../constants'
 import { useTotalSupply } from '../../data/TotalSupply'
 import { useActiveWeb3React } from '../../hooks'
 import { useTotalRadiEarned } from '../../state/stake/hooks'
-import { DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION } from '../../state/stake/doubleSideConfig'
 import { useAggregateRadiBalance, useTokenBalance } from '../../state/wallet/hooks'
 import { StyledInternalLink, TYPE, RadiTokenAnimated } from '../../theme'
 import { AutoColumn } from '../../components/Column'
@@ -122,10 +121,7 @@ export default function RadiBalanceContent({ setShowRadiBalanceModal }: { setSho
                   <TYPE.white color="white">
                     {radiToClaim?.toFixed(4, { groupSeparator: ',' })}{' '}
                     {radiToClaim && radiToClaim.greaterThan('0') && (
-                      <StyledInternalLink
-                        onClick={() => setShowRadiBalanceModal(false)}
-                        to={`/radi/${DOUBLE_SIDE_STAKING_REWARDS_CURRENT_VERSION}`}
-                      >
+                      <StyledInternalLink onClick={() => setShowRadiBalanceModal(false)} to={`/radi`}>
                         ({t('earn.claim')})
                       </StyledInternalLink>
                     )}

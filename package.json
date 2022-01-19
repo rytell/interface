@@ -133,6 +133,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "@rytell/exchange-contracts": "^1.0.1",
+    "@rytell/liquidity-pools": "^1.0.0",
     "@rytell/staking-radi": "^1.0.0",
     "@rytell/tokens": "^1.0.0",
     "@types/crypto-js": "^4.0.2",

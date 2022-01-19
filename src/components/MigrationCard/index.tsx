@@ -39,16 +39,17 @@ const MigrationCard = ({ pair, onClickMigrate, stakingData }: StatProps) => {
       <Divider />
 
       <AutoRow gap="20px">
+        {/* TODO: add total staked in usd */}
         <Stat
           title={t('earnPage.totalStaked')}
-          stat={numeral((stakingData?.totalStakedInUsd as Fraction)?.toFixed(2)).format('$0.00a')}
+          stat={numeral((stakingData?.totalStakedInWavax as Fraction)?.toFixed(2)).format('$0.00a')}
           titlePosition="top"
         />
-        <Stat
+        {/* <Stat
           title={t('migratePage.apr')}
           stat={stakingData?.combinedApr ? `${stakingData?.combinedApr}%` : '-'}
           titlePosition="top"
-        />
+        /> */}
       </AutoRow>
 
       <InnerWrapper>

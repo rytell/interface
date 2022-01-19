@@ -28,7 +28,7 @@ const StepView = ({ selectedPool, version, onDismiss }: StepProps) => {
   const [currentStep, setCurrentStep] = useState(0)
   const [allChoosePool, setAllChoosePool] = useState({} as { [address: string]: { pair: Pair; staking: StakingInfo } })
 
-  const { allPool, v2IsLoading } = useGetMigrationData(version)
+  const { allPool, v2IsLoading } = useGetMigrationData()
   const [completed, setCompleted] = useState(false)
   const [loading, setLoading] = useState(false)
 

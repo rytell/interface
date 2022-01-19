@@ -777,6 +777,59 @@ const WAVAX_AND_PNG_ONLY: ChainTokenList = {
   [ChainId.AVALANCHE]: [WAVAX[ChainId.AVALANCHE], PNG[ChainId.AVALANCHE], RADI[ChainId.AVALANCHE]]
 }
 
+export const STAKING_V1_FUJI: {
+  tokens: [Token, Token]
+  stakingRewardAddress: string
+  pair: string
+}[] = [
+  {
+    tokens: [USDT[ChainId.FUJI], WAVAX[ChainId.FUJI]],
+    stakingRewardAddress: '0x00efe7500f88d4815d873e2fe302ee9a3cad4e40',
+    pair: '0xb81853e2D8cE364416B6F07866ea3647de3AF7dA'
+  }
+  // {
+  //   tokens: [PARTY[ChainId.FUJI], WAVAX[ChainId.FUJI]],
+  //   stakingRewardAddress: '0x8d1f03fd74a1dd4b4e8ec5d2895c943a3fce379c',
+  //   pair: '0x40ca3289acf6fa8500479a1be7731e40d64c6fa4'
+  // },
+  // {
+  //   tokens: [PARTY[ChainId.FUJI], USDT[ChainId.FUJI]],
+  //   stakingRewardAddress: '0x249f3965f3857c2b7d5a1cb20005c68911c706d7',
+  //   pair: '0x70ed4710208be3d262db27f14c6682b531350e2a'
+  // }
+]
+
+export const STAKING_V1: {
+  tokens: [Token, Token]
+  stakingRewardAddress: string
+  pair: string
+  delisted?: boolean
+}[] = [
+  {
+    tokens: [RADI[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
+    stakingRewardAddress: '0x880f47837a7763E906E6D5D71e85b4CFcBF3348B',
+    pair: '0x379842a6cd96a70ebce66004275ce0c68069df62',
+    delisted: false
+  }
+]
+
+export const STAKING_REWARDS_INFO: {
+  [chainId in ChainId]?: {
+    tokens: [Token, Token]
+    stakingRewardAddress: string
+    pair: string
+    delisted?: boolean
+  }[][]
+} = {
+  [ChainId.FUJI]: [STAKING_V1_FUJI],
+  [ChainId.AVALANCHE]: [STAKING_V1]
+}
+
+export const LIQUIDITY_POOL_MANAGER_ADDRESS: { [chainId in ChainId]?: string } = {
+  [ChainId.FUJI]: '0x6B7494a1dD11C51E04613DD148bc298082557Dfe',
+  [ChainId.AVALANCHE]: ZERO_ADDRESS
+}
+
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.FUJI]: [WAVAX[ChainId.FUJI], PNG[ChainId.FUJI], RADI[ChainId.FUJI]],

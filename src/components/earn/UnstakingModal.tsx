@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { RowBetween } from '../Row'
 import { TYPE, CloseIcon } from '../../theme'
 import { ButtonError } from '../Button'
-import { DoubleSideStakingInfo, useMinichefPools } from '../../state/stake/hooks'
+import { StakingInfo, useMinichefPools } from '../../state/stake/hooks'
 import { useStakingContract } from '../../hooks/useContract'
 import { SubmittedView, LoadingView } from '../ModalViews'
 import { TransactionResponse } from '@ethersproject/providers'
@@ -22,11 +22,10 @@ const ContentWrapper = styled(AutoColumn)`
 interface StakingModalProps {
   isOpen: boolean
   onDismiss: () => void
-  stakingInfo: DoubleSideStakingInfo
-  version: number
+  stakingInfo: StakingInfo
 }
 
-export default function UnstakingModal({ isOpen, onDismiss, stakingInfo, version }: StakingModalProps) {
+export default function UnstakingModal({ isOpen, onDismiss, stakingInfo }: StakingModalProps) {
   const { account } = useActiveWeb3React()
   const { t } = useTranslation()
 
@@ -47,17 +46,9 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo, version
   async function onWithdraw() {
     if (stakingContract && poolMap && stakingInfo?.stakedAmount) {
       setAttempting(true)
-      const method = version < 2 ? 'exit' : 'withdrawAndHarvest'
-      const args =
-        version < 2
-          ? []
-          : [
-              poolMap[stakingInfo.stakedAmount.token.address],
-              `0x${stakingInfo.stakedAmount?.raw.toString(16)}`,
-              account
-            ]
+      const method = 'exit'
+      const args: any[] = []
 
-      // TODO: Support withdrawing partial amounts for v2+
       await stakingContract[method](...args)
         .then((response: TransactionResponse) => {
           addTransaction(response, {

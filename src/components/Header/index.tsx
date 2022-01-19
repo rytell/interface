@@ -343,6 +343,10 @@ export default function Header() {
             {t('header.stake')}
           </StyledNavLink>
 
+          <StyledNavLink id={`stake-nav-link`} to={'/radi'}>
+            {t('header.farm')}
+          </StyledNavLink>
+
           {/* <StyledLink
             id={`png-nav-link`}
             onClick={toggle}

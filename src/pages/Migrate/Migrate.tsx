@@ -42,7 +42,7 @@ const MigrateUI = () => {
   const { account } = useActiveWeb3React()
   const toggleMigrationModal = useMigrationModalToggle()
 
-  const { allPool, v2IsLoading } = useGetMigrationData(params?.version)
+  const { allPool, v2IsLoading } = useGetMigrationData()
 
   return (
     <PageWrapper>

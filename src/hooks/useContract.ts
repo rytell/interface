@@ -1,5 +1,5 @@
 import { Contract } from '@ethersproject/contracts'
-import { WAVAX } from '@rytell/sdk'
+import { ChainId, WAVAX } from '@rytell/sdk'
 import { abi as IRytellPairABI } from '@rytell/exchange-contracts/artifacts/contracts/core/interfaces/IRytellPair.sol/IRytellPair.json'
 import { abi as STAKING_REWARDS_ABI } from '@pangolindex/governance/artifacts/contracts/StakingRewards.sol/StakingRewards.json'
 import { abi as AIRDROP_ABI } from '@pangolindex/governance/artifacts/contracts/Airdrop.sol/Airdrop.json'
@@ -8,6 +8,7 @@ import { abi as RADI_ABI } from '@rytell/tokens/artifacts/contracts/RadiToken.so
 import { abi as BRIDGE_MIGRATOR_ABI } from '@rytell/exchange-contracts/artifacts/contracts/periphery/RytellBridgeMigrationRouter.sol/RytellBridgeMigrationRouter.json'
 import { abi as MINICHEF_ABI } from '@pangolindex/governance/artifacts/contracts/MiniChefV2.sol/MiniChefV2.json'
 import { abi as STAKING_RADI_ABI } from '@rytell/staking-radi/artifacts/contracts/StakingPool.sol/StakingPool.json'
+import { abi as LIQUIDITY_POOL_MANAGER_ABI } from '@rytell/liquidity-pools/artifacts/contracts/LiquidityPoolManager.sol/LiquidityPoolManager.json'
 import { useMemo } from 'react'
 import ENS_PUBLIC_RESOLVER_ABI from '../constants/abis/ens-public-resolver.json'
 import { ERC20_BYTES32_ABI } from '../constants/abis/erc20'
@@ -25,7 +26,8 @@ import {
   MINICHEF_ADDRESS,
   RADI,
   GOVERNANCE_ADDRESS,
-  RADI_STAKING_POOL
+  RADI_STAKING_POOL,
+  LIQUIDITY_POOL_MANAGER_ADDRESS
 } from '../constants'
 
 // returns null on errors
@@ -114,4 +116,9 @@ export function useStakingContract(stakingAddress?: string, withSignerIfPossible
 export function useAirdropContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId ? AIRDROP_ADDRESS[chainId] : undefined, AIRDROP_ABI, true)
+}
+
+export function useLiquidityPoolManagerContract() {
+  const { chainId } = useActiveWeb3React()
+  return useContract(LIQUIDITY_POOL_MANAGER_ADDRESS[chainId || ChainId.FUJI], LIQUIDITY_POOL_MANAGER_ABI, false)
 }

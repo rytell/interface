@@ -2497,6 +2497,11 @@
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.4.1.tgz#3382db2cd83ab565ed9626765e7da92944b45de8"
   integrity sha512-o+pHCf/yMLSlV5MkDQEzEQL402i6SoRnktru+0rdSxVEFZcTzzGhZCAtZjUFyKGazMSv1TilzMg+RbED1N8XHQ==
 
+"@openzeppelin/contracts@^4.4.2":
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.4.2.tgz#4e889c9c66e736f7de189a53f8ba5b8d789425c2"
+  integrity sha512-NyJV7sJgoGYqbtNUWgzzOGW4T6rR19FmX1IJgXGdapGPWsuMelGJn9h03nos0iqfforCbCB0iYIR0MtIuIFLLw==
+
 "@openzeppelin/fuzzy-solidity-import-parser@^0.1.2":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@openzeppelin/fuzzy-solidity-import-parser/-/fuzzy-solidity-import-parser-0.1.2.tgz#3b9f524d6028ca73df60474a313e0295e5610c51"
@@ -2742,7 +2747,16 @@
     dotenv "^10.0.0"
     hardhat-tracer "^1.0.0-alpha.5"
 
-"@rytell/sdk@1.0.3":
+"@rytell/liquidity-pools@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@rytell/liquidity-pools/-/liquidity-pools-1.0.0.tgz#ffc7a12ff968671962b7198de78421b8356cac1a"
+  integrity sha512-0fxLPaQdZ3Iyv1PomqlxHW3e83ovbpXY2QzGeQ4IrQpILTlDHpaECOAk4+hamPwfbofDzLzlwPqUZotkuTK4oA==
+  dependencies:
+    "@openzeppelin/contracts" "^4.4.2"
+    "@rytell/exchange-contracts" "^1.0.1"
+    "@rytell/sdk" "^1.0.3"
+
+"@rytell/sdk@1.0.3", "@rytell/sdk@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@rytell/sdk/-/sdk-1.0.3.tgz#12208e03748ab3c5323d1ec0b560b63f4e379a79"
   integrity sha512-M8E85yfX5m9COkUd+7RleXb3V2cahZ2gJhMg4yvz9A76YhcNjgH9qJC/wh17vzZoEenPZpq0EOw8V5RFruf4Eg==
