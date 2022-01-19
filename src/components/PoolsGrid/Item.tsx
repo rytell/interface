@@ -11,7 +11,11 @@ import { unwrappedToken } from '../../utils/wrappedCurrency'
 import { WithLockedValue } from '../WithLockedValue'
 
 const Item = styled.div`
-  background-color: ${({ theme }) => theme.color1};
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0.5rem;
+  background-color: ${({ theme }) => theme.color2};
   [class*='-item-header'] h4 {
     color: ${({ theme }) => theme.text1};
     word-break: break-all;
@@ -38,7 +42,7 @@ const Item = styled.div`
     color: ${({ theme }) => theme.text6};
   }
   .grid-item-details {
-    background-color: ${({ theme }) => theme.color1};
+    background-color: transparent;
   }
   .grid-item-details-btn {
     color: ${({ theme }) => theme.primary3};

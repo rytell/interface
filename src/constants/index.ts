@@ -58,7 +58,13 @@ export const WETHe: { [chainId in ChainId]: Token } = {
 }
 
 export const USDT: { [chainId in ChainId]: Token } = {
-  [ChainId.FUJI]: new Token(ChainId.FUJI, ZERO_ADDRESS, 6, 'USDT', 'Tether USD'),
+  [ChainId.FUJI]: new Token(
+    ChainId.FUJI,
+    '0x2058ec2791dD28b6f67DB836ddf87534F4Bbdf22',
+    6,
+    'FUJISTABLE',
+    'The Fuji stablecoin'
+  ),
   [ChainId.AVALANCHE]: new Token(
     ChainId.AVALANCHE,
     '0xde3A24028580884448a5397872046a019649b084',
@@ -69,7 +75,13 @@ export const USDT: { [chainId in ChainId]: Token } = {
 }
 
 export const USDTe: { [chainId in ChainId]: Token } = {
-  [ChainId.FUJI]: new Token(ChainId.FUJI, ZERO_ADDRESS, 6, 'USDT.e', 'Tether USD'),
+  [ChainId.FUJI]: new Token(
+    ChainId.FUJI,
+    '0x2058ec2791dD28b6f67DB836ddf87534F4Bbdf22',
+    6,
+    'FUJISTABLE',
+    'The Fuji stablecoin'
+  ),
   [ChainId.AVALANCHE]: new Token(
     ChainId.AVALANCHE,
     '0xc7198437980c041c805A1EDcbA50c1Ce5db95118',
@@ -767,6 +779,11 @@ export const KLO: { [chainId in ChainId]: Token } = {
   )
 }
 
+export const RIORE: { [chainId in ChainId]: Token } = {
+  [ChainId.FUJI]: new Token(ChainId.FUJI, '0xA84b0D75cF0cb4515abcC7737544075C02A851Bd', 18, 'RIORE', 'Rytell Iron Ore'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, ZERO_ADDRESS, 18, 'RIORE', 'Rytell Iron Ore')
+}
+
 export const AIRDROP_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.FUJI]: ZERO_ADDRESS,
   [ChainId.AVALANCHE]: '0x0C58C2041da4CfCcF5818Bbe3b66DBC23B3902d9'
@@ -784,19 +801,24 @@ export const STAKING_V1_FUJI: {
 }[] = [
   {
     tokens: [USDT[ChainId.FUJI], WAVAX[ChainId.FUJI]],
-    stakingRewardAddress: '0x00efe7500f88d4815d873e2fe302ee9a3cad4e40',
-    pair: '0xb81853e2D8cE364416B6F07866ea3647de3AF7dA'
+    stakingRewardAddress: '0x3D8778c01888582Cad8Dc5f472fB9862b4886646',
+    pair: '0xc47df7d0c62786d4322dDD8C1b019DF70163155c'
+  },
+  {
+    tokens: [RADI[ChainId.FUJI], WAVAX[ChainId.FUJI]],
+    stakingRewardAddress: '0xCEFC7DBc094a5298303E97105Ed87EC569718c90',
+    pair: '0x24ad1A896cF3521b80D3ae428b3cA33902267250'
+  },
+  {
+    tokens: [RADI[ChainId.FUJI], USDT[ChainId.FUJI]],
+    stakingRewardAddress: '0xD4020BAD4B7BA2a5958630f15F6CcadaB33Dd150',
+    pair: '0x84B83Ef692a2e6Ca8eCF9Dc926B1eDC655CECbc1'
+  },
+  {
+    tokens: [USDT[ChainId.FUJI], RIORE[ChainId.FUJI]],
+    stakingRewardAddress: '0x49984179429cB27a70E3691af61372D8D55b87E5',
+    pair: '0xBf4ABD3CE34711F04a373E2d41523637B948D833'
   }
-  // {
-  //   tokens: [PARTY[ChainId.FUJI], WAVAX[ChainId.FUJI]],
-  //   stakingRewardAddress: '0x8d1f03fd74a1dd4b4e8ec5d2895c943a3fce379c',
-  //   pair: '0x40ca3289acf6fa8500479a1be7731e40d64c6fa4'
-  // },
-  // {
-  //   tokens: [PARTY[ChainId.FUJI], USDT[ChainId.FUJI]],
-  //   stakingRewardAddress: '0x249f3965f3857c2b7d5a1cb20005c68911c706d7',
-  //   pair: '0x70ed4710208be3d262db27f14c6682b531350e2a'
-  // }
 ]
 
 export const STAKING_V1: {

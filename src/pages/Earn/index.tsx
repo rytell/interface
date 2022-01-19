@@ -14,7 +14,7 @@ import { unwrappedToken } from '../../utils/wrappedCurrency'
 const Wrapper = styled.div`
   width: 100vw;
   margin-top: -2rem;
-  background-color: ${({ theme }) => theme.color1};
+  background-color: ${({ theme }) => theme.color2};
   overflow: hidden;
 `
 
