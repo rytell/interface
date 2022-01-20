@@ -64,13 +64,13 @@ const fetchPoolAprs = async (
         // greater stake in avax comes first
         return +(info_b.multiplier?.toString() || '0') - +(info_a.multiplier?.toString() || '0')
       })
-    .map(stakingInfo => {
-      return fetch(
-        `${process.env.REACT_APP_APR_API}${stakingInfo.stakingRewardAddress}/${chainId || ChainId.AVALANCHE}`
-      )
-        .then(res => res.text())
-        .then(res => ({ apr: res, ...stakingInfo }))
-    })
+      .map(stakingInfo => {
+        return fetch(
+          `${process.env.REACT_APP_APR_API}${stakingInfo.stakingRewardAddress}/${chainId || ChainId.AVALANCHE}`
+        )
+          .then(res => res.text())
+          .then(res => ({ apr: res, ...stakingInfo }))
+      })
   )
 
   if (results.length) {
