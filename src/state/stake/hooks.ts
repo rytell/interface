@@ -1,6 +1,14 @@
 import { ChainId, CurrencyAmount, JSBI, Token, TokenAmount, WAVAX, Pair, Percent } from '@rytell/sdk'
 import { useMemo, useEffect, useState, useCallback } from 'react'
-import { MINICHEF_ADDRESS, BIG_INT_ZERO, RADI, EXCHANGE_API, STAKING_REWARDS_INFO, USDT, BIG_INT_ONE } from '../../constants'
+import {
+  MINICHEF_ADDRESS,
+  BIG_INT_ZERO,
+  RADI,
+  EXCHANGE_API,
+  STAKING_REWARDS_INFO,
+  BIG_INT_ONE,
+  USDTe
+} from '../../constants'
 import { STAKING_REWARDS_INTERFACE } from '../../constants/abis/staking-rewards'
 import { PairState, usePair, usePairs } from '../../data/Reserves'
 import { useActiveWeb3React } from '../../hooks'
@@ -239,7 +247,7 @@ export function useStakingInfo(
   }, [chainId, pairToFilterBy])
 
   const radi = RADI[chainId || ChainId.AVALANCHE]
-  const usdt = USDT[chainId || ChainId.AVALANCHE]
+  const usdt = USDTe[chainId || ChainId.AVALANCHE]
 
   const rewardsAddresses = useMemo(() => info.map(({ stakingRewardAddress }) => stakingRewardAddress), [info])
   const pairAddresses = useMemo(() => info.map(({ pair }) => [pair] as MethodArg[]), [info])
@@ -342,7 +350,7 @@ export function useStakingInfo(
         const totalRewardRate = new TokenAmount(radi, JSBI.BigInt(rewardRateState.result?.[0]))
         const isAvaxPool = tokens[0].equals(WAVAX[tokens[0].chainId])
         const isRadiPool = tokens[0].equals(RADI[tokens[0].chainId]) || tokens[1].equals(RADI[tokens[1].chainId])
-        const isStableCoinPool = tokens[0].equals(USDT[tokens[0].chainId]) || tokens[1].equals(USDT[tokens[1].chainId])
+        const isStableCoinPool = tokens[0].equals(USDTe[tokens[0].chainId]) || tokens[1].equals(USDTe[tokens[1].chainId])
         let totalStakedInWavax
         if (isAvaxPool) {
           totalStakedInWavax = calculteTotalStakedAmountInAvax(

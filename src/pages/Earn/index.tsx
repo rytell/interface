@@ -68,8 +68,13 @@ const fetchPoolAprs = async (
         return fetch(
           `${process.env.REACT_APP_APR_API}${stakingInfo.stakingRewardAddress}/${chainId || ChainId.AVALANCHE}`
         )
-          .then(res => res.text())
-          .then(res => ({ apr: res, ...stakingInfo }))
+          .then(res => res.json())
+          .then(res => {
+            if (res.statusCode && res.statusCode !== 200) {
+              return { apr: 'N/A', ...stakingInfo }
+            }
+            return { apr: res, ...stakingInfo }
+          })
       })
   )
 

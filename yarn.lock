@@ -2756,7 +2756,21 @@
     "@rytell/exchange-contracts" "^1.0.1"
     "@rytell/sdk" "^1.0.3"
 
-"@rytell/sdk@1.0.3", "@rytell/sdk@^1.0.3":
+"@rytell/sdk@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@rytell/sdk/-/sdk-1.0.4.tgz#fe30d2f2501ee12c133d890b8239b227c6dd1aae"
+  integrity sha512-KHesQtpHIUH65OcfnChkjL2Eg102wp02aRCShFnYzjZ1XYOaU9CyAOAhT+M4gr0oR4HpwTQ0iy/j5AJeG9rMvQ==
+  dependencies:
+    "@openzeppelin/cli" "^2.8.2"
+    "@pangolindex/exchange-contracts" "^1.0.1"
+    big.js "^5.2.2"
+    decimal.js-light "^2.5.0"
+    jsbi "^3.1.1"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.3"
+    toformat "^2.0.0"
+
+"@rytell/sdk@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@rytell/sdk/-/sdk-1.0.3.tgz#12208e03748ab3c5323d1ec0b560b63f4e379a79"
   integrity sha512-M8E85yfX5m9COkUd+7RleXb3V2cahZ2gJhMg4yvz9A76YhcNjgH9qJC/wh17vzZoEenPZpq0EOw8V5RFruf4Eg==

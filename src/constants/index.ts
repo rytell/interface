@@ -7,12 +7,12 @@ export const GAS_PRICE = 225
 
 export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FUJI]: '0xd0f172F6EeEeB2490fAC02dED056C6CBde07127C',
-  [ChainId.AVALANCHE]: '0xE54Ca86531e17Ef3616d22Ca28b0D458b6C89106'
+  [ChainId.AVALANCHE]: '0xa333EEBa817519B7F9C8B074b19Af7b6F8076e71'
 }
 
 export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FUJI]: '0x12c643591dD4bcf68bc71Ff5d79DB505EaC792A2',
-  [ChainId.AVALANCHE]: '0xE54Ca86531e17Ef3616d22Ca28b0D458b6C89106'
+  [ChainId.AVALANCHE]: '0xe5e970FE3a90F314977a9Fd41e349486a9e8c4fe'
 }
 
 export const LANDING_PAGE = 'https://rytell.exchange/'
@@ -29,7 +29,7 @@ export const MINICHEF_ADDRESS = '0x1f806f7C8dED893fd3caE279191ad7Aa3798E928'
 
 export const RADI_STAKING_POOL: { [chainId in ChainId]: string } = {
   [ChainId.FUJI]: '0x9812Fb943aA12fEC07dDF496DEbaF1c4765403FA',
-  [ChainId.AVALANCHE]: ZERO_ADDRESS
+  [ChainId.AVALANCHE]: '0xa19A30B689CDe1FB05f89E81a72C14ea31b7aC00'
 }
 
 // a list of tokens by chain
@@ -39,7 +39,7 @@ type ChainTokenList = {
 
 export const RADI: { [chainId in ChainId]: Token } = {
   [ChainId.FUJI]: new Token(ChainId.FUJI, '0xCcA36c23E977d6c2382dF43e930BC8dE9daC897E', 18, 'RADI', 'RADI'),
-  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, ZERO_ADDRESS, 18, 'RADI', 'RADI')
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0x81d8B7e80b5823Ebb93D5019dde5096E03292F12', 18, 'RADI', 'RADI')
 }
 
 export const PNG: { [chainId in ChainId]: Token } = {
@@ -784,6 +784,22 @@ export const RIORE: { [chainId in ChainId]: Token } = {
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, ZERO_ADDRESS, 18, 'RIORE', 'Rytell Iron Ore')
 }
 
+export const EGG: { [chainId in ChainId]: Token } = {
+  [ChainId.FUJI]: new Token(ChainId.FUJI, ZERO_ADDRESS, 18, 'EGG', 'chikn egg'),
+  [ChainId.AVALANCHE]: new Token(
+    ChainId.AVALANCHE,
+    '0x7761E2338B35bCEB6BdA6ce477EF012bde7aE611',
+    18,
+    'EGG',
+    'chikn egg'
+  )
+}
+
+export const CRA: { [chainId in ChainId]: Token } = {
+  [ChainId.FUJI]: new Token(ChainId.FUJI, ZERO_ADDRESS, 18, 'CRA', 'CRA'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0xA32608e873F9DdEF944B24798db69d80Bbb4d1ed', 18, 'CRA', 'CRA')
+}
+
 export const AIRDROP_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.FUJI]: ZERO_ADDRESS,
   [ChainId.AVALANCHE]: '0x0C58C2041da4CfCcF5818Bbe3b66DBC23B3902d9'
@@ -829,8 +845,32 @@ export const STAKING_V1: {
 }[] = [
   {
     tokens: [RADI[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
-    stakingRewardAddress: '0x880f47837a7763E906E6D5D71e85b4CFcBF3348B',
-    pair: '0x379842a6cd96a70ebce66004275ce0c68069df62',
+    stakingRewardAddress: '0x9d297aaFf45AA5BFEE91D7007Fb650d572e98aE6',
+    pair: '0x6c7c8929712da7a62bd437898b648cbb89494104',
+    delisted: false
+  },
+  {
+    tokens: [USDCe[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
+    stakingRewardAddress: '0xE1F305a5bEbaCc2e841A811E1e5313ab4c059179',
+    pair: '0xe8440c62c6c01E7C47CbEDFCa80aB26be0AF79dB',
+    delisted: false
+  },
+  {
+    tokens: [WETHe[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
+    stakingRewardAddress: '0x07884C3c506F3691304f9CA3e40d0bBae445726b',
+    pair: '0xec33377d45EA63d71182135406d40ed78Ff3171c',
+    delisted: false
+  },
+  {
+    tokens: [EGG[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
+    stakingRewardAddress: '0x06713B29bf4a71D341E105cde30C16066E90c7C4',
+    pair: '0xa4960f15F3e93db61A16BEc40154Da0E4dC2799e',
+    delisted: false
+  },
+  {
+    tokens: [CRA[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
+    stakingRewardAddress: '0x3c72010e1Eb03358a916C43DBaE8e99Ee1186999',
+    pair: '0x29c27C2Db6352fb94e2AAeB96941adA479b3EB4E',
     delisted: false
   }
 ]
@@ -849,7 +889,7 @@ export const STAKING_REWARDS_INFO: {
 
 export const LIQUIDITY_POOL_MANAGER_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.FUJI]: '0x6B7494a1dD11C51E04613DD148bc298082557Dfe',
-  [ChainId.AVALANCHE]: ZERO_ADDRESS
+  [ChainId.AVALANCHE]: '0x0eDe43B541f4f2bFd31b9e2A202bC680C8FC9f60'
 }
 
 // used to construct intermediary pairs for trading
