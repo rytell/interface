@@ -866,13 +866,13 @@ export const STAKING_V1: {
     stakingRewardAddress: '0x899d0d35712997bbBABE6506Edf44a14FC1816a3',
     pair: '0xa4960f15F3e93db61A16BEc40154Da0E4dC2799e',
     delisted: false
+  },
+  {
+    tokens: [CRA[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
+    stakingRewardAddress: '0x867fEd0AD388a6603A52dBEfa29cC892e2FE470d',
+    pair: '0x29c27C2Db6352fb94e2AAeB96941adA479b3EB4E',
+    delisted: false
   }
-  // {
-  //   tokens: [CRA[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
-  //   stakingRewardAddress: '0x3c72010e1Eb03358a916C43DBaE8e99Ee1186999',
-  //   pair: '0x29c27C2Db6352fb94e2AAeB96941adA479b3EB4E',
-  //   delisted: false
-  // }
 ]
 
 export const STAKING_REWARDS_INFO: {
