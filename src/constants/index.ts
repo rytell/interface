@@ -28,8 +28,8 @@ export const BRIDGE_MIGRATOR_ADDRESS = '0x4b23Aa72A1214d0E4fd3f2c8Da7C6ba660F748
 export const MINICHEF_ADDRESS = '0x1f806f7C8dED893fd3caE279191ad7Aa3798E928'
 
 export const RADI_STAKING_POOL: { [chainId in ChainId]: string } = {
-  [ChainId.FUJI]: '0x9812Fb943aA12fEC07dDF496DEbaF1c4765403FA',
-  [ChainId.AVALANCHE]: '0xa19A30B689CDe1FB05f89E81a72C14ea31b7aC00'
+  [ChainId.FUJI]: '0x6DCF1696755311e80B658d419a45BF7F7a7d7CC6',
+  [ChainId.AVALANCHE]: '0x3EE96FD99f38EB26fF1F019B4f68976952ceEa03'
 }
 
 // a list of tokens by chain
@@ -38,7 +38,7 @@ type ChainTokenList = {
 }
 
 export const RADI: { [chainId in ChainId]: Token } = {
-  [ChainId.FUJI]: new Token(ChainId.FUJI, '0xCcA36c23E977d6c2382dF43e930BC8dE9daC897E', 18, 'RADI', 'RADI'),
+  [ChainId.FUJI]: new Token(ChainId.FUJI, '0x600615234c0a427834A4344D10fEaCA374B2dfCB', 18, 'RADI', 'RADI'),
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0x81d8B7e80b5823Ebb93D5019dde5096E03292F12', 18, 'RADI', 'RADI')
 }
 
@@ -845,34 +845,34 @@ export const STAKING_V1: {
 }[] = [
   {
     tokens: [RADI[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
-    stakingRewardAddress: '0x9d297aaFf45AA5BFEE91D7007Fb650d572e98aE6',
-    pair: '0x6c7c8929712da7a62bd437898b648cbb89494104',
+    stakingRewardAddress: '0x8A715e13b00306b55D721Be11053DA74549c3874',
+    pair: '0xAa4f1ADB2bF0665Ab24eB742CbeFE1A13658d913',
     delisted: false
   },
   {
     tokens: [USDCe[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
-    stakingRewardAddress: '0xE1F305a5bEbaCc2e841A811E1e5313ab4c059179',
+    stakingRewardAddress: '0xFBfA2532301324dCD25EdA7F9C089cEb2FAB1D9f',
     pair: '0xe8440c62c6c01E7C47CbEDFCa80aB26be0AF79dB',
     delisted: false
   },
   {
     tokens: [WETHe[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
-    stakingRewardAddress: '0x07884C3c506F3691304f9CA3e40d0bBae445726b',
+    stakingRewardAddress: '0x4B25bc0fE7869cE20cB2A4F78B7c0dB7c442d1D5',
     pair: '0xec33377d45EA63d71182135406d40ed78Ff3171c',
     delisted: false
   },
   {
     tokens: [EGG[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
-    stakingRewardAddress: '0x06713B29bf4a71D341E105cde30C16066E90c7C4',
+    stakingRewardAddress: '0x899d0d35712997bbBABE6506Edf44a14FC1816a3',
     pair: '0xa4960f15F3e93db61A16BEc40154Da0E4dC2799e',
     delisted: false
-  },
-  {
-    tokens: [CRA[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
-    stakingRewardAddress: '0x3c72010e1Eb03358a916C43DBaE8e99Ee1186999',
-    pair: '0x29c27C2Db6352fb94e2AAeB96941adA479b3EB4E',
-    delisted: false
   }
+  // {
+  //   tokens: [CRA[ChainId.AVALANCHE], WAVAX[ChainId.AVALANCHE]],
+  //   stakingRewardAddress: '0x3c72010e1Eb03358a916C43DBaE8e99Ee1186999',
+  //   pair: '0x29c27C2Db6352fb94e2AAeB96941adA479b3EB4E',
+  //   delisted: false
+  // }
 ]
 
 export const STAKING_REWARDS_INFO: {
@@ -888,8 +888,8 @@ export const STAKING_REWARDS_INFO: {
 }
 
 export const LIQUIDITY_POOL_MANAGER_ADDRESS: { [chainId in ChainId]?: string } = {
-  [ChainId.FUJI]: '0x6B7494a1dD11C51E04613DD148bc298082557Dfe',
-  [ChainId.AVALANCHE]: '0x0eDe43B541f4f2bFd31b9e2A202bC680C8FC9f60'
+  [ChainId.FUJI]: '0xaf5Ce847C596323BD1113A7779269Bd731710CdA',
+  [ChainId.AVALANCHE]: '0x16a449Da4B5d699aa0A8D080dE5EDa1e52Aac716'
 }
 
 // used to construct intermediary pairs for trading
