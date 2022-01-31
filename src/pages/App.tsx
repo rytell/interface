@@ -106,7 +106,6 @@ export default function App() {
               <Route component={RedirectPathToSwapOnly} />
             </Switch>
           </Web3ReactManager>
-
           <Marginer />
         </BodyWrapper>
       </AppWrapper>
