@@ -64,11 +64,11 @@ export function colors(darkMode: boolean): Colors {
     advancedBG: darkMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.6)',
 
     //primary colors
-    primary1: darkMode ? '#2172E5' : '#FF6B00',
-    primary2: darkMode ? '#3680E7' : '#FF6B00',
-    primary3: darkMode ? '#4D8FEA' : '#FF6B00',
-    primary4: darkMode ? '#376bad70' : '#FF6B00',
-    primary5: darkMode ? '#153d6f70' : '#FF6B00',
+    primary1: darkMode ? '#2172E5' : '#751a2b',
+    primary2: darkMode ? '#3680E7' : '#751a2b',
+    primary3: darkMode ? '#4D8FEA' : '#751a2b',
+    primary4: darkMode ? '#376bad70' : '#751a2b',
+    primary5: darkMode ? '#153d6f70' : '#751a2b',
     primary6: darkMode ? '#2172E5' : '#FFFFFF',
 
     // color text
@@ -92,7 +92,7 @@ export function colors(darkMode: boolean): Colors {
     // beta theme color
     color1: '#E67826',
     color2: '#707070',
-    color3: '#FF6B00'
+    color3: '#751a2b'
 
     // dont wanna forget these blue yet
     // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
@@ -142,12 +142,12 @@ export function betaColors(darkMode: boolean): Colors {
     bg7: darkMode ? '#2C2D33' : '#FFFFFF',
 
     //primary colors
-    primary1: darkMode ? '#FF6B00' : '#FF6B00',
-    primary2: darkMode ? '#FF6B00' : '#FF6B00',
-    primary3: darkMode ? '#FF6B00' : '#FF6B00',
-    primary4: darkMode ? '#FF6B00' : '#FF6B00',
-    primary5: darkMode ? '#FF6B00' : '#FF6B00',
-    primary6: darkMode ? '#FF6B00' : '#FFFFFF',
+    primary1: darkMode ? '#751a2b' : '#751a2b',
+    primary2: darkMode ? '#751a2b' : '#751a2b',
+    primary3: darkMode ? '#751a2b' : '#751a2b',
+    primary4: darkMode ? '#751a2b' : '#751a2b',
+    primary5: darkMode ? '#751a2b' : '#751a2b',
+    primary6: darkMode ? '#751a2b' : '#FFFFFF',
 
     // color text
     primaryText1: darkMode ? '#6da8ff' : '#ffffff',
@@ -157,7 +157,7 @@ export function betaColors(darkMode: boolean): Colors {
     secondary2: darkMode ? '#17000b26' : '#F6DDE8',
     secondary3: darkMode ? '#17000b26' : '#FDEAF1',
 
-    yellow2: '#FF6B00'
+    yellow2: '#751a2b'
   }
 }
 
