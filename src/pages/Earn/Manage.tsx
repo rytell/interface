@@ -36,12 +36,12 @@ import { AlertTriangle } from 'react-feather'
 const PageWrapper = styled.div`
   position: relative;
   width: 100%;
-  padding: 6rem 0;
-  margin-top: -100px;
+  /* padding: 6rem 0; */
+  /* margin-top: -100px; */
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
-    padding: 2rem 1rem;
-    margin-top: -2rem;
+    // padding: 2rem 1rem;
+    // margin-top: -2rem;
   `};
 `
 
@@ -50,8 +50,8 @@ const PageContent = styled(AutoColumn)`
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  background-color: ${({ theme }) => theme.bg4};
-  border: 1px solid ${({ theme }) => theme.bg6};
+  background-color: ${({ theme }) => theme.bg1};
+  /* border: 1px solid ${({ theme }) => theme.bg3}; */
   position: relative;
   .poolsGrid-item-content {
     padding: 2rem;
@@ -76,8 +76,8 @@ const PageContent = styled(AutoColumn)`
     line-height: 1;
   }
   .grid-item-accent {
-    background-color: ${({ theme }) => theme.bg5};
-    border: 1px solid ${({ theme }) => theme.bg7};
+    background-color: ${({ theme }) => theme.bg2};
+    border: 1px solid ${({ theme }) => theme.bg3};
     border-radius: 1.25rem;
     padding: 1rem;
   }
@@ -101,7 +101,7 @@ const PageContent = styled(AutoColumn)`
 
 const BackgroundImage = styled.div`
   position: absolute;
-  background-color: #f6f6ff;
+  /* background-color: #f6f6ff; */
   height: 100%;
   width: 100%;
   top: 0;
@@ -120,7 +120,7 @@ const BottomSection = styled(AutoColumn)`
   position: relative;
   gap: 1rem;
   .accent {
-    color: ${({ theme }) => theme.text6};
+    color: ${({ theme }) => theme.primary1};
     font-weight: 900;
     font-size: 0.935rem;
     text-transform: uppercase;
@@ -133,9 +133,9 @@ const BottomSection = styled(AutoColumn)`
 `
 
 const StyledDataCard = styled(DataCard)<{ bgColor?: any; showBackground?: any }>`
-  background-color: ${({ theme }) => theme.bg5};
-  background: ${({ theme }) => theme.bg5};
-  border: 2px solid ${({ theme }) => theme.bg7};
+  background-color: ${({ theme }) => theme.bg2};
+  background: ${({ theme }) => theme.bg2};
+  border: 2px solid ${({ theme }) => theme.bg3};
   border-radius: 1.25rem;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -146,9 +146,9 @@ const StyledDataCard = styled(DataCard)<{ bgColor?: any; showBackground?: any }>
 `
 
 const StyledBottomCard = styled(DataCard)<{ dim: any }>`
-  background-color: ${({ theme }) => theme.bg5};
+  background-color: ${({ theme }) => theme.bg1};
   background: ${({ theme }) => theme.bg1};
-  border: 2px solid ${({ theme }) => theme.bg7};
+  border: 2px solid ${({ theme }) => theme.bg3};
   border-radius: 1.25rem;
   padding: 1rem;
 `
@@ -166,8 +166,8 @@ const Warning = () => {
 
   return (
     <StyledWarning className="grid-item-accent">
-      <AlertTriangle size={24} style={{ marginRight: '8px', minWidth: 24 }} color={theme.primary6} />
-      <TYPE.body color={theme.text6}>
+      <AlertTriangle size={24} style={{ marginRight: '8px', minWidth: 24 }} color={theme.primary1} />
+      <TYPE.body color={theme.text1}>
         This pair is currently not generating rewards. Therefore, we recommend removing liquidity and add it to another
         pair that is distributing $RADI!
       </TYPE.body>
