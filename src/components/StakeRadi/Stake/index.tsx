@@ -8,16 +8,55 @@ import { tryParseAmount } from '../../../state/swap/hooks'
 import { ChainId } from '@rytell/sdk'
 import { RADI } from '../../../constants'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
+import { RowBetween } from '../../Row'
+import { AutoColumn } from '../../Column'
+import { ButtonPrimary } from '../../Button'
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
+const ContentWrapper = styled(AutoColumn)`
+  width: 100%;
+  padding: 1.5rem;
 `
 
 const InputWrapper = styled.div`
   display: flex;
-  padding-top: 1rem;
+`
+
+const StakeAmount = styled(RowBetween)`
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 1.5rem;
+  background-color: ${({ theme }) => theme.bg2};
+  border: 2px solid ${({ theme }) => theme.bg3};
+  border-radius: 1.25rem;
+  padding: 1rem 1rem;
+  button {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    background-color: ${({ theme }) => theme.primary1};
+    border: 2px solid ${({ theme }) => theme.primary1};
+    border-radius: 1.5rem;
+    color: #fff;
+    &:hover,
+    &:focus {
+      background-color: ${({ theme }) => theme.primary1};
+      border-color: ${({ theme }) => theme.primary1};
+    }
+  }
+  > * {
+    height: 100%;
+  }
+`
+
+const StakeInput = styled.input`
+  color: ${({ theme }) => theme.text1};
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem;
+  font-size: 15px;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 `
 
 export const StakeRadi = ({ onDismiss }: { onDismiss: () => void }) => {
@@ -59,13 +98,18 @@ export const StakeRadi = ({ onDismiss }: { onDismiss: () => void }) => {
   }
 
   return (
-    <Wrapper>
-      <TYPE.mediumHeader style={{ marginTop: '0.5rem' }}>You have {radiBalance} $RADI</TYPE.mediumHeader>
+    <ContentWrapper gap="lg">
+      <RowBetween>
+        <TYPE.largeHeader>Stake</TYPE.largeHeader>
+      </RowBetween>
+      <RowBetween>You have {Number(radiBalance).toFixed(4)} $RADI</RowBetween>
       <InputWrapper>
-        <input type="text" value={typedValue} onChange={handleChangeTypedValue} />
-        <button onClick={handleSetMax}>Max</button>
+        <StakeAmount>
+          <button onClick={handleSetMax}>Max</button>
+          <StakeInput type="text" value={typedValue} onChange={handleChangeTypedValue} />
+        </StakeAmount>
       </InputWrapper>
-      <button onClick={handleStake}>Stake</button>
-    </Wrapper>
+      <ButtonPrimary onClick={handleStake}>Stake</ButtonPrimary>
+    </ContentWrapper>
   )
 }

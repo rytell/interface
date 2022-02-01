@@ -69,11 +69,19 @@ const StyledNavLink = styled(NavLink).attrs({
   }
 `
 
+const Buttons = styled.div`
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1.5rem;
+  
+  button {
+    display: block;
+  }
+`
+
 const Button = styled(ButtonPrimary)`
-  /* border-radius: 3px; */
-  /* border: 1px solid gray; */
   cursor: pointer;
-  width: 10rem;
   display: flex;
   flex: 1;
   justify-content: center;
@@ -101,8 +109,8 @@ const GetRadiOrInteract = ({
 const UserCurrentBalances = ({ radiBalance, stakingBalance }: { radiBalance: string; stakingBalance: string }) => {
   return (
     <>
-      <div>You have {stakingBalance} xRADI</div>
-      <div>Which is worth {radiBalance} $RADI</div>
+      <div style={{ color: '#fff' }}>You have {stakingBalance} xRADI</div>
+      <div style={{ color: '#fff' }}>Which is worth {radiBalance} $RADI</div>
     </>
   )
 }
@@ -118,9 +126,9 @@ const StakingPoolInfo = ({
 }) => {
   return (
     <>
-      <div>Total $RADI staked: {totalStaked}</div>
-      <div>Total xRADI supply: {totalMinted}</div>
-      <div>Each xRADI is worth {price} $RADI now</div>
+      <div style={{ color: '#fff' }}>Total $RADI staked: {totalStaked}</div>
+      <div style={{ color: '#fff' }}>Total xRADI supply: {totalMinted}</div>
+      <div style={{ color: '#fff' }}>Each xRADI is worth {price} $RADI now</div>
     </>
   )
 }
@@ -243,10 +251,10 @@ export default function Earn({
                 <UserCurrentBalances radiBalance={xRadiInRadiBalance} stakingBalance={userStakingBalance} />
                 <StakingPoolInfo totalMinted={totalMinted} totalStaked={totalStaked} price={xRadiPrice} />
                 <ApproveOrInteract approval={approval} onApprove={stakingPoolApproveCallback}>
-                  <>
+                  <Buttons>
                     <Button onClick={() => setStakingModalOpen(true)}>Stake</Button>
                     <Button onClick={() => setUnstakingModalOpen(true)}>Unstake</Button>
-                  </>
+                  </Buttons>
                 </ApproveOrInteract>
               </>
             ) : (
