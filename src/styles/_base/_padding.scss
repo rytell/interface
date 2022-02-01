@@ -1,0 +1,43 @@
+// Horizontal Padding
+$pad-x: 1.5rem;
+
+// Vertical Padding
+$pad-y: 5rem;
+$pad-y-400: 5rem;
+$pad-y-550: 5rem;
+$pad-y-650: 5rem;
+$pad-y-768: 5rem;
+$pad-y-850: 5rem;
+$pad-y-992: 7rem;
+$pad-y-1200: 10rem;
+$pad-y-1450: 10rem;
+$pad-y-1600: 10rem;
+$pad-y-1850: 10rem;
+$pad-y-2200: 10rem;
+$pad-y-2400: 10rem;
+
+// Internal Functions
+@function get-pad-y($breakpoint: null) {
+  @if $breakpoint == null { @return $pad-y; }
+  @else if $breakpoint == 400 { @return $pad-y-400; }
+  @else if $breakpoint == 550 { @return $pad-y-550; }
+  @else if $breakpoint == 650 { @return $pad-y-650; }
+  @else if $breakpoint == 768 { @return $pad-y-768; }
+  @else if $breakpoint == 850 { @return $pad-y-850; }
+  @else if $breakpoint == 992 { @return $pad-y-992; }
+  @else if $breakpoint == 1200 { @return $pad-y-1200; }
+  @else if $breakpoint == 1450 { @return $pad-y-1450; }
+  @else if $breakpoint == 1600 { @return $pad-y-1600; }
+  @else if $breakpoint == 1850 { @return $pad-y-1850; }
+  @else if $breakpoint == 2400 { @return $pad-y-2400; }
+}
+
+// Helper Mixins
+@mixin margin-x($value: auto) {
+  margin-left: $value;
+  margin-right: $value;
+}
+@mixin pad-y($breakpoint: null) {
+  padding-top: get-pad-y($breakpoint);
+  padding-bottom: get-pad-y($breakpoint);
+}

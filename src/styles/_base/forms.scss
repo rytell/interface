@@ -1,0 +1,148 @@
+/* Remove all native broswer styling from all elements
+------------------------------------------------------------- */
+input,
+input[type='number'],
+input[type='search'],
+input[type='password'],
+input[type='email'],
+input[type='tel'],
+input[type='submit'],
+textarea,
+select {
+  // -moz-appearance: none;
+  // -webkit-appearance: none;
+  // appearance: none;
+}
+
+/* Form Controls
+------------------------------------------------------------- */
+input,
+button,
+textarea,
+select {
+  // font-family: inherit;
+  // font-size: inherit;
+  // font-weight: inherit;
+  // line-height: inherit;
+}
+input,
+input[type='number'],
+input[type='search'],
+input[type='password'],
+input[type='email'],
+input[type='tel'],
+textarea,
+select {
+  // width: 100%;
+  // color: #000;
+  // background-color: #fff;
+  // border: none;
+  // border-bottom: 2px solid #e5e5e5;
+  // border-radius: 0;
+  // padding: 0.3rem 0.5rem;
+  // margin-bottom: 1rem;
+}
+input::placeholder,
+textarea::placeholder {
+  // color: #777;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  // border-color: $color-accent-1;
+  outline: 0;
+}
+select {
+  display: block;
+  box-sizing: border-box;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='292.4' height='292.4'%3E%3Cpath fill='%23000' d='M287 69.4a17.6 17.6 0 0 0-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 0 0 0 82.2c0 5 1.8 9.3 5.4 12.9l128 127.9c3.6 3.6 7.8 5.4 12.8 5.4s9.2-1.8 12.8-5.4L287 95c3.5-3.5 5.4-7.8 5.4-12.8 0-5-1.9-9.2-5.5-12.8z'/%3E%3C/svg%3E%0A");
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.7rem top 50%, 0 0;
+  background-size: 0.65rem auto, 100%;
+}
+label {
+  // color: $color-text-heading;
+  font-family: $font-heading;
+  font-weight: 600;
+  // margin-bottom: 0.2rem;
+}
+
+/* Form Group
+------------------------------------------------------------- */
+.formGroup {
+  width: 100%;
+}
+@media (min-width: 550px) {
+  .formGroup.half,
+  input.half,
+  input[type='number'].half,
+  input[type='search'].half,
+  input[type='password'].half,
+  input[type='email'].half,
+  input[type='tel'].half,
+  textarea.half,
+  select .half {
+    width: 49%;
+  }
+}
+
+/* Button Overrides
+------------------------------------------------------------- */
+[role='button'] {
+  cursor: pointer;
+}
+input[type='submit'],
+.btn {
+  display: inline-block;
+  position: relative;
+  color: #000;
+  background-color: $color-accent-1;
+  // font-family: $font-heading;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: inherit;
+  text-align: center;
+  text-decoration: none;
+  text-transform: normal;
+  border: 1px solid transparent;
+  border-radius: 5rem;
+  padding: 1rem 2rem;
+  margin-right: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.25s ease-in-out;
+  cursor: pointer;
+}
+.btn:hover,
+.btn:focus,
+.btn:active {
+  background-color: #f5e400;
+  transform: translate(0, -0.25em);
+  text-decoration: none;
+}
+
+.btn:disabled {
+  background-color: lightgray;
+  cursor: not-allowed;
+}
+.btn-secondary {
+  color: #fff;
+  background-color: $color-brand;
+  border-color: $color-brand;
+}
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-secondary:hover {
+  color: #fff;
+  background-color: $color-brand-dark;
+  border-color: $color-brand-dark;
+}
+.btn:last-child {
+  margin-right: 0;
+}
+@media (min-width: 992px) {
+  input[type='submit'],
+  .btn {
+    // padding-top: 0.6rem;
+    // padding-bottom: 0.6rem;
+  }
+}

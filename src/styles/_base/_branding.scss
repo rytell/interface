@@ -1,0 +1,50 @@
+// Font Families
+$font-heading: 'Trajan', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+$font-body: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+// Colors - Text
+$color-text-heading: #fff;
+$color-text-body: #031333;
+$color-text-heading-alt: #fff;
+$color-text-body-alt: #d4dcdd;
+
+// Colors - Branding
+$color-brand: #751a2b;
+$color-brand-dark: darken($color-brand, 10%);
+$color-accent-1: #052460;
+$color-accent-2: #b3c022;
+
+// Gradients
+$gradient-main: linear-gradient(180deg, #d2b078, #e0c9a3);
+$gradient-alternate: linear-gradient(180deg, #62a6d3, #027abf);
+
+// Colors - Background
+$color-bg-1: #e0c7a3;
+$color-bg-2: #620f23;
+$color-bg-3: #c2d4ff;
+
+// Colors - General
+$color-success: #19c47b;
+$color-error: #c63940;
+$color-error-bg: #fff4f4;
+
+// Colors - Grays
+$color-gray-1: #f7f7f7; // 97%
+$color-gray-2: #f2f2f2; // 95%
+$color-gray-3: #e6e6e6; // 90%
+$color-gray-4: #d9d9d9; // 85%
+$color-gray-5: #cccccc; // 80%
+$color-gray-6: #aaaaaa; // 67%
+$color-gray-7: #2b343b;
+
+// Spacing - Margin
+$margin-bottom: 2rem;
+$margin-bottom-400: 2rem;
+$margin-bottom-550: 3rem;
+$margin-bottom-650: 3rem;
+$margin-bottom-768: 3rem;
+$margin-bottom-992: 3rem;
+$margin-bottom-1200: 5rem;
+$margin-bottom-1450: 5rem;
