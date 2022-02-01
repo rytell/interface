@@ -166,7 +166,7 @@ export default function RadiBalanceContent({ setShowRadiBalanceModal }: { setSho
                                 symbol: radi?.symbol,
                                 decimals: radi?.decimals,
                                 image:
-                                  'https://raw.githubusercontent.com/pangolindex/tokens/main/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png'
+                                  'https://raw.githubusercontent.com/rytell/assets/main/0x9c5bBb5169B66773167d86818b3e149A4c7e1d1A/logo.png'
                               }
                             }
                           })
