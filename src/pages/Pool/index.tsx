@@ -18,20 +18,12 @@ import { usePairs } from '../../data/Reserves'
 import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks'
 import { Dots } from '../../components/swap/styleds'
 import { ChainId } from '@rytell/sdk'
-import { CardSection, DataCard, CardNoise, CardBGImage } from '../../components/earn/styled'
-import { LANDING_PAGE, ANALYTICS_PAGE } from '../../constants'
+import { ANALYTICS_PAGE } from '../../constants'
 import { useTranslation } from 'react-i18next'
-
-const LiquidityTutorial = LANDING_PAGE + 'tutorials/manage-liquidity'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
   width: 100%;
-`
-
-const VoteCard = styled(DataCard)`
-  background: radial-gradient(76.02% 75.41% at 1.84% 0%, #27ae60 0%, #000000 100%);
-  overflow: hidden;
 `
 
 const TitleRow = styled(RowBetween)`
@@ -123,30 +115,6 @@ export default function Pool() {
     <>
       <PageWrapper>
         <SwapPoolTabs active={'pool'} />
-
-        <VoteCard>
-          <CardBGImage />
-          <CardNoise />
-          <CardSection>
-            <AutoColumn gap="md">
-              <RowBetween>
-                <TYPE.white fontWeight={600}>{t('pool.liquidityProviderRewards')}</TYPE.white>
-              </RowBetween>
-              <RowBetween>
-                <TYPE.white fontSize={14}>{t('pool.liquidityProvidersEarn')}</TYPE.white>
-              </RowBetween>
-              <ExternalLink
-                style={{ color: 'white', textDecoration: 'underline' }}
-                target="_blank"
-                href={LiquidityTutorial}
-              >
-                <TYPE.white fontSize={14}>{t('pool.readMoreProviding')}</TYPE.white>
-              </ExternalLink>
-            </AutoColumn>
-          </CardSection>
-          <CardBGImage />
-          <CardNoise />
-        </VoteCard>
 
         <ExternalLink
           style={{ marginTop: '1.5rem', color: 'black', textDecoration: 'underline' }}
