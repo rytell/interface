@@ -37,9 +37,11 @@ const PageWrapper = styled.div`
   position: relative;
   width: 100%;
   padding: 6rem 0;
+  margin-top: -100px;
 
   ${({ theme }) => theme.mediaWidth.upToSmall`
     padding: 2rem 1rem;
+    margin-top: -2rem;
   `};
 `
 

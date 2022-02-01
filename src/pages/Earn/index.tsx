@@ -11,11 +11,21 @@ import { useActiveWeb3React } from '../../hooks'
 import { StakingInfo, useStakingInfo } from '../../state/stake/hooks'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
 
+import pattern from '../../assets/images/pattern-main.png'
+
 const Wrapper = styled.div`
   width: 100vw;
-  margin-top: -2rem;
+  /* min-height: 100vh;
+  padding: 5rem 0;
+  margin-top: -100px;
   background-color: ${({ theme }) => theme.color2};
+  background-image: url(${pattern});
+
   overflow: hidden;
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    padding: 3rem 0;
+    margin-top: -2rem;
+  `}; */
 `
 
 const LoaderWrapper = styled.div`
