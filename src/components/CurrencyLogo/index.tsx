@@ -1,14 +1,29 @@
-import { Currency, CAVAX, Token } from '@rytell/sdk'
+import { Currency, CAVAX, Token, ChainId } from '@rytell/sdk'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 import AvaxLogo from '../../assets/images/avalanche_token_round.png'
+import { RADI } from '../../constants'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/hooks'
 import Logo from '../Logo'
 
+const isRytellToken = (address: string) => {
+  const tokens = [RADI]
+
+  const lowercasedAddress = address.toLowerCase()
+
+  return tokens.some(
+    token =>
+      token[ChainId.AVALANCHE].address.toLowerCase() === lowercasedAddress ||
+      token[ChainId.FUJI].address.toLowerCase() === lowercasedAddress
+  )
+}
+
 const getTokenLogoURL = (address: string) =>
-  `https://raw.githubusercontent.com/pangolindex/tokens/main/assets/${address}/logo.png`
+  isRytellToken(address)
+    ? `https://raw.githubusercontent.com/rytell/assets/main/${address}/logo.png`
+    : `https://raw.githubusercontent.com/pangolindex/tokens/main/assets/${address}/logo.png`
 
 export const StyledEthereumLogo = styled.img<{ size: string }>`
   width: ${({ size }) => size};
