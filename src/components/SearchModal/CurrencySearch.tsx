@@ -190,7 +190,7 @@ export function CurrencySearch({
       <Card>
         {selectedListInfo.multipleSelected ? (
           <LinkStyledButton
-            style={{ fontWeight: 500, color: theme.text2, fontSize: 16, textAlign: 'center', width: '100%' }}
+            style={{ fontWeight: 500, color: theme.text1, fontSize: 16, textAlign: 'center', width: '100%' }}
             onClick={onChangeList}
             id="currency-search-change-list-button"
           >

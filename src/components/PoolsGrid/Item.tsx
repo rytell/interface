@@ -174,7 +174,7 @@ export default function PoolsGridItem({
         {account ? (
           <StyledInternalLink to={`/radi/${currencyId(currency0)}/${currencyId(currency1)}`}>
             {isStaking ? (
-              <button className="btn">Manage</button>
+              <button className="btn btn-secondary">Manage</button>
             ) : (
               <button className="btn btn-secondary">Deposit</button>
             )}
