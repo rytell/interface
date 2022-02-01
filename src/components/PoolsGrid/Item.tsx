@@ -10,14 +10,22 @@ import { useSnowtraceUrl } from '../../utils/useSnowtraceUrl'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
 import { WithLockedValue } from '../WithLockedValue'
 
+import pattern from '../../assets/images/pattern-main.png'
+import patternSecondary from '../../assets/images/pattern-secondary.png'
+import { ReactComponent as ArrowDown } from '../../assets/svg/arrow-down.svg'
+import { ReactComponent as BadgeSVG } from '../../assets/svg/badge.svg'
+
 const Item = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   background-color: ${({ theme }) => theme.color2};
+  background-color: #fff;
+  background-image: url(${pattern});
   [class*='-item-header'] h4 {
     color: ${({ theme }) => theme.text1};
+    color: ${({ theme }) => theme.color3};
     word-break: break-all;
     span {
       display: inline-block;
@@ -39,16 +47,19 @@ const Item = styled.div`
     grid-template-columns: 1fr;
   }
   .poolsGrid-item-grid p:nth-child(1) {
-    color: ${({ theme }) => theme.text6};
+    color: ${({ theme }) => theme.color3};
   }
   .grid-item-details {
-    background-color: transparent;
+    background-color: #e0c7a3;
+    background-image: url(${patternSecondary});
   }
   .grid-item-details-btn {
     color: ${({ theme }) => theme.primary3};
+    color: #fff;
   }
   .grid-item-details-btn svg {
     fill: ${({ theme }) => theme.primary3};
+    fill: #fff;
   }
   .grid-item-details .poolsGrid-item-table span {
     color: ${({ theme }) => theme.text1};
@@ -60,6 +71,10 @@ const Item = styled.div`
 
 const ExtLink = styled.div`
   margin-left: 0.125em;
+`
+
+const BadgeIcon = styled(BadgeSVG)`
+  margin-right: 0.125em;
 `
 
 export default function PoolsGridItem({
@@ -115,10 +130,20 @@ export default function PoolsGridItem({
     <Item className="poolsGrid-item">
       <div className="poolsGrid-item-content">
         <div className="poolsGrid-item-header">
+          <div></div>
           <div>
             <h4>{liquidityPoolCalculatedSymbol}</h4>
             <div className="poolsGrid-item-header-features">
-              <span>{multiplier?.toString() !== '0' ? <>Core</> : 'Delisted Pool'}</span>
+              <span>
+                {multiplier?.toString() !== '0' ? (
+                  <>
+                    <BadgeIcon />
+                    Core
+                  </>
+                ) : (
+                  'Delisted Pool'
+                )}
+              </span>
               <span>{multiplier?.toString()}X</span>
             </div>
           </div>
@@ -126,7 +151,7 @@ export default function PoolsGridItem({
         <div className="poolsGrid-item-table">
           <p>APR: {multiplier?.toString() === '0' ? <span>0%</span> : <span>{apr}%</span>}</p>
           <p>
-            Earn: <span>RADI</span>
+            Earn: <span>RADI + Fees</span>
           </p>
         </div>
         <div className="poolsGrid-item-grid">
@@ -155,7 +180,7 @@ export default function PoolsGridItem({
             )}
           </StyledInternalLink>
         ) : (
-          <button className="btn hero-btn" onClick={toggleWalletModal}>
+          <button className="btn btn-secondary" onClick={toggleWalletModal}>
             Unlock Wallet
           </button>
         )}
@@ -163,7 +188,10 @@ export default function PoolsGridItem({
       <div className="grid-item-details">
         <details>
           <summary>
-            <span className="grid-item-details-btn">Details /</span>
+            <span className="grid-item-details-btn">
+              Details
+              <ArrowDown />
+            </span>
           </summary>
           <div className="poolsGrid-item-table">
             <p>

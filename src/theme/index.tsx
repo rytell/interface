@@ -44,16 +44,16 @@ export function colors(darkMode: boolean): Colors {
     // text
     text1: darkMode ? '#FFFFFF' : '#000000',
     text2: darkMode ? '#C3C5CB' : '#565A69',
-    text3: darkMode ? '#6C7284' : '#888D9B',
+    text3: darkMode ? '#6C7284' : '#000',
     text4: darkMode ? '#565A69' : '#C3C5CB',
     text5: darkMode ? '#2C2F36' : '#EDEEF2',
     text6: darkMode ? '#111111' : '#EDEEF2',
 
     // backgrounds / greys
-    bg1: darkMode ? '#212429' : '#FFFFFF',
-    bg2: darkMode ? '#2C2F36' : '#F7F8FA',
-    bg3: darkMode ? '#40444F' : '#EDEEF2',
-    bg4: darkMode ? '#565A69' : '#CED0D9',
+    bg1: darkMode ? '#212429' : '#e0c7a3',
+    bg2: darkMode ? '#2C2F36' : '#e6d0b3',
+    bg3: darkMode ? '#40444F' : '#d2ad79',
+    bg4: darkMode ? '#565A69' : '#751a2b',
     bg5: darkMode ? '#6C7284' : '#888D9B',
     bg6: darkMode ? '#1c1c1c' : '#F7F8FA',
     bg7: darkMode ? '#2C2D33' : '#F7F8FA',
@@ -87,11 +87,11 @@ export function colors(darkMode: boolean): Colors {
     yellow2: '#F3841E',
     blue1: '#2172E5',
 
-    avaxRed: '#E84142',
+    avaxRed: '#751a2b',
 
     // beta theme color
     color1: '#E67826',
-    color2: '#707070',
+    color2: '#052460',
     color3: '#751a2b'
 
     // dont wanna forget these blue yet

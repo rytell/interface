@@ -33,6 +33,8 @@ import { useModalOpen, useToggleModal } from '../../state/application/hooks'
 // import { MenuFlyout, MenuNavItem } from '../StyledMenu'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 
+import pattern from '../../assets/images/pattern-main.png'
+
 const HeaderFrame = styled.div`
   display: grid;
   grid-template-columns: 1fr 120px;
@@ -44,6 +46,7 @@ const HeaderFrame = styled.div`
   top: 0;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-image: url(${pattern});
   padding: 1rem;
   z-index: 2;
   ${({ theme }) => theme.mediaWidth.upToMedium`
@@ -191,6 +194,7 @@ const Title = styled.a`
 `
 
 const RadiIcon = styled.div`
+  display: flex;
   transition: transform 0.3s ease;
   :hover {
     transform: rotate(-5deg);
@@ -208,7 +212,7 @@ const StyledNavLink = styled(NavLink).attrs({
   outline: none;
   cursor: pointer;
   text-decoration: none;
-  color: ${({ theme }) => theme.text2};
+  color: ${({ theme }) => theme.text1};
   font-size: 1rem;
   width: fit-content;
   margin: 0 12px;
@@ -217,12 +221,12 @@ const StyledNavLink = styled(NavLink).attrs({
   &.${activeClassName} {
     border-radius: 12px;
     font-weight: 600;
-    color: ${({ theme }) => theme.text1};
+    color: ${({ theme }) => theme.primary1};
   }
 
   :hover,
   :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
+    color: ${({ theme }) => darken(0.1, theme.primary1)};
   }
 `
 
@@ -318,7 +322,7 @@ export default function Header() {
       <HeaderRow>
         <Title href=".">
           <RadiIcon>
-            <img width={'60px'} src={isDark ? LogoDark : Logo} alt="logo" />
+            <img width={'80px'} src={isDark ? LogoDark : Logo} alt="logo" />
           </RadiIcon>
         </Title>
         <HeaderLinks>

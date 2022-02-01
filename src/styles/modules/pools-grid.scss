@@ -1,0 +1,214 @@
+/* Grid General
+------------------------------------------------------------- */
+.poolsGrid {
+  position: relative;
+  z-index: 10;
+}
+.poolsGrid {
+  display: grid;
+  justify-content: center;
+  gap: 1.5rem;
+  @include module-container();
+}
+@media (min-width: 768px) {
+  .poolsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 30rem;
+  }
+}
+@media (min-width: 992px) {
+  .poolsGrid {
+    // grid-template-columns: repeat(2, 1fr);
+    // grid-template-columns: 35rem;
+  }
+}
+@media (min-width: 1200px) {
+  .poolsGrid {
+    gap: 3rem;
+  }
+}
+
+/* Grid Item
+------------------------------------------------------------- */
+.poolsGrid-item {
+  border-radius: 1.25rem;
+  box-shadow: 0 3px 20px rgba($color: #000000, $alpha: 0.15);
+  margin-bottom: auto;
+}
+.poolsGrid-item-content {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  @include module-last-child();
+}
+.poolsGrid-item-content .btn {
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+@media (min-width: 550px) {
+  .poolsGrid-item-content {
+    padding: 2rem 2rem 1.5rem;
+  }
+}
+
+/* Grid Item - Table & Grid
+------------------------------------------------------------- */
+.poolsGrid-item-table {
+  @include module-last-child();
+}
+.poolsGrid-item-grid {
+  display: grid;
+  align-items: flex-end;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+.poolsGrid-item-table p,
+.poolsGrid-item-grid p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.poolsGrid-item-table p {
+  display: flex;
+  justify-content: space-between;
+}
+.poolsGrid-item-table span {
+  font-weight: 700;
+}
+.poolsGrid-item-grid p {
+  font-weight: 700;
+}
+.poolsGrid-item-grid p:nth-child(1) {
+  font-weight: 900;
+  font-size: $font-size-small;
+  text-transform: uppercase;
+}
+.poolsGrid-item-grid p:nth-child(2) {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.poolsGrid-item-grid > * {
+  @include module-last-child();
+}
+@media (min-width: 550px) {
+  .poolsGrid-item-grid p,
+  .poolsGrid-item-table p {
+    font-size: $font-size-body;
+  }
+}
+
+/* Grid Item - Header
+------------------------------------------------------------- */
+.poolsGrid-item-header {
+  display: grid;
+  grid-template-columns: 4rem auto;
+  gap: 1rem;
+}
+.poolsGrid-item-header h4 {
+  text-align: right;
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+.poolsGrid-item-header p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0;
+}
+.poolsGrid-item-header-features {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 0.25rem;
+  justify-content: flex-end;
+}
+.poolsGrid-item-header-features span {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-small;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  border-radius: 5rem;
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+}
+.poolsGrid-item-header-features span:nth-child(1) {
+  font-weight: 600;
+  color: $color-brand;
+}
+@media (min-width: 550px) {
+  .poolsGrid-item-header {
+    grid-template-columns: 4rem auto;
+    gap: 2rem;
+  }
+}
+
+/* Grid Item - Details
+------------------------------------------------------------- */
+.grid-item-details {
+  background-color: #f6f6ff;
+  border-bottom-left-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+  padding: 1.5rem;
+}
+.grid-item-details details[open] span svg {
+  transform: rotate(180deg);
+  transition: 0.25s transform ease;
+}
+.grid-item-details summary:focus {
+  outline: none;
+}
+.grid-item-details summary::marker,
+.grid-item-details summary::-webkit-details-marker {
+  content: '';
+  display: none;
+}
+.grid-item-details .poolsGrid-item-table {
+  margin-top: 1rem;
+}
+.grid-item-details .poolsGrid-item-table p {
+  color: #fff;
+  font-size: $font-size-small;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.grid-item-details .poolsGrid-item-table a {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: $font-size-small;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: auto;
+  margin-bottom: 0.25rem;
+}
+.grid-item-details .poolsGrid-item-table a:hover {
+  text-decoration: underline;
+}
+.grid-item-details .poolsGrid-item-table a svg {
+  width: 1rem;
+}
+.grid-item-details-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-small;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin: auto;
+}
+.grid-item-details-btn svg {
+  transition: 0.25s transform ease;
+}
+@media (min-width: 550px) {
+  .grid-item-details {
+    padding: 1.5rem 2rem;
+  }
+}

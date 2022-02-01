@@ -28,6 +28,8 @@ import { useIsBetaUI } from '../hooks/useLocation'
 import Earn from './Earn'
 import Web3ReactManager from '../components/Web3ReactManager'
 
+import '../styles/Main.scss'
+
 const AppWrapper = styled.div`
   display: flex;
   flex-flow: column;

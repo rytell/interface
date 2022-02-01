@@ -1,0 +1,154 @@
+/* Module Padding Mixin
+--------------------------------------------*/
+@mixin module() {
+  & { @include pad-y() }
+  @media (min-width: 550px) { & { @include pad-y(550) } }
+  @media (min-width: 650px) { & { @include pad-y(650) } }
+  @media (min-width: 768px) { & { @include pad-y(768) } }
+  @media (min-width: 992px) { & { @include pad-y(992) } }
+  @media (min-width: 1200px) { & { @include pad-y(1200) } }
+  @media (min-width: 1450px) { & { @include pad-y(1450) } }
+  @media (min-width: 2400px) { & { @include pad-y(2400) } }
+}
+
+
+/* Container Mixin
+--------------------------------------------*/
+$max-width: 26.25rem;
+$max-width-550: 30rem;
+$max-width-768: 45rem;
+$max-width-992: 60rem;
+$max-width-1200: 67.5rem;
+$max-width-1450: 67.5rem;
+$max-width-2400: 67.5rem;
+
+@mixin module-container() {
+  & {
+    width: 100%;
+    max-width: $max-width;
+    padding-right: $pad-x;
+    padding-left: $pad-x;
+    @include margin-x();
+  }
+  @media (min-width: 550px) {
+    & {
+      max-width: $max-width-550;
+    }
+  }
+  @media (min-width: 768px) {
+    & {
+      max-width: $max-width-768;
+    }
+  }
+  @media (min-width: 992px) {
+    & {
+      max-width: $max-width-992;
+    }
+  }
+  @media (min-width: 1200px) {
+    & {
+      max-width: $max-width-1200;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  @media (min-width: 1450px) {
+    & {
+      max-width: $max-width-1450;
+    }
+  }
+  @media (min-width: 2400px) {
+    & {
+      max-width: $max-width-2400;
+    }
+  }
+}
+
+
+/* Header Mixin
+--------------------------------------------*/
+@mixin module-header($text-align: center, $margin: true) {
+  @if $margin {
+    @include module-margin();
+  }
+  & {
+    position: relative;
+    text-align: $text-align;
+    @include module-last-child();
+  }
+  & > * {
+    width: 100%;
+    max-width: $max-width;
+    padding-right: $pad-x;
+    padding-left: $pad-x;
+    @include margin-x();
+  }
+  @media (min-width: 550px) {
+    & > * {
+      max-width: $max-width-550;
+    }
+  }
+  @media (min-width: 768px) {
+    & > * {
+      max-width: $max-width-768 * 0.75;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  @media (min-width: 992px) {
+    & > * {
+      max-width: $max-width-992 * 0.8;
+    }
+  }
+  @media (min-width: 2400px) {
+    & > * {
+      max-width: $max-width-2400 * 0.711111111111111;
+    }
+  }
+}
+
+
+/* Content Mixin
+--------------------------------------------*/
+@mixin module-content($text-align: left) {
+  @include module-header($text-align, false);
+}
+
+
+/* Background Mixin
+--------------------------------------------*/
+@mixin module-background() {
+  & {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $color-gray-6;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 0;
+  }
+}
+
+
+/* Last Child Mixin
+--------------------------------------------*/
+@mixin module-last-child() {
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+/* Margin Mixin
+--------------------------------------------*/
+@mixin module-margin() {
+  & { margin-bottom: $margin-bottom; }
+  @media (min-width: 400px) { & { margin-bottom: $margin-bottom-400; } }
+  @media (min-width: 550px) { & { margin-bottom: $margin-bottom-550; } }
+  @media (min-width: 650px) { & { margin-bottom: $margin-bottom-650; } }
+  @media (min-width: 768px) { & { margin-bottom: $margin-bottom-768; } }
+  @media (min-width: 992px) { & { margin-bottom: $margin-bottom-992; } }
+  @media (min-width: 1200px) { & { margin-bottom: $margin-bottom-1200; } }
+  @media (min-width: 1450px) { & { margin-bottom: $margin-bottom-1450; } }
+}

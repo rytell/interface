@@ -153,14 +153,14 @@ export default function Pool() {
           target="_blank"
           href={AccountAnalytics}
         >
-          <TYPE.black fontSize={18}>{t('pool.viewStakedLiquidity')}</TYPE.black>
+          <TYPE.white fontSize={18}>{t('pool.viewStakedLiquidity')}</TYPE.white>
         </ExternalLink>
 
         <AutoColumn gap="lg" justify="center">
           <AutoColumn gap="lg" style={{ width: '100%' }}>
             <TitleRow style={{ marginTop: '1rem' }} padding={'0'}>
               <HideSmall>
-                <TYPE.mediumHeader style={{ marginTop: '0.5rem', justifySelf: 'flex-start' }}>
+                <TYPE.mediumHeader color={theme.white} style={{ justifySelf: 'flex-start' }}>
                   {t('pool.yourLiquidity')}
                 </TYPE.mediumHeader>
               </HideSmall>
@@ -203,7 +203,7 @@ export default function Pool() {
             )}
 
             <AutoColumn justify={'center'} gap="md">
-              <Text textAlign="center" fontSize={14} style={{ padding: '.5rem 0 .5rem 0' }}>
+              <Text textAlign="center" fontSize={14} color={theme.white} style={{ padding: '.5rem 0 .5rem 0' }}>
                 {hasV1Liquidity ? t('pool.uniswapV1Found') : t('pool.noSeePoolJoined')}{' '}
                 <StyledInternalLink id="import-pool-link" to={hasV1Liquidity ? '/migrate/v1' : '/find'}>
                   {hasV1Liquidity ? t('pool.migrateNow') : t('pool.importIt')}
