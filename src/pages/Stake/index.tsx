@@ -19,6 +19,7 @@ import Modal from '../../components/Modal'
 import { StakeRadi } from '../../components/StakeRadi/Stake'
 import { UnstakeRadi } from '../../components/StakeRadi/Unstake'
 import { useAllTransactions } from '../../state/transactions/hooks'
+import { ButtonPrimary } from '../../components/Button'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -68,11 +69,11 @@ const StyledNavLink = styled(NavLink).attrs({
   }
 `
 
-const Button = styled.span`
-  border-radius: 3px;
-  border: 1px solid gray;
+const Button = styled(ButtonPrimary)`
+  /* border-radius: 3px; */
+  /* border: 1px solid gray; */
   cursor: pointer;
-  width: 5rem;
+  width: 10rem;
   display: flex;
   flex: 1;
   justify-content: center;

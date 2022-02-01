@@ -40,6 +40,7 @@ const StyledPositionCard = styled(LightCard)<{ bgColor: any }>`
   border: none;
   background: ${({ theme, bgColor }) =>
     `radial-gradient(91.85% 100% at 1.84% 0%, ${transparentize(0.8, bgColor)} 0%, ${theme.bg3} 100%) `};
+  background: radial-gradient(174.47% 188.91% at 1.84% 0%, #e0c7a3 0%, #e0c7a3 100%), #edeef2;
   position: relative;
   overflow: hidden;
 `
