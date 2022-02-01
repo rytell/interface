@@ -15,7 +15,7 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.AVALANCHE]: '0xe5e970FE3a90F314977a9Fd41e349486a9e8c4fe'
 }
 
-export const LANDING_PAGE = 'https://rytell.exchange/'
+export const LANDING_PAGE = 'https://rytell.io/'
 export const ANALYTICS_PAGE = 'https://info.rytell.exchange/'
 export const EXCHANGE_API = process.env.REACT_APP_EXCHANGE_API
 
