@@ -62,10 +62,10 @@ const Item = styled.div`
     fill: #fff;
   }
   .grid-item-details .poolsGrid-item-table span {
-    color: ${({ theme }) => theme.text1};
+    color: white;
   }
   .grid-item-details .poolsGrid-item-table a {
-    color: ${({ theme }) => theme.primary3};
+    color: #e0c7a3;
   }
 `
 

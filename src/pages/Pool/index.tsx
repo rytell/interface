@@ -56,6 +56,12 @@ const ResponsiveButtonSecondary = styled(ButtonSecondary)`
   ${({ theme }) => theme.mediaWidth.upToSmall`
     width: 48%;
   `};
+  color: white;
+  border-color: white;
+
+  &:hover {
+    color: ${({ theme }) => theme.color3};
+  }
 `
 
 const EmptyProposals = styled.div`
