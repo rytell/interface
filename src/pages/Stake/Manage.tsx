@@ -133,7 +133,7 @@ export default function Manage({
             <TYPE.body style={{ margin: 0 }}>{t('earnPage.totalStaked')}</TYPE.body>
             <TYPE.body fontSize={24} fontWeight={500}>
               {stakingInfo ? (
-                `${stakingInfo.totalStakedInRadi?.toSignificant(4, { groupSeparator: ',' })} PNG`
+                `${stakingInfo.totalStakedInRadi?.toSignificant(4, { groupSeparator: ',' })} RADI`
               ) : (
                 <Loader />
               )}
@@ -185,13 +185,13 @@ export default function Manage({
             <CardSection>
               <AutoColumn gap="md">
                 <RowBetween>
-                  <TYPE.white fontWeight={600}>{t('earnPage.yourStakedToken', { symbol: 'PNG' })}</TYPE.white>
+                  <TYPE.white fontWeight={600}>{t('earnPage.yourStakedToken', { symbol: 'RADI' })}</TYPE.white>
                 </RowBetween>
                 <RowBetween style={{ alignItems: 'baseline' }}>
                   <TYPE.white fontSize={36} fontWeight={600}>
                     {stakingInfo?.stakedAmount?.toSignificant(6) ?? '-'}
                   </TYPE.white>
-                  <TYPE.white>PNG</TYPE.white>
+                  <TYPE.white>RADI</TYPE.white>
                 </RowBetween>
               </AutoColumn>
             </CardSection>
@@ -245,7 +245,7 @@ export default function Manage({
           <ButtonPrimary padding="10px" borderRadius="8px" width="auto" onClick={handleStakeClick}>
             {stakingInfo?.stakedAmount?.greaterThan(JSBI.BigInt(0))
               ? t('earnPage.stake')
-              : t('earnPage.stakeStakingTokens', { symbol: 'PNG' })}
+              : t('earnPage.stakeStakingTokens', { symbol: 'RADI' })}
           </ButtonPrimary>
         ) : (
           <ButtonPrimary
@@ -254,7 +254,7 @@ export default function Manage({
             as={Link}
             to={`/swap?inputCurrency=${ZERO_ADDRESS}&outputCurrency=${radi.address}`}
           >
-            {t('earnPage.getToken', { symbol: 'PNG' })}
+            {t('earnPage.getToken', { symbol: 'RADI' })}
           </ButtonPrimary>
         )}
 
@@ -267,7 +267,7 @@ export default function Manage({
 
       {userRadiUnstaked?.greaterThan('0') && (
         <TYPE.main>
-          {userRadiUnstaked.toSignificant(6)} {t('earnPage.stakingTokensAvailable', { symbol: 'PNG' })}
+          {userRadiUnstaked.toSignificant(6)} {t('earnPage.stakingTokensAvailable', { symbol: 'RADI' })}
         </TYPE.main>
       )}
     </PageWrapper>

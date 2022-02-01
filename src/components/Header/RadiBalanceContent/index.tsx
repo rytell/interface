@@ -35,7 +35,7 @@ const StyledClose = styled(X)`
     cursor: pointer;
   }
 `
-const AddPNG = styled.span`
+const AddRADI = styled.span`
   width: 100%;
   height: 100%;
   font-weight: 500;
@@ -73,10 +73,11 @@ export const RadiBalanceContent = ({ setShowRadiBalanceModal }: { setShowRadiBal
   const oneToken = JSBI.BigInt(1000000000000000000)
   const { t } = useTranslation()
   let radiPrice: number | undefined
+
   if (avaxRadiTokenPair && radi) {
     const avaxRadiRatio = JSBI.divide(
       JSBI.multiply(oneToken, avaxRadiTokenPair.reserveOf(wavax).raw),
-      avaxRadiTokenPair.reserveOf(radi).raw
+      avaxRadiTokenPair?.reserveOf(radi).raw.toString() === '0' ? JSBI.BigInt(1) : avaxRadiTokenPair.reserveOf(radi).raw
     )
     radiPrice = JSBI.toNumber(avaxRadiRatio) / 1000000000000000000
   }
@@ -152,7 +153,7 @@ export const RadiBalanceContent = ({ setShowRadiBalanceModal }: { setShowRadiBal
           <>
             <CardSection gap="sm">
               <AutoColumn gap="md">
-                <AddPNG
+                <AddRADI
                   onClick={() => {
                     injected.getProvider().then(provider => {
                       if (provider) {
@@ -178,7 +179,7 @@ export const RadiBalanceContent = ({ setShowRadiBalanceModal }: { setShowRadiBal
                   }}
                 >
                   <TYPE.white color="white">{t('header.addMetamask')}</TYPE.white>
-                </AddPNG>
+                </AddRADI>
               </AutoColumn>
             </CardSection>
           </>

@@ -154,7 +154,7 @@ export function useIsSelectedAEBToken(): Boolean {
 
   const aebToken = allAEBTokens.find(token => token?.address === selectedOutputToken?.currencyId)
 
-  // ignore PNG and WAVAX token
+  // ignore RADI and WAVAX token
   if (aebToken?.address === RADI[ChainId.AVALANCHE].address || aebToken?.address === WAVAX[ChainId.AVALANCHE].address) {
     return false
   }

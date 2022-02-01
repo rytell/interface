@@ -4,7 +4,7 @@ import { X } from 'react-feather'
 import styled from 'styled-components'
 import tokenLogo from '../../assets/images/token-logo.png'
 import { injected } from '../../connectors'
-import { EXCHANGE_API, PNG } from '../../constants'
+import { EXCHANGE_API, RADI } from '../../constants'
 import { useTotalSupply } from '../../data/TotalSupply'
 import { useActiveWeb3React } from '../../hooks'
 import { useTotalRadiEarned } from '../../state/stake/hooks'
@@ -35,7 +35,7 @@ const StyledClose = styled(X)`
     cursor: pointer;
   }
 `
-const AddPNG = styled.span`
+const AddRADI = styled.span`
   width: 100%;
   height: 100%;
   font-weight: 500;
@@ -59,7 +59,7 @@ const AddPNG = styled.span`
  */
 export default function RadiBalanceContent({ setShowRadiBalanceModal }: { setShowRadiBalanceModal: any }) {
   const { account, chainId } = useActiveWeb3React()
-  const radi = chainId ? PNG[chainId] : undefined
+  const radi = chainId ? RADI[chainId] : undefined
 
   const total = useAggregateRadiBalance()
   const radiBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, radi)
@@ -67,7 +67,7 @@ export default function RadiBalanceContent({ setShowRadiBalanceModal }: { setSho
 
   const totalSupply: TokenAmount | undefined = useTotalSupply(radi)
 
-  // Determine PNG price in AVAX
+  // Determine RADI price in AVAX
   const wavax = WAVAX[chainId ? chainId : 43114]
   const [, avaxRadiTokenPair] = usePair(wavax, radi)
   const oneToken = JSBI.BigInt(1000000000000000000)
@@ -76,7 +76,7 @@ export default function RadiBalanceContent({ setShowRadiBalanceModal }: { setSho
   if (avaxRadiTokenPair && radi) {
     const avaxRadiRatio = JSBI.divide(
       JSBI.multiply(oneToken, avaxRadiTokenPair.reserveOf(wavax).raw),
-      avaxRadiTokenPair.reserveOf(radi).raw
+      avaxRadiTokenPair?.reserveOf(radi).raw.toString() === '0' ? JSBI.BigInt(1) : avaxRadiTokenPair.reserveOf(radi).raw
     )
     radiPrice = JSBI.toNumber(avaxRadiRatio) / 1000000000000000000
   }
@@ -152,7 +152,7 @@ export default function RadiBalanceContent({ setShowRadiBalanceModal }: { setSho
           <>
             <CardSection gap="sm">
               <AutoColumn gap="md">
-                <AddPNG
+                <AddRADI
                   onClick={() => {
                     injected.getProvider().then(provider => {
                       if (provider) {
@@ -178,7 +178,7 @@ export default function RadiBalanceContent({ setShowRadiBalanceModal }: { setSho
                   }}
                 >
                   <TYPE.white color="white">{t('header.addMetamask')}</TYPE.white>
-                </AddPNG>
+                </AddRADI>
               </AutoColumn>
             </CardSection>
           </>
