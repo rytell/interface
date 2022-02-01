@@ -23,6 +23,7 @@ const ContentWrapper = styled(AutoColumn)`
 const ModalUpper = styled(DataCard)`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   background: radial-gradient(76.02% 75.41% at 1.84% 0%, #f97316 0%, #e84142 100%);
+  background: radial-gradient(174.47% 188.91% at 1.84% 0%, #751a2b 0%, #691726 100%), #edeef2;
   padding: 0.5rem;
 `
 
@@ -45,6 +46,7 @@ const AddRADI = styled.span`
   text-align: center;
   background-color: ${({ theme }) => theme.bg3};
   background: radial-gradient(174.47% 188.91% at 1.84% 0%, #f97316 0%, #e84142 100%), #edeef2;
+  background: radial-gradient(174.47% 188.91% at 1.84% 0%, #751a2b 0%, #691726 100%), #edeef2;
   border-radius: 12px;
   white-space: nowrap;
   cursor: pointer;
