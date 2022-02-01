@@ -1,4 +1,3 @@
-import { transparentize } from 'polished'
 import React, { useMemo } from 'react'
 import styled, {
   ThemeProvider as StyledComponentsThemeProvider,
@@ -278,15 +277,7 @@ html {
 
 body {
   min-height: ${({ isBeta }) => (isBeta ? 'unset' : '100vh')};
-  background-position: 0 -30vh;
-  background-repeat: no-repeat;
-  background-image: ${({ theme, isBeta }) =>
-    isBeta
-      ? 'unset'
-      : `radial-gradient(50% 50% at 50% 50%, ${transparentize(0.85, theme.primary1)} 0%, ${transparentize(
-          1,
-          theme.bg1
-        )} 100%)`};
-  background-color:  ${({ theme, isBeta }) => (isBeta ? theme.bg6 : 'unset')};
+
+  background-color: ${({ theme }) => theme.color2};
 }
 `

@@ -74,7 +74,7 @@ const Buttons = styled.div`
   display: grid;
   grid-auto-flow: column;
   gap: 1.5rem;
-  
+
   button {
     display: block;
   }
@@ -101,7 +101,7 @@ const GetRadiOrInteract = ({
     children
   ) : (
     <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
-      Go get some RADI first!
+      <span style={{ color: '#fff' }}>Go get some RADI first!</span>
     </StyledNavLink>
   )
 }
