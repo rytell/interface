@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
-import { MessageCircle, Info, Twitter, GitHub } from 'react-feather'
+import { MessageCircle, Info, Twitter, GitHub, Activity } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
-import { LANDING_PAGE } from '../../constants'
+import { ANALYTICS_PAGE, LANDING_PAGE } from '../../constants'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen, useToggleModal } from '../../state/application/hooks'
@@ -42,6 +42,10 @@ export default function Menu() {
 
       {open && (
         <NarrowMenuFlyout>
+          <MenuItem id="link" href={ANALYTICS_PAGE}>
+            <Activity size={14} />
+            Analytics
+          </MenuItem>
           <MenuItem id="link" href={LANDING_PAGE}>
             <Info size={14} />
             {t('menu.about')}
