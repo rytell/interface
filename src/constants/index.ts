@@ -15,8 +15,8 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.AVALANCHE]: '0xe5e970FE3a90F314977a9Fd41e349486a9e8c4fe'
 }
 
-export const LANDING_PAGE = 'https://rytell.exchange/'
-export const ANALYTICS_PAGE = 'https://info.rytell.exchange/'
+export const LANDING_PAGE = 'https://rytell.io/'
+export const ANALYTICS_PAGE = 'https://info.rytell.io/'
 export const EXCHANGE_API = process.env.REACT_APP_EXCHANGE_API
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
@@ -39,7 +39,7 @@ type ChainTokenList = {
 
 export const RADI: { [chainId in ChainId]: Token } = {
   [ChainId.FUJI]: new Token(ChainId.FUJI, '0x600615234c0a427834A4344D10fEaCA374B2dfCB', 18, 'RADI', 'RADI'),
-  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0x81d8B7e80b5823Ebb93D5019dde5096E03292F12', 18, 'RADI', 'RADI')
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0x9c5bBb5169B66773167d86818b3e149A4c7e1d1A', 18, 'RADI', 'RADI')
 }
 
 export const PNG: { [chainId in ChainId]: Token } = {
@@ -805,9 +805,9 @@ export const AIRDROP_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.AVALANCHE]: '0x0C58C2041da4CfCcF5818Bbe3b66DBC23B3902d9'
 }
 
-const WAVAX_AND_PNG_ONLY: ChainTokenList = {
-  [ChainId.FUJI]: [WAVAX[ChainId.FUJI], PNG[ChainId.FUJI], RADI[ChainId.FUJI]],
-  [ChainId.AVALANCHE]: [WAVAX[ChainId.AVALANCHE], PNG[ChainId.AVALANCHE], RADI[ChainId.AVALANCHE]]
+const WAVAX_AND_RADI_ONLY: ChainTokenList = {
+  [ChainId.FUJI]: [WAVAX[ChainId.FUJI], RADI[ChainId.FUJI], RADI[ChainId.FUJI]],
+  [ChainId.AVALANCHE]: [WAVAX[ChainId.AVALANCHE], RADI[ChainId.AVALANCHE], RADI[ChainId.AVALANCHE]]
 }
 
 export const STAKING_V1_FUJI: {
@@ -914,12 +914,12 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
-  ...WAVAX_AND_PNG_ONLY
+  ...WAVAX_AND_RADI_ONLY
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
-  ...WAVAX_AND_PNG_ONLY
+  ...WAVAX_AND_RADI_ONLY
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
@@ -1032,4 +1032,4 @@ export const WYRE_ID = process.env.REACT_APP_WYRE_ID ? process.env.REACT_APP_WYR
 export const WYRE_API_URL = 'https://api.sendwyre.com'
 export const WYRE_QUOTE_API_ENDPOINT = '/v3/orders/quote/partner'
 export const WYRE_RESERVE_API_ENDPOINT = '/v3/orders/reserve'
-export const WYRE_CALLBACK_URL = 'https://app.rytell.exchange/'
+export const WYRE_CALLBACK_URL = 'https://app.rytell.io/'

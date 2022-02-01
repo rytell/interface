@@ -99,7 +99,7 @@ export interface StakingInfoBase {
 export interface SingleSideStakingInfo extends StakingInfoBase {
   // the token being earned
   rewardToken: Token
-  // total staked PNG in the pool
+  // total staked RADI in the pool
   totalStakedInRadi: TokenAmount
   apr: JSBI
 }
@@ -491,7 +491,7 @@ export function useSingleSideStakingInfo(
 
   const accountArg = useMemo(() => [account ?? undefined], [account])
   const getAmountsOutArgs = useMemo(() => {
-    const amountIn = '1' + '0'.repeat(18) // 1 PNG
+    const amountIn = '1' + '0'.repeat(18) // 1 RADI
     return routes.map(route => [amountIn, route])
   }, [routes])
 

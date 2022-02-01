@@ -106,7 +106,7 @@ export default function Sidebar({ collapsed, onCollapsed }: SidebarProps) {
       id: 'charts'
     },
     {
-      link: 'https://gov.rytell.exchange',
+      link: 'https://gov.rytell.io',
       icon: Governance,
       title: t('header.forum'),
       id: 'forum'
@@ -121,7 +121,7 @@ export default function Sidebar({ collapsed, onCollapsed }: SidebarProps) {
       id: 'bridge'
     },
     {
-      link: 'https://rytell.exchange',
+      link: 'https://rytell.io',
       icon: Partners,
       title: t('header.ourPartners'),
       id: 'our-partners'

@@ -22,15 +22,15 @@ import {
   HeaderElement,
   HeaderElementWrap,
   AccountElement,
-  PNGAmount,
-  PNGWrapper,
   HideSmall,
   NetworkCard,
   BalanceText,
   ThemeMode,
   MobileHeader,
   StyledMenuIcon,
-  MobileLogoWrapper
+  MobileLogoWrapper,
+  RADIAmount,
+  RADIWrapper
 } from './styled'
 import Logo from '../Logo'
 
@@ -82,8 +82,8 @@ export default function Header({ onCollapsed }: HeaderProps) {
             )}
           </HideSmall>
           {aggregateBalance && (
-            <PNGWrapper onClick={() => setShowRadiBalanceModal(true)}>
-              <PNGAmount active={!!account} style={{ pointerEvents: 'auto' }}>
+            <RADIWrapper onClick={() => setShowRadiBalanceModal(true)}>
+              <RADIAmount active={!!account} style={{ pointerEvents: 'auto' }}>
                 {account && (
                   <HideSmall>
                     <TYPE.white
@@ -102,10 +102,10 @@ export default function Header({ onCollapsed }: HeaderProps) {
                     </TYPE.white>
                   </HideSmall>
                 )}
-                PNG
-              </PNGAmount>
+                RADI
+              </RADIAmount>
               <CardNoise />
-            </PNGWrapper>
+            </RADIWrapper>
           )}
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (

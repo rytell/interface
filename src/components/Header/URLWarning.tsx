@@ -32,15 +32,15 @@ export default function URLWarning() {
     <PhishAlert isActive={showURLWarning}>
       <div style={{ display: 'flex' }}>
         <AlertTriangle style={{ marginRight: 6 }} size={12} /> {t('header.makeSureURLWarning')}
-        <code style={{ padding: '0 4px', display: 'inline', fontWeight: 'bold' }}>app.rytell.exchange</code>
+        <code style={{ padding: '0 4px', display: 'inline', fontWeight: 'bold' }}>app.rytell.io</code>
       </div>
       <StyledClose size={12} onClick={toggleURLWarning} />
     </PhishAlert>
-  ) : window.location.hostname === 'app.rytell.exchange' ? (
+  ) : window.location.hostname === 'app.rytell.io' ? (
     <PhishAlert isActive={showURLWarning}>
       <div style={{ display: 'flex' }}>
         <AlertTriangle style={{ marginRight: 6 }} size={12} /> {t('header.alwaysMakeSureWarning')}
-        <code style={{ padding: '0 4px', display: 'inline', fontWeight: 'bold' }}>app.rytell.exchange</code> -
+        <code style={{ padding: '0 4px', display: 'inline', fontWeight: 'bold' }}>app.rytell.io</code> -
         {t('header.bookmarkIt')}
       </div>
       <StyledClose size={12} onClick={toggleURLWarning} />

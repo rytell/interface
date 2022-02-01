@@ -133,7 +133,7 @@ const AccountElement = styled.div<{ active: boolean }>`
   } */
 `
 
-const PNGAmount = styled(AccountElement)`
+const RADIAmount = styled(AccountElement)`
   color: white;
   padding: 4px 8px;
   height: 36px;
@@ -142,7 +142,7 @@ const PNGAmount = styled(AccountElement)`
   background: radial-gradient(174.47% 188.91% at 1.84% 0%, #751a2b 0%, #691726 100%), #edeef2;
 `
 
-const PNGWrapper = styled.span`
+const RADIWrapper = styled.span`
   width: fit-content;
   position: relative;
   cursor: pointer;
@@ -391,8 +391,8 @@ export default function Header() {
             )}
           </HideSmall>
           {aggregateBalance && (
-            <PNGWrapper onClick={() => setShowRadiBalanceModal(true)}>
-              <PNGAmount active={!!account} style={{ pointerEvents: 'auto' }}>
+            <RADIWrapper onClick={() => setShowRadiBalanceModal(true)}>
+              <RADIAmount active={!!account} style={{ pointerEvents: 'auto' }}>
                 {account && (
                   <HideSmall>
                     <TYPE.white
@@ -412,9 +412,9 @@ export default function Header() {
                   </HideSmall>
                 )}
                 RADI
-              </PNGAmount>
+              </RADIAmount>
               <CardNoise />
-            </PNGWrapper>
+            </RADIWrapper>
           )}
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (
