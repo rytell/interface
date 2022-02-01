@@ -87,7 +87,7 @@ export function colors(darkMode: boolean): Colors {
     yellow2: '#F3841E',
     blue1: '#2172E5',
 
-    avaxRed: '#E84142',
+    avaxRed: '#751a2b',
 
     // beta theme color
     color1: '#E67826',
