@@ -16,7 +16,7 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
 }
 
 export const LANDING_PAGE = 'https://rytell.io/'
-export const ANALYTICS_PAGE = 'https://info.rytell.exchange/'
+export const ANALYTICS_PAGE = 'https://info.rytell.io/'
 export const EXCHANGE_API = process.env.REACT_APP_EXCHANGE_API
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
@@ -1032,4 +1032,4 @@ export const WYRE_ID = process.env.REACT_APP_WYRE_ID ? process.env.REACT_APP_WYR
 export const WYRE_API_URL = 'https://api.sendwyre.com'
 export const WYRE_QUOTE_API_ENDPOINT = '/v3/orders/quote/partner'
 export const WYRE_RESERVE_API_ENDPOINT = '/v3/orders/reserve'
-export const WYRE_CALLBACK_URL = 'https://app.rytell.exchange/'
+export const WYRE_CALLBACK_URL = 'https://app.rytell.io/'

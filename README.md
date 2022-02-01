@@ -2,15 +2,15 @@
 
 An open source interface for Rytell -- a community-driven decentralized exchange for Avalanche and Ethereum assets with fast settlement, low transaction fees, and a democratic distribution -- powered by Avalanche.
 
-- Website: [rytell.exchange](https://rytell.exchange/)
-- Interface: [app.rytell.exchange](https://app.rytell.exchange)
+- Website: [rytell.io](https://rytell.io/)
+- Interface: [app.rytell.io](https://app.rytell.io)
 - Telegram: [Rytell](https://t.me/rytelldex)
 - Discord: [Rytell](https://discord.gg/bZ9bBxbjR9)
 - Twitter: [@rytelldex](https://twitter.com/rytelldex)
 
 ## Accessing the Rytell Interface
 
-Visit [app.rytell.exchange](https://app.rytell.exchange).
+Visit [app.rytell.io](https://app.rytell.io).
 
 ## Development
 

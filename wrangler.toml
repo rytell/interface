@@ -1,6 +1,6 @@
 name = "rytell-app-temp"
 type = "javascript"
-route = "app.rytell.exchange/*"
+route = "app.rytell.io/*"
 
 [site]
 bucket = "./build"
