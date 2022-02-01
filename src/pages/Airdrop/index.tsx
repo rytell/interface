@@ -165,7 +165,7 @@ export default function Vote() {
           <ButtonError error={!!error} padding="16px 16px" width="100%" mt="1rem" onClick={onClaim}>
             {error
               ? error['data']['message']
-              : t('airdrop.claim') + claimAmount?.toFixed(0, { groupSeparator: ',' }) + ' PNG'}
+              : t('airdrop.claim') + claimAmount?.toFixed(0, { groupSeparator: ',' }) + ' RADI'}
           </ButtonError>
         )}
       </TopSection>

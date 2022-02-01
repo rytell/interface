@@ -16,7 +16,7 @@ import VoteModal from '../../components/vote/VoteModal'
 import { TokenAmount, JSBI } from '@rytell/sdk'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useActiveWeb3React } from '../../hooks'
-import { PNG, ZERO_ADDRESS } from '../../constants'
+import { RADI, ZERO_ADDRESS } from '../../constants'
 import { isAddress, getEtherscanLink } from '../../utils'
 import { useTranslation } from 'react-i18next'
 
@@ -127,7 +127,7 @@ export default function VotePage({
 
   // show delegation option if they have have a balance, have not delegated
   const availableVotes: TokenAmount | undefined = useUserVotes()
-  const uniBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, chainId ? PNG[chainId] : undefined)
+  const uniBalance: TokenAmount | undefined = useTokenBalance(account ?? undefined, chainId ? RADI[chainId] : undefined)
   const userDelegatee: string | undefined = useUserDelegatee()
   const showUnlockVoting = Boolean(
     uniBalance && JSBI.notEqual(uniBalance.raw, JSBI.BigInt(0)) && userDelegatee === ZERO_ADDRESS

@@ -4,7 +4,7 @@ import { useAirdropContract } from '../../hooks/useContract'
 import { calculateGasMargin } from '../../utils'
 import { useTransactionAdder } from '../transactions/hooks'
 import { TokenAmount, JSBI } from '@rytell/sdk'
-import { PNG } from './../../constants/index'
+import { RADI } from './../../constants/index'
 import { useSingleCallResult } from '../multicall/hooks'
 
 export function useAirdropIsClaimingAllowed(): boolean {
@@ -35,7 +35,7 @@ export function useUserUnclaimedAmount(account: string | null | undefined): Toke
   const airdropContract = useAirdropContract()
   const withdrawAmountResult = useSingleCallResult(airdropContract, 'withdrawAmount', [account ? account : undefined])
 
-  const radi = chainId ? PNG[chainId] : undefined
+  const radi = chainId ? RADI[chainId] : undefined
   if (!radi) return undefined
   if (!canClaim) {
     return new TokenAmount(radi, JSBI.BigInt(0))
@@ -61,7 +61,7 @@ export function useClaimCallback(
         .claim({ value: null, gasLimit: calculateGasMargin(estimatedGasLimit) })
         .then((response: TransactionResponse) => {
           addTransaction(response, {
-            summary: `Claimed PNG`,
+            summary: `Claimed RADI`,
             claim: { recipient: account }
           })
           return response.hash

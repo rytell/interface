@@ -133,7 +133,7 @@ export function useAllTokenBalances(): { [tokenAddress: string]: TokenAmount | u
   return balances ?? {}
 }
 
-// get the total owned and unharvested PNG for account
+// get the total owned and unharvested RADI for account
 export function useAggregateRadiBalance(): TokenAmount | undefined {
   const { account, chainId } = useActiveWeb3React()
 

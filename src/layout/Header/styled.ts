@@ -87,7 +87,7 @@ export const AccountElement = styled.div<{ active: boolean }>`
   } */
 `
 
-export const PNGAmount = styled(AccountElement)`
+export const RADIAmount = styled(AccountElement)`
   color: white;
   padding: 4px 8px;
   height: 36px;
@@ -96,7 +96,7 @@ export const PNGAmount = styled(AccountElement)`
   background: radial-gradient(174.47% 188.91% at 1.84% 0%, #f97316 0%, #e84142 100%), #edeef2;
 `
 
-export const PNGWrapper = styled.span`
+export const RADIWrapper = styled.span`
   width: fit-content;
   position: relative;
   cursor: pointer;
