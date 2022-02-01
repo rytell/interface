@@ -149,8 +149,7 @@ export default function PoolsGridItem({
           </div>
         </div>
         <div className="poolsGrid-item-table">
-          {/* <p>APR: {multiplier?.toString() === '0' ? <span>0%</span> : <span>{apr}%</span>}</p> */}
-          {/* <p>APR: Available Soon!</p> */}
+          <p>APR: {multiplier?.toString() === '0' ? <span>0%</span> : <span>{apr}%</span>}</p>
           <p>
             Earn: <span>$RADI</span>
           </p>
