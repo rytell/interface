@@ -1,7 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit'
 import { getVersionUpgrade, VersionUpgrade } from '@pangolindex/token-lists'
 import { TokenList } from '@pangolindex/token-lists/dist/types'
-import { DEFAULT_LIST_OF_LISTS, DEFAULT_TOKEN_LIST_URL, STABLECOIN_TOKEN_LIST } from '../../constants/lists'
+import {
+  DEFAULT_LIST_OF_LISTS,
+  DEFAULT_TOKEN_LIST_URL,
+  RYTELL_TOKENS_LIST,
+  STABLECOIN_TOKEN_LIST
+} from '../../constants/lists'
 import { updateVersion } from '../global/actions'
 import { acceptListUpdate, addList, fetchTokenList, removeList, selectList } from './actions'
 
@@ -38,7 +43,7 @@ const initialState: ListsState = {
       return memo
     }, {})
   },
-  selectedListUrl: [DEFAULT_TOKEN_LIST_URL]
+  selectedListUrl: [DEFAULT_TOKEN_LIST_URL, RYTELL_TOKENS_LIST]
 }
 
 export default createReducer(initialState, builder =>
@@ -186,7 +191,7 @@ export default createReducer(initialState, builder =>
       state.lastInitializedDefaultListOfLists = DEFAULT_LIST_OF_LISTS
 
       if (!state.selectedListUrl) {
-        state.selectedListUrl = [DEFAULT_TOKEN_LIST_URL]
+        state.selectedListUrl = [DEFAULT_TOKEN_LIST_URL, RYTELL_TOKENS_LIST]
         if (!state.byUrl[DEFAULT_TOKEN_LIST_URL]) {
           state.byUrl[DEFAULT_TOKEN_LIST_URL] = NEW_LIST_STATE
         }
