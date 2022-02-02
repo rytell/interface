@@ -4,6 +4,7 @@ import { TokenList } from '@pangolindex/token-lists/dist/types'
 import {
   DEFAULT_LIST_OF_LISTS,
   DEFAULT_TOKEN_LIST_URL,
+  DEFI_TOKEN_LIST,
   RYTELL_TOKENS_LIST,
   STABLECOIN_TOKEN_LIST
 } from '../../constants/lists'
@@ -43,7 +44,7 @@ const initialState: ListsState = {
       return memo
     }, {})
   },
-  selectedListUrl: [DEFAULT_TOKEN_LIST_URL, RYTELL_TOKENS_LIST]
+  selectedListUrl: [DEFAULT_TOKEN_LIST_URL, RYTELL_TOKENS_LIST, DEFI_TOKEN_LIST]
 }
 
 export default createReducer(initialState, builder =>
