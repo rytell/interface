@@ -164,6 +164,7 @@ export default function Earn({
   const radi = useRadiContract()
   const stakingPool = useStakingPoolContract()
   const txs = useAllTransactions()
+  const [txLength, setTxsLength] = useState(-1)
 
   const [userRadiBalance, setRadiBalance] = useState('')
   const [userRadiBigNumberBalance, setRadiBigNumberBalance] = useState('')
@@ -188,34 +189,32 @@ export default function Earn({
 
   const getData = useCallback(async () => {
     const userBalance = await radi?.balanceOf(account)
-    const userStakingBalance = await stakingPool?.balanceOf(account)
-    const stakingPoolBalance = (await radi?.balanceOf(stakingPool?.address)) as BigNumber
-    const xRadiCurrentSupply = (await stakingPool?.totalSupply()) as BigNumber
-    const xRadiCurrentPrice = stakingPoolBalance.div(xRadiCurrentSupply.toString() === '0' ? 1 : xRadiCurrentSupply)
+    const userStakingBalance = await stakingPool?.balanceOf(account) // users's xRADI
+    const stakingPoolBalance = (await radi?.balanceOf(stakingPool?.address)) as BigNumber // xRADI balance on RADI
+    const xRadiCurrentSupply = (await stakingPool?.totalSupply()) as BigNumber // xRADI totalSupply
 
-    const xRadiInRadi = xRadiCurrentPrice.mul(userStakingBalance)
+    const etherXradiCurrentSupply = +fromWei(xRadiCurrentSupply.toString(), 'ether') || 1
+
+    const xRadiCurrentPrice = +fromWei(stakingPoolBalance.toString(), 'ether') / etherXradiCurrentSupply
+
+    const xRadiInRadi = +fromWei(userStakingBalance.toString(), 'ether') * xRadiCurrentPrice // user's xRADI worth in RADI
 
     setRadiBigNumberBalance(userBalance)
     setRadiBalance(fromWei(userBalance.toString(), 'ether'))
     setStakingBalance(fromWei(userStakingBalance.toString(), 'ether'))
     setStakingPoolRadiBalance(fromWei(stakingPoolBalance.toString(), 'ether'))
     setXRadiSupply(fromWei(xRadiCurrentSupply.toString(), 'ether'))
-    setXRadiPrice(fromWei(xRadiCurrentPrice.toString(), 'wei'))
-    setXRadiInRadiBalance(fromWei(xRadiInRadi.toString(), 'ether'))
-    if (txs) return
-  }, [radi, stakingPool, account, txs])
+    setXRadiPrice(xRadiCurrentPrice.toLocaleString())
+    setXRadiInRadiBalance(xRadiInRadi.toLocaleString())
+  }, [radi, stakingPool, account])
 
   useEffect(() => {
-    if (!chainId || !account) return
+    if (!chainId || !account || Object.keys(txs).length === txLength) return
 
     getData()
-  }, [chainId, account, getData])
 
-  // const DataRow = styled(RowBetween)`
-  //   ${({ theme }) => theme.mediaWidth.upToSmall`
-  //    flex-direction: column;
-  //  `};
-  // `
+    setTxsLength(Object.keys(txs).length)
+  }, [chainId, account, txLength, getData, txs])
 
   return (
     <PageWrapper gap="lg" justify="center">
