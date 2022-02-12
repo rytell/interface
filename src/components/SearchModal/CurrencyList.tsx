@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, CAVAX, Token } from '@rytell/sdk'
+import { Currency, CurrencyAmount, currencyEquals, CAVAX, Token, ChainId } from '@rytell/sdk'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'
@@ -17,6 +17,7 @@ import { FadedSpan, MenuItem } from './styleds'
 import Loader from '../Loader'
 import { isTokenOnList } from '../../utils'
 import { useTranslation } from 'react-i18next'
+import { RADI } from '../../constants'
 
 function currencyKey(currency: Currency): string {
   return currency instanceof Token ? currency.address : currency === CAVAX ? 'AVAX' : ''
@@ -173,7 +174,27 @@ export default function CurrencyList({
   fixedListRef?: MutableRefObject<FixedSizeList | undefined>
   showETH: boolean
 }) {
-  const itemData = useMemo(() => (showETH ? [Currency.CAVAX, ...currencies] : currencies), [currencies, showETH])
+  const itemData = useMemo(() => {
+    function moveElementInArray(from: number, to: number, object: any[]) {
+      object.splice(to, 0, object.splice(from, 1)[0])
+    }
+    const resultingList = []
+    if (showETH) {
+      resultingList.push(Currency.CAVAX)
+    }
+
+    if (!currencies.some(currency => currency.symbol === 'RADI')) {
+      resultingList.push(RADI[ChainId.AVALANCHE])
+    } else {
+      moveElementInArray(
+        currencies.findIndex(currency => currency.symbol === 'RADI'),
+        0,
+        currencies
+      )
+    }
+
+    return resultingList.concat(currencies)
+  }, [currencies, showETH])
 
   const Row = useCallback(
     ({ data, index, style }) => {
