@@ -146,7 +146,7 @@ const StakingPoolInfo = ({
       <div style={{ color: '#fff' }}>Total $RADI staked: {totalStaked}</div>
       <div style={{ color: '#fff' }}>Total xRADI supply: {totalMinted}</div>
       <div style={{ color: '#fff' }}>Each xRADI is worth {price} $RADI now</div>
-      <div style={{ color: '#fff' }}>APR: {annualProjection} %</div>
+      <div style={{ color: '#fff' }}>APR: {annualProjection}%</div>
     </>
   )
 }

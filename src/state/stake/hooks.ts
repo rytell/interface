@@ -383,7 +383,7 @@ export function useStakingInfo(
 
         const multiplier = info[index].delisted
           ? JSBI.BigInt(0)
-          : JSBI.divide(JSBI.BigInt(weight.result?.[0]), JSBI.BigInt(100))
+          : JSBI.divide(JSBI.BigInt(weight.result?.[0]), JSBI.BigInt(1000))
         const getHypotheticalRewardRate = (
           stakedAmount: TokenAmount,
           totalStakedAmount: TokenAmount,
