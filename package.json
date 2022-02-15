@@ -138,6 +138,7 @@
     "@rytell/tokens": "^1.0.1",
     "@types/crypto-js": "^4.0.2",
     "crypto-js": "^4.0.0",
+    "moment": "^2.29.1",
     "sass": "^1.49.3",
     "web3-utils": "^1.6.1"
   },
