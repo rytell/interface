@@ -802,7 +802,13 @@ export const CRA: { [chainId in ChainId]: Token } = {
 
 export const MEAD: { [chainId in ChainId]: Token } = {
   [ChainId.FUJI]: new Token(ChainId.FUJI, ZERO_ADDRESS, 18, 'MEAD', 'Thors Mead V2'),
-  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0x44a45a9BaEb63c6ea4860ecf9ac5732c330C4d4E', 18, 'MEAD', 'Thors Mead V2')
+  [ChainId.AVALANCHE]: new Token(
+    ChainId.AVALANCHE,
+    '0x44a45a9BaEb63c6ea4860ecf9ac5732c330C4d4E',
+    18,
+    'MEAD',
+    'Thors Mead V2'
+  )
 }
 
 export const AIRDROP_ADDRESS: { [chainId in ChainId]?: string } = {
@@ -895,7 +901,7 @@ export const STAKING_V1: {
     stakingRewardAddress: '0xd7161D97157fA42e4f5Eb003BA223fb5507F008D',
     pair: '0x173121A8449420bb868034FbB6809a3089B15b23',
     delisted: false
-  },
+  }
 ]
 
 export const STAKING_REWARDS_INFO: {
