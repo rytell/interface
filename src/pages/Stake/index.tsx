@@ -107,17 +107,14 @@ const GetRadiOrInteract = ({
   )
 }
 
-// 
-const getRadiAnnualProjection = () :any => {
-  const response = fetch(`${EXCHANGE_API}/volume/annual-projection`).then(
-    resp => resp.text().then(
-      val => (val))
-  )
+//
+const getRadiAnnualProjection = (): any => {
+  const response = fetch(`${EXCHANGE_API}/volume/annual-projection`).then(resp => resp.text().then(val => val))
   return response
 }
 
-const getExchangeAnnualProjection = (totalRadi:any, radiAnnualProjection:any, totalXRadi:any) :any => {
-  const exchange = (totalRadi + radiAnnualProjection) / totalXRadi;
+const getExchangeAnnualProjection = (totalRadi: any, radiAnnualProjection: any, totalXRadi: any): any => {
+  const exchange = (totalRadi + radiAnnualProjection) / totalXRadi
   const price = totalRadi / totalXRadi
   const diff = exchange - price / price
 
@@ -222,8 +219,12 @@ export default function Earn({
     const xRadiInRadi = +fromWei(userStakingBalance.toString(), 'ether') * xRadiCurrentPrice // user's xRADI worth in RADI
 
     const radiAnnualProjectionValue = await getRadiAnnualProjection()
-    const percentajeAnnualProjection = getExchangeAnnualProjection(+fromWei(stakingPoolBalance.toString(),'ether'), +radiAnnualProjectionValue, +fromWei(xRadiCurrentSupply.toString(),'ether'))
-    
+    const percentajeAnnualProjection = getExchangeAnnualProjection(
+      +fromWei(stakingPoolBalance.toString(), 'ether'),
+      +radiAnnualProjectionValue,
+      +fromWei(xRadiCurrentSupply.toString(), 'ether')
+    )
+
     setRadiBigNumberBalance(userBalance)
     setRadiBalance(fromWei(userBalance.toString(), 'ether'))
     setStakingBalance(fromWei(userStakingBalance.toString(), 'ether'))
@@ -274,7 +275,12 @@ export default function Earn({
             {account ? (
               <>
                 <UserCurrentBalances radiBalance={xRadiInRadiBalance} stakingBalance={userStakingBalance} />
-                <StakingPoolInfo totalMinted={totalMinted} totalStaked={totalStaked} price={xRadiPrice} annualProjection={radiAnnualProjection}/>
+                <StakingPoolInfo
+                  totalMinted={totalMinted}
+                  totalStaked={totalStaked}
+                  price={xRadiPrice}
+                  annualProjection={radiAnnualProjection}
+                />
                 <ApproveOrInteract approval={approval} onApprove={stakingPoolApproveCallback}>
                   <Buttons>
                     <Button onClick={() => setStakingModalOpen(true)}>Stake</Button>
