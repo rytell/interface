@@ -135,7 +135,7 @@
     "@rytell/exchange-contracts": "^1.0.1",
     "@rytell/liquidity-pools": "^1.0.0",
     "@rytell/staking-radi": "^1.0.0",
-    "@rytell/tokens": "^1.0.0",
+    "@rytell/tokens": "^1.0.1",
     "@types/crypto-js": "^4.0.2",
     "crypto-js": "^4.0.0",
     "sass": "^1.49.3",

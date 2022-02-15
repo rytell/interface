@@ -4,7 +4,7 @@ import { abi as IRytellPairABI } from '@rytell/exchange-contracts/artifacts/cont
 import { abi as STAKING_REWARDS_ABI } from '@pangolindex/governance/artifacts/contracts/StakingRewards.sol/StakingRewards.json'
 import { abi as AIRDROP_ABI } from '@pangolindex/governance/artifacts/contracts/Airdrop.sol/Airdrop.json'
 import { abi as GOVERNANCE_ABI } from '@pangolindex/governance/artifacts/contracts/GovernorAlpha.sol/GovernorAlpha.json'
-import { abi as RADI_ABI } from '@rytell/tokens/artifacts/contracts/RadiToken.sol/RadiToken.json'
+import { abi as RADI_ABI } from '@rytell/tokens/artifacts/contracts/Radi.sol/Radi.json'
 import { abi as BRIDGE_MIGRATOR_ABI } from '@rytell/exchange-contracts/artifacts/contracts/periphery/RytellBridgeMigrationRouter.sol/RytellBridgeMigrationRouter.json'
 import { abi as MINICHEF_ABI } from '@pangolindex/governance/artifacts/contracts/MiniChefV2.sol/MiniChefV2.json'
 import { abi as STAKING_RADI_ABI } from '@rytell/staking-radi/artifacts/contracts/StakingPool.sol/StakingPool.json'
