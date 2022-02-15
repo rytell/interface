@@ -800,6 +800,11 @@ export const CRA: { [chainId in ChainId]: Token } = {
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0xA32608e873F9DdEF944B24798db69d80Bbb4d1ed', 18, 'CRA', 'CRA')
 }
 
+export const MEAD: { [chainId in ChainId]: Token } = {
+  [ChainId.FUJI]: new Token(ChainId.FUJI, ZERO_ADDRESS, 18, 'MEAD', 'Thors Mead V2'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0x44a45a9BaEb63c6ea4860ecf9ac5732c330C4d4E', 18, 'MEAD', 'Thors Mead V2')
+}
+
 export const AIRDROP_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.FUJI]: ZERO_ADDRESS,
   [ChainId.AVALANCHE]: '0x0C58C2041da4CfCcF5818Bbe3b66DBC23B3902d9'
@@ -872,7 +877,25 @@ export const STAKING_V1: {
     stakingRewardAddress: '0x867fEd0AD388a6603A52dBEfa29cC892e2FE470d',
     pair: '0x29c27C2Db6352fb94e2AAeB96941adA479b3EB4E',
     delisted: false
-  }
+  },
+  {
+    tokens: [RADI[ChainId.AVALANCHE], EGG[ChainId.AVALANCHE]],
+    stakingRewardAddress: '0x6441e036195A400da26b321835A21560fa68B32F',
+    pair: '0x976C77e94691b2e500a7890ab83dD5f618a4b769',
+    delisted: false
+  },
+  {
+    tokens: [RADI[ChainId.AVALANCHE], CRA[ChainId.AVALANCHE]],
+    stakingRewardAddress: '0x38Dab2bA6dA4FF3f7EC6e0bf5793CcDe7f5e13Fe',
+    pair: '0x82486c62AeC7b75E0327Bc29736167db7d5dD1A9',
+    delisted: false
+  },
+  {
+    tokens: [RADI[ChainId.AVALANCHE], MEAD[ChainId.AVALANCHE]],
+    stakingRewardAddress: '0xd7161D97157fA42e4f5Eb003BA223fb5507F008D',
+    pair: '0x173121A8449420bb868034FbB6809a3089B15b23',
+    delisted: false
+  },
 ]
 
 export const STAKING_REWARDS_INFO: {
