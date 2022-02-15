@@ -2683,7 +2683,7 @@
     hardhat-gas-reporter "^1.0.6"
     openzeppelin-solidity "^3.4.0"
 
-"@rytell/tokens@^1.0.0", "@rytell/tokens@^1.0.1":
+"@rytell/tokens@^1.0.1":
   version "1.0.1"
   resolved "https://registry.npmjs.org/@rytell/tokens/-/tokens-1.0.1.tgz"
   integrity sha512-SZwVjQ2mkqAgvz4P/F1SHByoYpJRqJX3+jiufZiov/kA3eEsNQhjVpm1RQbXN4e31Wxbqy/kck5ZDsdIMGg99Q==
