@@ -118,7 +118,7 @@ const getExchangeAnnualProjection = (totalRadi: any, radiAnnualProjection: any, 
   const price = totalRadi / totalXRadi
   const diff = exchange - price / price
 
-  return diff * 100
+  return (diff * 100).toFixed(4)
 }
 
 const UserCurrentBalances = ({ radiBalance, stakingBalance }: { radiBalance: string; stakingBalance: string }) => {
