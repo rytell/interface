@@ -20,6 +20,7 @@ import { StakeRadi } from '../../components/StakeRadi/Stake'
 import { UnstakeRadi } from '../../components/StakeRadi/Unstake'
 import { useAllTransactions } from '../../state/transactions/hooks'
 import { ButtonPrimary } from '../../components/Button'
+import { EXCHANGE_API } from '../../constants/index'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -106,6 +107,23 @@ const GetRadiOrInteract = ({
   )
 }
 
+// 
+const getRadiAnnualProjection = () :any => {
+  const response = fetch(`${EXCHANGE_API}/volume/annual-projection`).then(
+    resp => resp.text().then(
+      val => (val))
+  )
+  return response
+}
+
+const getExchangeAnnualProjection = (totalRadi:any, radiAnnualProjection:any, totalXRadi:any) :any => {
+  const exchange = (totalRadi + radiAnnualProjection) / totalXRadi;
+  const price = totalRadi / totalXRadi
+  const diff = exchange - price / price
+
+  return diff * 100
+}
+
 const UserCurrentBalances = ({ radiBalance, stakingBalance }: { radiBalance: string; stakingBalance: string }) => {
   return (
     <>
@@ -118,17 +136,20 @@ const UserCurrentBalances = ({ radiBalance, stakingBalance }: { radiBalance: str
 const StakingPoolInfo = ({
   totalMinted,
   totalStaked,
-  price
+  price,
+  annualProjection
 }: {
   totalStaked: string
   totalMinted: string
   price: string
+  annualProjection: string
 }) => {
   return (
     <>
       <div style={{ color: '#fff' }}>Total $RADI staked: {totalStaked}</div>
       <div style={{ color: '#fff' }}>Total xRADI supply: {totalMinted}</div>
       <div style={{ color: '#fff' }}>Each xRADI is worth {price} $RADI now</div>
+      <div style={{ color: '#fff' }}>APR: {annualProjection} %</div>
     </>
   )
 }
@@ -173,6 +194,7 @@ export default function Earn({
   const [totalMinted, setXRadiSupply] = useState('')
   const [xRadiPrice, setXRadiPrice] = useState('')
   const [xRadiInRadiBalance, setXRadiInRadiBalance] = useState('')
+  const [radiAnnualProjection, setRadiAnnualProjection] = useState('')
 
   const [stakingModalOpen, setStakingModalOpen] = useState(false)
   const [unstakingModalOpen, setUnstakingModalOpen] = useState(false)
@@ -199,6 +221,9 @@ export default function Earn({
 
     const xRadiInRadi = +fromWei(userStakingBalance.toString(), 'ether') * xRadiCurrentPrice // user's xRADI worth in RADI
 
+    const radiAnnualProjectionValue = await getRadiAnnualProjection()
+    const percentajeAnnualProjection = getExchangeAnnualProjection(+fromWei(stakingPoolBalance.toString(),'ether'), +radiAnnualProjectionValue, +fromWei(xRadiCurrentSupply.toString(),'ether'))
+    
     setRadiBigNumberBalance(userBalance)
     setRadiBalance(fromWei(userBalance.toString(), 'ether'))
     setStakingBalance(fromWei(userStakingBalance.toString(), 'ether'))
@@ -206,6 +231,7 @@ export default function Earn({
     setXRadiSupply(fromWei(xRadiCurrentSupply.toString(), 'ether'))
     setXRadiPrice(xRadiCurrentPrice.toLocaleString())
     setXRadiInRadiBalance(xRadiInRadi.toLocaleString())
+    setRadiAnnualProjection(percentajeAnnualProjection)
   }, [radi, stakingPool, account])
 
   useEffect(() => {
@@ -248,7 +274,7 @@ export default function Earn({
             {account ? (
               <>
                 <UserCurrentBalances radiBalance={xRadiInRadiBalance} stakingBalance={userStakingBalance} />
-                <StakingPoolInfo totalMinted={totalMinted} totalStaked={totalStaked} price={xRadiPrice} />
+                <StakingPoolInfo totalMinted={totalMinted} totalStaked={totalStaked} price={xRadiPrice} annualProjection={radiAnnualProjection}/>
                 <ApproveOrInteract approval={approval} onApprove={stakingPoolApproveCallback}>
                   <Buttons>
                     <Button onClick={() => setStakingModalOpen(true)}>Stake</Button>
