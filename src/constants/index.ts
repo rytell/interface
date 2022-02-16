@@ -801,11 +801,11 @@ export const CRA: { [chainId in ChainId]: Token } = {
 }
 
 export const MEAD: { [chainId in ChainId]: Token } = {
-  [ChainId.FUJI]: new Token(ChainId.FUJI, ZERO_ADDRESS, 18, 'MEAD', 'Thors Mead V2'),
+  [ChainId.FUJI]: new Token(ChainId.FUJI, ZERO_ADDRESS, 9, 'MEAD', 'Thors Mead V2'),
   [ChainId.AVALANCHE]: new Token(
     ChainId.AVALANCHE,
     '0x44a45a9BaEb63c6ea4860ecf9ac5732c330C4d4E',
-    18,
+    9,
     'MEAD',
     'Thors Mead V2'
   )
