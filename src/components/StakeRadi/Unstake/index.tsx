@@ -11,6 +11,7 @@ import { useTransactionAdder } from '../../../state/transactions/hooks'
 import { RowBetween } from '../../Row'
 import { AutoColumn } from '../../Column'
 import { ButtonPrimary } from '../../Button'
+import moment from 'moment'
 
 const ContentWrapper = styled(AutoColumn)`
   width: 100%;
@@ -59,6 +60,45 @@ const StakeInput = styled.input`
   }
 `
 
+const UnstakeWarning = () => {
+  const { account, chainId } = useActiveWeb3React()
+  const stakingPool = useStakingPoolContract()
+  const [formattedUnlockDate, setFormattedUnlockDate] = useState(moment().format())
+  const [itsBeforeUnlockDate, setIsBeforeUnlockDate] = useState(false)
+  const [feePercentage, setFeePercentage] = useState(0)
+
+  const getData = useCallback(async () => {
+    const [
+      unlockDate,
+      MAX_EARLY_WITHDRAW_FEE_PERCENTAGE_BASE,
+      earlyWithdrawalFeePortionFromPercentageBase
+    ] = await Promise.all([
+      stakingPool?.unlockDate(),
+      stakingPool?.MAX_EARLY_WITHDRAW_FEE_PERCENTAGE_BASE(),
+      stakingPool?.earlyWithdrawalFeePortionFromPercentageBase()
+    ])
+
+    setIsBeforeUnlockDate(unlockDate.toNumber() * 1000 > new Date().getTime())
+    setFormattedUnlockDate(moment(unlockDate.toNumber() * 1000).format('LLL'))
+    setFeePercentage(
+      (earlyWithdrawalFeePortionFromPercentageBase.toNumber() / MAX_EARLY_WITHDRAW_FEE_PERCENTAGE_BASE.toNumber()) * 100
+    )
+  }, [stakingPool])
+
+  useEffect(() => {
+    if (!chainId || !account) return
+    getData()
+  }, [account, chainId, getData])
+
+  return itsBeforeUnlockDate ? (
+    <div>
+      Be aware, if you unstake before {formattedUnlockDate}, you will receive {feePercentage}% less $RADI.
+    </div>
+  ) : (
+    <></>
+  )
+}
+
 export const UnstakeRadi = ({ onDismiss }: { onDismiss: () => void }) => {
   const { account, chainId } = useActiveWeb3React()
   const radi = useRadiContract()
@@ -76,11 +116,14 @@ export const UnstakeRadi = ({ onDismiss }: { onDismiss: () => void }) => {
       stakingPool?.totalSupply()
     ])
 
-    const price = stakingPoolRadiBalance.div(totalSupply.toString() === '0' ? 1 : totalSupply)
-    const xRadiInRadi = price.mul(balance)
+    const etherXradiCurrentSupply = +fromWei(totalSupply.toString(), 'ether') || 1
 
-    setRadiBalance(fromWei(xRadiInRadi.toString(), 'ether'))
-    setXRadiBalance(fromWei(balance.toString(), 'ether'))
+    const xRadiCurrentPrice = +fromWei(stakingPoolRadiBalance.toString(), 'ether') / etherXradiCurrentSupply
+
+    const xRadiInRadi = +fromWei(balance.toString(), 'ether') * xRadiCurrentPrice
+
+    setRadiBalance(xRadiInRadi.toFixed(4).toLocaleString())
+    setXRadiBalance((+fromWei(balance.toString(), 'ether')).toFixed(4))
   }, [account, stakingPool, radi])
 
   useEffect(() => {
@@ -112,6 +155,7 @@ export const UnstakeRadi = ({ onDismiss }: { onDismiss: () => void }) => {
       <RowBetween>
         <TYPE.largeHeader>Unstake</TYPE.largeHeader>
       </RowBetween>
+      <UnstakeWarning />
       <RowBetween>You have {xRadiBalance} xRADI</RowBetween>
       <RowBetween>Worth {radiBalance} RADI</RowBetween>
       <InputWrapper>
