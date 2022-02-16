@@ -232,12 +232,11 @@ export default function Earn({
       +fromWei(stakingPoolBalance.toString(), 'ether'),
       +radiAnnualProjectionValue,
       +fromWei(xRadiCurrentSupply.toString(), 'ether')
-    );
+    )
 
     const earlyWithdraw = await stakingPool?.earlyWithdrawalFeePortionFromPercentageBase()
     const unlockDateStamp = await stakingPool?.unlockDate()
     const unlockDateMoment = moment(unlockDateStamp * 1000)
-    
 
     setRadiBigNumberBalance(userBalance)
     setRadiBalance(fromWei(userBalance.toString(), 'ether'))
