@@ -1,4 +1,5 @@
 import React, { ReactElement, useCallback, useEffect, useState } from 'react'
+import moment from 'moment'
 import { AutoColumn } from '../../components/Column'
 import styled from 'styled-components'
 import { TYPE } from '../../theme'
@@ -134,12 +135,16 @@ const StakingPoolInfo = ({
   totalMinted,
   totalStaked,
   price,
-  annualProjection
+  annualProjection,
+  earlyWithdrawFee,
+  unlockDate
 }: {
   totalStaked: string
   totalMinted: string
   price: string
   annualProjection: string
+  earlyWithdrawFee: string
+  unlockDate: string
 }) => {
   return (
     <>
@@ -147,6 +152,8 @@ const StakingPoolInfo = ({
       <div style={{ color: '#fff' }}>Total xRADI supply: {totalMinted}</div>
       <div style={{ color: '#fff' }}>Each xRADI is worth {price} $RADI now</div>
       <div style={{ color: '#fff' }}>APR: {annualProjection}%</div>
+      <div style={{ color: '#fff' }}>Early Withdraw Fee: {earlyWithdrawFee}%</div>
+      <div style={{ color: '#fff' }}>Unlock Date: {unlockDate}</div>
     </>
   )
 }
@@ -192,6 +199,8 @@ export default function Earn({
   const [xRadiPrice, setXRadiPrice] = useState('')
   const [xRadiInRadiBalance, setXRadiInRadiBalance] = useState('')
   const [radiAnnualProjection, setRadiAnnualProjection] = useState('')
+  const [earlyWithdrawFee, setEarlyWitdrawFee] = useState('')
+  const [unlockDate, setUnlockDate] = useState('')
 
   const [stakingModalOpen, setStakingModalOpen] = useState(false)
   const [unstakingModalOpen, setUnstakingModalOpen] = useState(false)
@@ -223,7 +232,12 @@ export default function Earn({
       +fromWei(stakingPoolBalance.toString(), 'ether'),
       +radiAnnualProjectionValue,
       +fromWei(xRadiCurrentSupply.toString(), 'ether')
-    )
+    );
+
+    const earlyWithdraw = await stakingPool?.earlyWithdrawalFeePortionFromPercentageBase()
+    const unlockDateStamp = await stakingPool?.unlockDate()
+    const unlockDateMoment = moment(unlockDateStamp * 1000)
+    
 
     setRadiBigNumberBalance(userBalance)
     setRadiBalance(fromWei(userBalance.toString(), 'ether'))
@@ -233,6 +247,8 @@ export default function Earn({
     setXRadiPrice(xRadiCurrentPrice.toLocaleString())
     setXRadiInRadiBalance(xRadiInRadi.toLocaleString())
     setRadiAnnualProjection(percentajeAnnualProjection)
+    setEarlyWitdrawFee(earlyWithdraw.toNumber())
+    setUnlockDate(unlockDateMoment.format('LLL'))
   }, [radi, stakingPool, account])
 
   useEffect(() => {
@@ -280,6 +296,8 @@ export default function Earn({
                   totalStaked={totalStaked}
                   price={xRadiPrice}
                   annualProjection={radiAnnualProjection}
+                  earlyWithdrawFee={earlyWithdrawFee}
+                  unlockDate={unlockDate}
                 />
                 <ApproveOrInteract approval={approval} onApprove={stakingPoolApproveCallback}>
                   <Buttons>
