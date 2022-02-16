@@ -3,13 +3,13 @@ import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 import AvaxLogo from '../../assets/images/avalanche_token_round.png'
-import { RADI } from '../../constants'
+import { MEAD, RADI } from '../../constants'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/hooks'
 import Logo from '../Logo'
 
 const isRytellToken = (address: string) => {
-  const tokens = [RADI]
+  const tokens = [RADI, MEAD]
 
   const lowercasedAddress = address.toLowerCase()
 

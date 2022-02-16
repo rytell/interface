@@ -17,7 +17,7 @@ import { FadedSpan, MenuItem } from './styleds'
 import Loader from '../Loader'
 import { isTokenOnList } from '../../utils'
 import { useTranslation } from 'react-i18next'
-import { RADI } from '../../constants'
+import { MEAD, RADI } from '../../constants'
 
 function currencyKey(currency: Currency): string {
   return currency instanceof Token ? currency.address : currency === CAVAX ? 'AVAX' : ''
@@ -174,6 +174,7 @@ export default function CurrencyList({
   fixedListRef?: MutableRefObject<FixedSizeList | undefined>
   showETH: boolean
 }) {
+  const { chainId } = useActiveWeb3React()
   const itemData = useMemo(() => {
     function moveElementInArray(from: number, to: number, object: any[]) {
       object.splice(to, 0, object.splice(from, 1)[0])
@@ -184,7 +185,7 @@ export default function CurrencyList({
     }
 
     if (!currencies.some(currency => currency.symbol === 'RADI')) {
-      resultingList.push(RADI[ChainId.AVALANCHE])
+      resultingList.push(RADI[chainId || ChainId.AVALANCHE])
     } else {
       moveElementInArray(
         currencies.findIndex(currency => currency.symbol === 'RADI'),
@@ -193,8 +194,12 @@ export default function CurrencyList({
       )
     }
 
+    if (!currencies.some(currency => currency.symbol === 'MEAD')) {
+      currencies.push(MEAD[chainId || ChainId.AVALANCHE])
+    }
+
     return resultingList.concat(currencies)
-  }, [currencies, showETH])
+  }, [currencies, showETH, chainId])
 
   const Row = useCallback(
     ({ data, index, style }) => {
