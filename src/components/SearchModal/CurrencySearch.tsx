@@ -79,7 +79,11 @@ export function CurrencySearch({
 
   const filteredSortedTokens: Token[] = useMemo(() => {
     if (searchToken) return [searchToken]
-    const sorted = filteredTokens.sort(tokenComparator)
+    const filterMeadOut = filteredTokens.filter(token => {
+      const meadOld = '0x245C2591403e182e41d7A851eab53B01854844CE'
+      return token.address.toLowerCase() !== meadOld.toLowerCase()
+    })
+    const sorted = filterMeadOut.sort(tokenComparator)
     const symbolMatch = searchQuery
       .toLowerCase()
       .split(/\s+/)
