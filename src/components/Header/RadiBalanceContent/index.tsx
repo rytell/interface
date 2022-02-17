@@ -85,6 +85,7 @@ export const RadiBalanceContent = ({ setShowRadiBalanceModal }: { setShowRadiBal
   }
 
   const [circulation, setCirculation] = useState(totalSupply)
+  const [radiPriceUsdc, setradiPriceUsdc] = useState(0)
 
   useMemo(() => {
     if (radi === undefined) return
@@ -92,6 +93,14 @@ export const RadiBalanceContent = ({ setShowRadiBalanceModal }: { setShowRadiBal
       .then(res => res.text())
       .then(val => setCirculation(new TokenAmount(radi, val)))
   }, [radi])
+  
+  useMemo(() => {
+    if (circulation === undefined) return
+    fetch(`${EXCHANGE_API}/radi/to-usdc/${circulation.toFixed(0)}`)
+      .then(res => res.text())
+      .then(val => setradiPriceUsdc(+val))
+  }, [circulation])
+
 
   return (
     <ContentWrapper gap="lg">
@@ -144,6 +153,10 @@ export const RadiBalanceContent = ({ setShowRadiBalanceModal }: { setShowRadiBal
             <RowBetween>
               <TYPE.white color="white">{t('header.radiCirculation')}</TYPE.white>
               <TYPE.white color="white">{circulation?.toFixed(0, { groupSeparator: ',' })}</TYPE.white>
+            </RowBetween>
+            <RowBetween>
+              <TYPE.white color="white">{t('header.currentMarketCap')}</TYPE.white>
+              <TYPE.white color="white">{radiPriceUsdc?.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ?? '-'} USD</TYPE.white>
             </RowBetween>
             <RowBetween>
               <TYPE.white color="white">{t('header.totalSupply')}</TYPE.white>
