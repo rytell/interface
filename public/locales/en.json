@@ -17,6 +17,7 @@
     "balance": "Balance: ",
     "unclaimed": "Unclaimed: ",
     "radiPrice": "RADI price:",
+    "currentMarketCap": "Current Market Cap:",
     "radiCirculation": "RADI in circulation:",
     "totalSupply": "Total Supply",
     "makeSureURLWarning": "Make sure the URL is",
