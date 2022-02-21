@@ -15,6 +15,7 @@ import { RowBetween } from '../../Row'
 import { Break, CardBGImage, CardNoise, CardSection, DataCard } from '../../earn/styled'
 import { usePair } from '../../../data/Reserves'
 import { useTranslation } from 'react-i18next'
+import { MouseoverTooltip } from '../../Tooltip'
 
 const ContentWrapper = styled(AutoColumn)`
   width: 100%;
@@ -154,10 +155,12 @@ export const RadiBalanceContent = ({ setShowRadiBalanceModal }: { setShowRadiBal
               <TYPE.white color="white">{t('header.radiCirculation')}</TYPE.white>
               <TYPE.white color="white">{circulation?.toFixed(0, { groupSeparator: ',' })}</TYPE.white>
             </RowBetween>
+            <MouseoverTooltip text="Circulating Supply * $RADI price">
             <RowBetween>
               <TYPE.white color="white">{t('header.currentMarketCap')}</TYPE.white>
               <TYPE.white color="white">{radiPriceUsdc?.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ?? '-'} USD</TYPE.white>
             </RowBetween>
+            </MouseoverTooltip>
             <RowBetween>
               <TYPE.white color="white">{t('header.totalSupply')}</TYPE.white>
               <TYPE.white color="white">{totalSupply?.toFixed(0, { groupSeparator: ',' })}</TYPE.white>
