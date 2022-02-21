@@ -123,7 +123,7 @@ export const UnstakeRadi = ({ onDismiss }: { onDismiss: () => void }) => {
     const xRadiInRadi = +fromWei(balance.toString(), 'ether') * xRadiCurrentPrice
 
     setRadiBalance(xRadiInRadi.toFixed(4).toLocaleString())
-    setXRadiBalance((+fromWei(balance.toString(), 'ether')).toFixed(4))
+    setXRadiBalance(fromWei(balance.toString(), 'ether'))
   }, [account, stakingPool, radi])
 
   useEffect(() => {
@@ -156,7 +156,7 @@ export const UnstakeRadi = ({ onDismiss }: { onDismiss: () => void }) => {
         <TYPE.largeHeader>Unstake</TYPE.largeHeader>
       </RowBetween>
       <UnstakeWarning />
-      <RowBetween>You have {xRadiBalance} xRADI</RowBetween>
+      <RowBetween>You have {Number(xRadiBalance).toFixed(4)} xRADI</RowBetween>
       <RowBetween>Worth {radiBalance} RADI</RowBetween>
       <InputWrapper>
         <StakeAmount>
