@@ -300,8 +300,14 @@ export default function Earn({
                 />
                 <ApproveOrInteract approval={approval} onApprove={stakingPoolApproveCallback}>
                   <Buttons>
-                    <Button onClick={() => setStakingModalOpen(true)}>Stake</Button>
-                    <Button onClick={() => setUnstakingModalOpen(true)}>Unstake</Button>
+                    { parseFloat(userRadiBalance) > 0 ?
+                      <Button onClick={() => setStakingModalOpen(true)}>Stake</Button>
+                      : null
+                    }
+                    { parseFloat(userStakingBalance) > 0 ?
+                      <Button onClick={() => setUnstakingModalOpen(true)}>Unstake</Button>
+                      : null
+                    }
                   </Buttons>
                 </ApproveOrInteract>
               </>
