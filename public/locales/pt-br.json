@@ -100,7 +100,9 @@
         "telegram": "Telegram",
         "tutorials": "Tutoriais",
         "idos": "IDOs",
-        "about": "Sobre"
+        "about": "Sobre",
+        "play": "Play Rytell",
+        "home": "Home Page"
     },
     "modalView": {
         "confirmTransaction": "Confirme esta transação em sua carteira",

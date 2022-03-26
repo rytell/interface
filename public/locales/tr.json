@@ -100,7 +100,9 @@
     "telegram": "Telegram",
     "tutorials": "Rehber",
     "idos": "IDOs",
-    "about": "Hakkında"
+    "about": "Hakkında",
+    "play": "Play Rytell",
+    "home": "Home Page"
   },
   "modalView": {
     "confirmTransaction": "Bu işlemi cüzdanınızda onaylayın",
