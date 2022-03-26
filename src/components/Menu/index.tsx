@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { MessageCircle, Info, Twitter, GitHub, Activity } from 'react-feather'
+import { MessageCircle, Info, Twitter, GitHub, Activity, Play, Home } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { ANALYTICS_PAGE, LANDING_PAGE } from '../../constants'
@@ -42,6 +42,14 @@ export default function Menu() {
 
       {open && (
         <NarrowMenuFlyout>
+          <MenuItem id="link" href="https://rytell.io/">
+            <Home size={14} />
+            {t('menu.home')}
+          </MenuItem>
+          <MenuItem id="link" href="https://play.rytell.io/#/">
+            <Play size={14} />
+            {t('menu.play')}
+          </MenuItem>
           <MenuItem id="link" href={ANALYTICS_PAGE}>
             <Activity size={14} />
             Analytics
