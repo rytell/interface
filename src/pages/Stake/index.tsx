@@ -125,7 +125,7 @@ const getExchangeAnnualProjection = (totalRadi: any, radiAnnualProjection: any, 
 const UserCurrentBalances = ({ radiBalance, stakingBalance }: { radiBalance: string; stakingBalance: string }) => {
   return (
     <>
-      <div style={{ color: '#fff' }}>You have {stakingBalance} xRADI</div>
+      <div style={{ color: '#fff' }}>You have {parseFloat(stakingBalance).toLocaleString()} xRADI</div>
       <div style={{ color: '#fff' }}>Which is worth {radiBalance} $RADI</div>
     </>
   )
@@ -148,8 +148,8 @@ const StakingPoolInfo = ({
 }) => {
   return (
     <>
-      <div style={{ color: '#fff' }}>Total $RADI staked: {totalStaked}</div>
-      <div style={{ color: '#fff' }}>Total xRADI supply: {totalMinted}</div>
+      <div style={{ color: '#fff' }}>Total $RADI staked: {parseFloat(totalStaked).toLocaleString()}</div>
+      <div style={{ color: '#fff' }}>Total xRADI supply: {parseFloat(totalMinted).toLocaleString()}</div>
       <div style={{ color: '#fff' }}>Each xRADI is worth {price} $RADI now</div>
       <div style={{ color: '#fff' }}>APR: {annualProjection}%</div>
       <div style={{ color: '#fff' }}>Early Withdraw Fee: {earlyWithdrawFee}%</div>
@@ -224,9 +224,7 @@ export default function Earn({
     const etherXradiCurrentSupply = +fromWei(xRadiCurrentSupply.toString(), 'ether') || 1
 
     const xRadiCurrentPrice = +fromWei(stakingPoolBalance.toString(), 'ether') / etherXradiCurrentSupply
-
     const xRadiInRadi = +fromWei(userStakingBalance.toString(), 'ether') * xRadiCurrentPrice // user's xRADI worth in RADI
-
     const radiAnnualProjectionValue = await getRadiAnnualProjection()
     const percentajeAnnualProjection = getExchangeAnnualProjection(
       +fromWei(stakingPoolBalance.toString(), 'ether'),
